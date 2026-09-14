@@ -67,9 +67,10 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
 **Completed**
 - Repository structure initialized.
 - Problem context and continuation-track justification documented.
+- Synthetic dataset schema and generator (`src/generate_synthetic_data.py`,
+  `data/schema.md`) — 600 rows, clearly labelled synthetic.
 
 **Planned / Future Work**
-- Synthetic dataset schema and generator.
 - Baseline waiting-time estimator.
 - Gradient Boosting Regression model.
 - Customer intake + prediction results interface.
