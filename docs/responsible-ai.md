@@ -1,0 +1,33 @@
+# Responsible AI Considerations
+
+## Data minimisation
+The system should collect only what is needed to estimate service time
+(service type, phone brand/model, reported issue, workload, technician
+availability). It must avoid collecting unnecessary personal information,
+payment information, passwords, private phone contents, or private
+conversations. Where possible, information is anonymised/non-sensitive.
+
+## Communicating uncertainty
+Predictions are always presented as **estimates or ranges**, never as
+guaranteed completion times. Interface copy should use language such as
+"Estimated Completion: around 30 minutes" rather than implying certainty.
+
+## Human oversight
+A human (the employee) remains in the loop:
+- reviews the prediction before sharing it with the customer,
+- can correct incorrect input information,
+- is responsible for the final communication and decision,
+- enters the actual completion time to support the feedback loop.
+
+## Synthetic vs. real data
+Because there is not yet enough real historical repair data, any model
+trained before real records are collected uses clearly labelled synthetic
+data (see `data/README.md` and `docs/methodology.md`). This is never
+presented as real-world validation.
+
+## Fabrication policy
+No user, tester, interview response, survey response, usability score,
+testing result, quote, measurement, or accuracy metric is invented anywhere
+in this repository or the associated report. Where evidence is required, the
+repository states what evidence is needed and how to collect it, and is
+updated once real results are provided.
