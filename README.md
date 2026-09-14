@@ -50,8 +50,15 @@ demonstrate the technical pipeline, not to claim real-world predictive accuracy.
 
 ## Prototype
 
-Setup and run instructions will be added here once the application exists (Milestone:
-`feat: add prediction service`).
+The prediction app (Flask UI) is not built yet — that's the next milestone.
+What's runnable today is the ML pipeline itself:
+
+```bash
+pip install -r requirements.txt
+python src/generate_synthetic_data.py   # regenerate the synthetic dataset
+python -m src.train                     # train baseline + GBR, print metrics
+python -m pytest tests/ -v              # run the automated tests
+```
 
 ## Testing
 
@@ -69,11 +76,13 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
 - Problem context and continuation-track justification documented.
 - Synthetic dataset schema and generator (`src/generate_synthetic_data.py`,
   `data/schema.md`) — 600 rows, clearly labelled synthetic.
+- Baseline estimator (`src/baseline.py`) and Gradient Boosting Regression
+  model (`src/model.py`), trained via `src/train.py`, with automated tests
+  (`tests/test_pipeline.py`, 5/5 passing). Results in `docs/methodology.md`,
+  labelled synthetic-data-only.
 
 **Planned / Future Work**
-- Baseline waiting-time estimator.
-- Gradient Boosting Regression model.
-- Customer intake + prediction results interface.
+- Customer intake + prediction results interface (Flask app).
 - Employee dashboard.
 - User testing (3+ testers) and iteration.
 - Final Prototype & Validation Report.
