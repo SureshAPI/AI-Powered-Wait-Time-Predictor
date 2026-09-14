@@ -79,3 +79,38 @@ def test_gbr_handles_unseen_category_gracefully(dataset):
     # Should not raise, thanks to handle_unknown="ignore" in the encoder.
     preds = pipeline.predict(unseen)
     assert len(preds) == 1
+
+
+def test_job_store_roundtrip(tmp_path, monkeypatch):
+    """Feedback-loop sanity check: add a job, then record its actual
+    completion time, using an isolated temp file so this test never touches
+    the real data/job_log.csv."""
+    import app.job_store as job_store
+
+    temp_log = tmp_path / "job_log_test.csv"
+    monkeypatch.setattr(job_store, "JOB_LOG_PATH", temp_log)
+
+    job_id = job_store.add_job(
+        {
+            "service_type": "Battery Replacement",
+            "phone_brand": "Apple",
+            "is_warranty_case": False,
+            "parts_availability": "Available",
+            "current_workload": 2,
+            "technician_availability": 1,
+        },
+        gbr_prediction=25.0,
+        baseline_prediction=30.0,
+    )
+
+    jobs = job_store.load_jobs()
+    assert len(jobs) == 1
+    assert jobs[0]["job_id"] == job_id
+    assert jobs[0]["status"] == "open"
+
+    updated = job_store.record_actual_completion(job_id, 27.5)
+    assert updated is True
+
+    jobs = job_store.load_jobs()
+    assert jobs[0]["status"] == "completed"
+    assert jobs[0]["actual_completion_minutes"] == "27.5"
