@@ -94,9 +94,12 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
   shown to both the customer and the dashboard. Full predict → dashboard →
   record-actual flow tested end-to-end (`tests/test_pipeline.py`, 6/6
   passing).
+- Internal QA pass completed (`docs/qa-findings.md`): found and fixed a
+  negative-prediction bug and a duration-readability issue; confirmed the
+  intake form doesn't collect unnecessary personal data.
 
 **Planned / Future Work**
-- Internal QA pass (edge cases, terminology, messaging review).
+- Real user testing (3+ testers) — testing kit to be produced next.
 - Employee dashboard.
 - User testing (3+ testers) and iteration.
 - Final Prototype & Validation Report.
