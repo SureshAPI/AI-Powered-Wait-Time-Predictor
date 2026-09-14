@@ -44,9 +44,9 @@
       <td><code>{{ job.job_id }}</code></td>
       <td>{{ job.created_at }}</td>
       <td>{{ job.service_type }}</td>
-      <td>{{ job.gbr_prediction_minutes }} min</td>
-      <td>{{ job.baseline_prediction_minutes }} min</td>
-      <td>{{ job.actual_completion_minutes if job.actual_completion_minutes else "—" }}</td>
+      <td>{{ job.gbr_prediction_minutes|format_minutes }}</td>
+      <td>{{ job.baseline_prediction_minutes|format_minutes }}</td>
+      <td>{{ job.actual_completion_minutes|format_minutes if job.actual_completion_minutes else "—" }}</td>
       <td class="status-{{ job.status }}">{{ job.status }}</td>
       <td>
         {% if job.status == "open" %}

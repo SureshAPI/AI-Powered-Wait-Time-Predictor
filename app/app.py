@@ -29,6 +29,7 @@ from src.preprocessing import get_features_and_target, load_dataset
 from app.job_store import add_job, load_jobs, record_actual_completion
 
 app = Flask(__name__)
+app.jinja_env.filters["format_minutes"] = lambda m: format_minutes(float(m))
 
 # --- Train once at startup on the synthetic dataset ---
 _df = load_dataset()
@@ -45,9 +46,25 @@ _baseline = BaselineEstimator().fit(_X, _y)
 # quantile regression for a statistically grounded interval.
 UNCERTAINTY_MARGIN_MINUTES = 20
 
+# QA finding: the raw GBR prediction can occasionally go to zero or negative
+# for very fast/low-workload jobs, since nothing in training constrains it to
+# be positive. A real service can't take negative time, so clamp to a small
+# practical floor (matches the floor already used in the baseline estimator).
+MIN_PREDICTION_MINUTES = 5.0
+
 SERVICE_TYPES = sorted(_df["service_type"].unique())
 PHONE_BRANDS = sorted(_df["phone_brand"].unique())
 PARTS_OPTIONS = sorted(_df["parts_availability"].unique())
+
+
+def format_minutes(minutes: float) -> str:
+    """QA finding: raw minute counts (e.g. '229 minutes') are hard to read
+    for longer jobs. Format as hours + minutes once over an hour."""
+    minutes = round(minutes)
+    if minutes < 60:
+        return f"{minutes} min"
+    hours, rem = divmod(minutes, 60)
+    return f"{hours} hr {rem} min" if rem else f"{hours} hr"
 
 
 @app.route("/", methods=["GET"])
@@ -74,19 +91,20 @@ def predict():
     row = pd.DataFrame([inputs])
 
     gbr_pred = float(_gbr.predict(row)[0])
+    gbr_pred = max(gbr_pred, MIN_PREDICTION_MINUTES)  # QA fix: no negative/near-zero estimates
     baseline_pred = float(_baseline.predict(row)[0])
 
     job_id = add_job(inputs, gbr_pred, baseline_pred)
 
-    low = max(gbr_pred - UNCERTAINTY_MARGIN_MINUTES, 5)
+    low = max(gbr_pred - UNCERTAINTY_MARGIN_MINUTES, MIN_PREDICTION_MINUTES)
     high = gbr_pred + UNCERTAINTY_MARGIN_MINUTES
 
     return render_template(
         "result.html",
         job_id=job_id,
-        estimate=round(gbr_pred),
-        low=round(low),
-        high=round(high),
+        estimate=format_minutes(gbr_pred),
+        low=format_minutes(low),
+        high=format_minutes(high),
         inputs=inputs,
     )
 
