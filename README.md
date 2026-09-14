@@ -50,15 +50,19 @@ demonstrate the technical pipeline, not to claim real-world predictive accuracy.
 
 ## Prototype
 
-The prediction app (Flask UI) is not built yet — that's the next milestone.
-What's runnable today is the ML pipeline itself:
-
 ```bash
 pip install -r requirements.txt
 python src/generate_synthetic_data.py   # regenerate the synthetic dataset
-python -m src.train                     # train baseline + GBR, print metrics
+python -m src.train                     # (optional) train baseline + GBR standalone, print metrics
 python -m pytest tests/ -v              # run the automated tests
+
+python app/app.py                       # run the prototype web app
+# then open http://127.0.0.1:5000/
 ```
+
+The app trains the model itself at startup (fast — 600 synthetic rows), so no
+separate model file needs to be committed. Enter job details on the intake
+form to see the estimated service-time range.
 
 ## Testing
 
@@ -80,9 +84,13 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
   model (`src/model.py`), trained via `src/train.py`, with automated tests
   (`tests/test_pipeline.py`, 5/5 passing). Results in `docs/methodology.md`,
   labelled synthetic-data-only.
+- Flask prototype app (`app/app.py`): customer intake form → prediction
+  results page with an estimated range and an explicit "this is an estimate,
+  not a guarantee" disclaimer. Verified working end-to-end (GET `/` and POST
+  `/predict` both return 200 and render correctly).
 
 **Planned / Future Work**
-- Customer intake + prediction results interface (Flask app).
+- Employee dashboard + prediction-explanation/uncertainty messaging for staff.
 - Employee dashboard.
 - User testing (3+ testers) and iteration.
 - Final Prototype & Validation Report.
