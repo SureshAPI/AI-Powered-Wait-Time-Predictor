@@ -13,6 +13,8 @@
          border-radius: 8px; padding: 10px 14px; margin-top: 16px; }
   .details { text-align: left; margin-top: 24px; font-size: 0.9rem; color: #444; }
   .details dt { font-weight: 600; margin-top: 8px; }
+  .explain { font-size: 0.85rem; color: #555; margin-top: 16px; text-align: left; }
+  .job-id { font-size: 0.8rem; color: #999; margin-top: 16px; }
   a.back { display: inline-block; margin-top: 24px; color: #2563eb; text-decoration: none; }
 </style>
 </head>
@@ -27,6 +29,10 @@
       unforeseen complications, additional parts issues, or workload changes.
     </div>
 
+    <p class="explain">Based on this service type, current workload, technician
+    availability, and parts status — compared against similar past jobs
+    (currently: labelled synthetic/demo data, see project README).</p>
+
     <dl class="details">
       <dt>Service type</dt><dd>{{ inputs.service_type }}</dd>
       <dt>Phone brand</dt><dd>{{ inputs.phone_brand }}</dd>
@@ -35,7 +41,11 @@
       <dt>Technicians available</dt><dd>{{ inputs.technician_availability }}</dd>
       <dt>Warranty case</dt><dd>{{ "Yes" if inputs.is_warranty_case else "No" }}</dd>
     </dl>
+
+    <p class="job-id">Job reference: <code>{{ job_id }}</code></p>
   </div>
   <a class="back" href="/">&larr; Enter another job</a>
+  &nbsp;|&nbsp;
+  <a class="back" href="/dashboard">Employee dashboard &rarr;</a>
 </body>
 </html>

@@ -20,11 +20,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 
 from src.baseline import BaselineEstimator
 from src.model import build_gbr_pipeline
 from src.preprocessing import get_features_and_target, load_dataset
+
+from app.job_store import add_job, load_jobs, record_actual_completion
 
 app = Flask(__name__)
 
@@ -61,32 +63,45 @@ def index():
 @app.route("/predict", methods=["POST"])
 def predict():
     form = request.form
-    row = pd.DataFrame(
-        [
-            {
-                "service_type": form["service_type"],
-                "phone_brand": form["phone_brand"],
-                "is_warranty_case": form.get("is_warranty_case") == "on",
-                "parts_availability": form["parts_availability"],
-                "current_workload": int(form["current_workload"]),
-                "technician_availability": int(form["technician_availability"]),
-            }
-        ]
-    )
+    inputs = {
+        "service_type": form["service_type"],
+        "phone_brand": form["phone_brand"],
+        "is_warranty_case": form.get("is_warranty_case") == "on",
+        "parts_availability": form["parts_availability"],
+        "current_workload": int(form["current_workload"]),
+        "technician_availability": int(form["technician_availability"]),
+    }
+    row = pd.DataFrame([inputs])
 
     gbr_pred = float(_gbr.predict(row)[0])
-    baseline_pred = float(_baseline.predict(row)[0])  # kept for the future employee dashboard
+    baseline_pred = float(_baseline.predict(row)[0])
+
+    job_id = add_job(inputs, gbr_pred, baseline_pred)
 
     low = max(gbr_pred - UNCERTAINTY_MARGIN_MINUTES, 5)
     high = gbr_pred + UNCERTAINTY_MARGIN_MINUTES
 
     return render_template(
         "result.html",
+        job_id=job_id,
         estimate=round(gbr_pred),
         low=round(low),
         high=round(high),
-        inputs=row.iloc[0].to_dict(),
+        inputs=inputs,
     )
+
+
+@app.route("/dashboard", methods=["GET"])
+def dashboard():
+    jobs = load_jobs()
+    return render_template("dashboard.html", jobs=jobs)
+
+
+@app.route("/dashboard/complete/<job_id>", methods=["POST"])
+def complete_job(job_id):
+    actual_minutes = float(request.form["actual_completion_minutes"])
+    record_actual_completion(job_id, actual_minutes)
+    return redirect(url_for("dashboard"))
 
 
 if __name__ == "__main__":
