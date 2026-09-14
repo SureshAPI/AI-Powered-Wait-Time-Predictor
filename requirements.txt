@@ -1,0 +1,6 @@
+# Core dependencies for the prediction pipeline and prototype app.
+# Pinned versions will be added once the implementation stage begins.
+flask
+scikit-learn
+pandas
+numpy

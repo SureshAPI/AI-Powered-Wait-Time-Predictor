@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data / model artifacts (keep schema + samples, not large generated files)
+*.pkl
+*.joblib
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Env
+.env
