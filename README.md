@@ -88,9 +88,15 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
   results page with an estimated range and an explicit "this is an estimate,
   not a guarantee" disclaimer. Verified working end-to-end (GET `/` and POST
   `/predict` both return 200 and render correctly).
+- Employee dashboard (`app/templates/dashboard.html`) and feedback-loop job
+  log (`app/job_store.py`): every prediction is logged, and an employee can
+  record the real completion time for a job. Uncertainty/explanation text is
+  shown to both the customer and the dashboard. Full predict → dashboard →
+  record-actual flow tested end-to-end (`tests/test_pipeline.py`, 6/6
+  passing).
 
 **Planned / Future Work**
-- Employee dashboard + prediction-explanation/uncertainty messaging for staff.
+- Internal QA pass (edge cases, terminology, messaging review).
 - Employee dashboard.
 - User testing (3+ testers) and iteration.
 - Final Prototype & Validation Report.
