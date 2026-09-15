@@ -38,3 +38,10 @@ Prototype is functional and internally consistent. Real user testing (as
 originally planned) was not conducted; a simulated validation study was
 produced instead — see `docs/validation-approach.md` and
 `docs/simulated-validation-study.md`.
+
+## Follow-up: UI/UX redesign pass (Phase 10)
+A further issue was found and fixed during the UI/UX redesign: refreshing or
+bookmarking the result page returned "Method Not Allowed" because the result
+was rendered directly on the `POST /predict` response. Fixed with a
+Post/Redirect/Get pattern (`GET /result/<job_id>`). See
+`docs/design-notes.md` for the full redesign writeup.

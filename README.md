@@ -112,12 +112,17 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
   hypothetical tester personas, synthetic interaction data, clearly labelled
   as simulated and not real-world validation. Original real-testing protocol
   retained unfilled in `docs/testing-protocol.md`.
+- Final Prototype & Validation Report produced
+  (`docs/Project_Better_Tomorrow_Review1_Report.docx`), covering problem,
+  architecture, ML methodology and results, QA findings, the simulated
+  validation study, responsible AI, and limitations.
+- UI/UX redesign (`docs/design-notes.md`): original visual identity — a
+  "service departure board" concept — replacing the generic first-pass
+  styling. Found and fixed a routing bug (result page broke on refresh) as
+  part of this pass. 7/7 tests passing.
 
 **Planned / Future Work**
-- Final Prototype & Validation Report, incorporating everything above.
-- If real testing later becomes possible: run `docs/testing-protocol.md`
-  with actual testers and report results separately from the simulated
-  study.
+- Final pre-submission polish and QBEE-readiness check.
 
 ## Limitations
 
