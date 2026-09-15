@@ -114,3 +114,35 @@ def test_job_store_roundtrip(tmp_path, monkeypatch):
     jobs = job_store.load_jobs()
     assert jobs[0]["status"] == "completed"
     assert jobs[0]["actual_completion_minutes"] == "27.5"
+
+
+def test_predict_redirects_to_bookmarkable_result_url(tmp_path, monkeypatch):
+    """UI/UX fix: POST /predict must redirect (Post/Redirect/Get) to a real
+    GET url, so refreshing or bookmarking the result page works instead of
+    showing 'Method Not Allowed'."""
+    import app.app as flask_app
+    import app.job_store as job_store
+
+    temp_log = tmp_path / "job_log_test.csv"
+    monkeypatch.setattr(job_store, "JOB_LOG_PATH", temp_log)
+    monkeypatch.setattr(flask_app, "add_job", job_store.add_job)
+    monkeypatch.setattr(flask_app, "get_job", job_store.get_job)
+
+    client = flask_app.app.test_client()
+    response = client.post(
+        "/predict",
+        data={
+            "service_type": "Screen Replacement",
+            "phone_brand": "Samsung",
+            "parts_availability": "Available",
+            "current_workload": "2",
+            "technician_availability": "1",
+        },
+    )
+    assert response.status_code == 302
+    assert response.headers["Location"].startswith("/result/")
+
+    # The redirected-to URL must be independently GET-able (e.g. on refresh).
+    result_response = client.get(response.headers["Location"])
+    assert result_response.status_code == 200
+    assert b"ESTIMATED READY" in result_response.data

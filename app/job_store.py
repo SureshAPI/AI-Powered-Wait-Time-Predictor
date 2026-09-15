@@ -74,6 +74,16 @@ def load_jobs() -> list[dict]:
     return list(reversed(jobs))
 
 
+def get_job(job_id: str) -> dict | None:
+    """Look up a single logged job by id, or None if not found. Used so the
+    result page has a real, bookmarkable/refreshable URL (GET /result/<id>)
+    instead of only rendering on the POST response."""
+    for job in load_jobs():
+        if job["job_id"] == job_id:
+            return job
+    return None
+
+
 def record_actual_completion(job_id: str, actual_minutes: float) -> bool:
     """Feedback-loop write: record the real completion time for a job.
     Returns True if the job was found and updated."""

@@ -20,13 +20,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, abort, redirect, render_template, request, url_for
 
 from src.baseline import BaselineEstimator
 from src.model import build_gbr_pipeline
 from src.preprocessing import get_features_and_target, load_dataset
 
-from app.job_store import add_job, load_jobs, record_actual_completion
+from app.job_store import add_job, get_job, load_jobs, record_actual_completion
 
 app = Flask(__name__)
 app.jinja_env.filters["format_minutes"] = lambda m: format_minutes(float(m))
@@ -77,6 +77,16 @@ def index():
     )
 
 
+def status_note_for(inputs: dict) -> str:
+    """Short, honest context line for the result board — based on the
+    actual inputs, not invented."""
+    if inputs["parts_availability"] == "Order Required":
+        return "Parts need to be ordered for this job — this can extend the wait."
+    if inputs["technician_availability"] == 0:
+        return "No technician is currently free — the wait may run longer than usual."
+    return "Estimate based on current shop workload and technician availability."
+
+
 @app.route("/predict", methods=["POST"])
 def predict():
     form = request.form
@@ -96,6 +106,29 @@ def predict():
 
     job_id = add_job(inputs, gbr_pred, baseline_pred)
 
+    # Robustness fix: redirect to a real GET URL for the result (Post/Redirect/
+    # Get) instead of rendering directly on the POST response, so refreshing
+    # or bookmarking the result page works instead of showing "Method Not
+    # Allowed".
+    return redirect(url_for("result", job_id=job_id))
+
+
+@app.route("/result/<job_id>", methods=["GET"])
+def result(job_id):
+    job = get_job(job_id)
+    if job is None:
+        abort(404)
+
+    inputs = {
+        "service_type": job["service_type"],
+        "phone_brand": job["phone_brand"],
+        "is_warranty_case": job["is_warranty_case"] == "True",
+        "parts_availability": job["parts_availability"],
+        "current_workload": int(job["current_workload"]),
+        "technician_availability": int(job["technician_availability"]),
+    }
+    gbr_pred = float(job["gbr_prediction_minutes"])
+
     low = max(gbr_pred - UNCERTAINTY_MARGIN_MINUTES, MIN_PREDICTION_MINUTES)
     high = gbr_pred + UNCERTAINTY_MARGIN_MINUTES
 
@@ -106,13 +139,21 @@ def predict():
         low=format_minutes(low),
         high=format_minutes(high),
         inputs=inputs,
+        status_note=status_note_for(inputs),
     )
 
 
 @app.route("/dashboard", methods=["GET"])
 def dashboard():
     jobs = load_jobs()
-    return render_template("dashboard.html", jobs=jobs)
+    open_count = sum(1 for j in jobs if j["status"] == "open")
+    completed_count = sum(1 for j in jobs if j["status"] == "completed")
+    return render_template(
+        "dashboard.html",
+        jobs=jobs,
+        open_count=open_count,
+        completed_count=completed_count,
+    )
 
 
 @app.route("/dashboard/complete/<job_id>", methods=["POST"])
