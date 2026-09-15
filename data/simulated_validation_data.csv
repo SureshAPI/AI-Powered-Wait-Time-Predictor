@@ -1,0 +1,6 @@
+persona_id,persona_name,ease_of_use,clarity,usefulness,trust,willingness_to_use,task_success,time_to_understand_seconds
+P1,Rushed Professional (hypothetical),4,4,4,3,3,True,37
+P2,Budget-Conscious Student (hypothetical),4,4,4,4,5,True,44
+P3,Cautious Parent (hypothetical),4,3,3,2,2,False,35
+P4,Skeptical Repeat Customer (hypothetical),5,4,3,3,3,True,38
+P5,First-Time Warranty Claimant (hypothetical),4,5,4,3,4,True,38
