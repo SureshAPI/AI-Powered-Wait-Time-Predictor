@@ -1,51 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Your Estimated Service Time — Project Better Tomorrow</title>
-<style>
-  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 560px;
-         margin: 40px auto; padding: 0 16px; color: #1a1a1a; background: #fafafa; }
-  .card { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 28px; text-align: center; }
-  .estimate { font-size: 2.2rem; font-weight: 700; color: #2563eb; margin: 8px 0; }
-  .range { color: #555; margin-bottom: 20px; }
-  .disclaimer { font-size: 0.85rem; color: #a15c00; background: #fff7e6; border: 1px solid #ffe2a8;
-         border-radius: 8px; padding: 10px 14px; margin-top: 16px; }
-  .details { text-align: left; margin-top: 24px; font-size: 0.9rem; color: #444; }
-  .details dt { font-weight: 600; margin-top: 8px; }
-  .explain { font-size: 0.85rem; color: #555; margin-top: 16px; text-align: left; }
-  .job-id { font-size: 0.8rem; color: #999; margin-top: 16px; }
-  a.back { display: inline-block; margin-top: 24px; color: #2563eb; text-decoration: none; }
-</style>
-</head>
-<body>
-  <div class="card">
-    <div>Estimated Completion</div>
-    <div class="estimate">~{{ estimate }}</div>
-    <div class="range">Typically between {{ low }} and {{ high }}</div>
+{% extends "base.html" %}
+{% block title %}Your Estimated Service Time — Project Better Tomorrow{% endblock %}
+{% block nav %}<a href="/dashboard">Staff view</a>{% endblock %}
 
-    <div class="disclaimer">
-      This is an <strong>estimate</strong>, not a guarantee. Actual time can vary with
-      unforeseen complications, additional parts issues, or workload changes.
-    </div>
-
-    <p class="explain">Based on this service type, current workload, technician
-    availability, and parts status — compared against similar past jobs
-    (currently: labelled synthetic/demo data, see project README).</p>
-
-    <dl class="details">
-      <dt>Service type</dt><dd>{{ inputs.service_type }}</dd>
-      <dt>Phone brand</dt><dd>{{ inputs.phone_brand }}</dd>
-      <dt>Parts availability</dt><dd>{{ inputs.parts_availability }}</dd>
-      <dt>Jobs ahead in queue</dt><dd>{{ inputs.current_workload }}</dd>
-      <dt>Technicians available</dt><dd>{{ inputs.technician_availability }}</dd>
-      <dt>Warranty case</dt><dd>{{ "Yes" if inputs.is_warranty_case else "No" }}</dd>
-    </dl>
-
-    <p class="job-id">Job reference: <code>{{ job_id }}</code></p>
+{% block content %}
+<div class="board">
+  <div class="board-eyebrow">ESTIMATED READY IN</div>
+  <div class="board-number-wrap">
+    <div class="board-number">{{ estimate }}</div>
   </div>
-  <a class="back" href="/">&larr; Enter another job</a>
-  &nbsp;|&nbsp;
-  <a class="back" href="/dashboard">Employee dashboard &rarr;</a>
-</body>
-</html>
+  <p class="board-range">Typically between {{ low }} and {{ high }}</p>
+
+  <div class="board-note">
+    <span class="icon" aria-hidden="true">!</span>
+    <span>This is an estimate, not a guarantee. Actual time can vary with
+    unforeseen complications, additional parts issues, or workload changes.</span>
+  </div>
+
+  <hr class="board-divider">
+
+  <dl>
+    <div class="board-row"><dt>Service</dt><dd>{{ inputs.service_type }}</dd></div>
+    <div class="board-row"><dt>Brand</dt><dd>{{ inputs.phone_brand }}</dd></div>
+    <div class="board-row"><dt>Parts</dt><dd>{{ inputs.parts_availability }}</dd></div>
+    <div class="board-row"><dt>Queue</dt><dd>{{ inputs.current_workload }} ahead</dd></div>
+    <div class="board-row"><dt>Technicians</dt><dd>{{ inputs.technician_availability }} free</dd></div>
+    <div class="board-row"><dt>Warranty</dt><dd>{{ "Yes" if inputs.is_warranty_case else "No" }}</dd></div>
+  </dl>
+
+  <p class="board-explain">{{ status_note }}</p>
+  <p class="job-ref">Ticket ref. {{ job_id }}</p>
+</div>
+
+<div class="result-links">
+  <a href="/">&larr; New estimate</a>
+  <a href="/dashboard">Staff view &rarr;</a>
+</div>
+{% endblock %}

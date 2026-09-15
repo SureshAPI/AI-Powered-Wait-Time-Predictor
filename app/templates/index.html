@@ -1,67 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Estimate My Service Time — Project Better Tomorrow</title>
-<style>
-  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 560px;
-         margin: 40px auto; padding: 0 16px; color: #1a1a1a; background: #fafafa; }
-  h1 { font-size: 1.4rem; margin-bottom: 4px; }
-  p.sub { color: #555; margin-top: 0; }
-  form { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 24px; }
-  label { display: block; font-weight: 600; margin: 16px 0 6px; font-size: 0.9rem; }
-  select, input[type=number] { width: 100%; padding: 8px 10px; border: 1px solid #ccc;
-         border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
-  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
-  .checkbox-row label { margin: 0; font-weight: 500; }
-  button { margin-top: 24px; width: 100%; padding: 12px; font-size: 1rem; font-weight: 600;
-         background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
-  button:hover { background: #1d4ed8; }
-  .note { font-size: 0.8rem; color: #777; margin-top: 24px; }
-</style>
-</head>
-<body>
-  <h1>Estimate My Service Time</h1>
-  <p class="sub">Prototype — Project Better Tomorrow. Enter the job details below.
-  &nbsp;<a href="/dashboard">Employee dashboard &rarr;</a></p>
+{% extends "base.html" %}
+{% block title %}Estimate My Service Time — Project Better Tomorrow{% endblock %}
+{% block nav %}<a href="/dashboard">Staff view</a>{% endblock %}
 
-  <form action="/predict" method="post">
-    <label for="service_type">Service type</label>
-    <select name="service_type" id="service_type" required>
-      {% for st in service_types %}
-      <option value="{{ st }}">{{ st }}</option>
-      {% endfor %}
-    </select>
+{% block content %}
+<div class="ticket">
+  <div class="ticket-head">
+    <h1>How long's my repair?</h1>
+    <p>Enter your job details and get an estimated ready time.</p>
+  </div>
+  <div class="perforation" aria-hidden="true"></div>
+  <div class="ticket-body">
+    <form action="/predict" method="post">
+      <div class="field">
+        <label for="service_type">Service type</label>
+        <div class="select-wrap">
+          <select name="service_type" id="service_type" required>
+            {% for st in service_types %}
+            <option value="{{ st }}">{{ st }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-    <label for="phone_brand">Phone brand</label>
-    <select name="phone_brand" id="phone_brand" required>
-      {% for b in phone_brands %}
-      <option value="{{ b }}">{{ b }}</option>
-      {% endfor %}
-    </select>
+      <div class="field">
+        <label for="phone_brand">Phone brand</label>
+        <div class="select-wrap">
+          <select name="phone_brand" id="phone_brand" required>
+            {% for b in phone_brands %}
+            <option value="{{ b }}">{{ b }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-    <label for="parts_availability">Parts availability</label>
-    <select name="parts_availability" id="parts_availability" required>
-      {% for p in parts_options %}
-      <option value="{{ p }}">{{ p }}</option>
-      {% endfor %}
-    </select>
+      <div class="field">
+        <label for="parts_availability">Parts availability</label>
+        <div class="select-wrap">
+          <select name="parts_availability" id="parts_availability" required>
+            {% for p in parts_options %}
+            <option value="{{ p }}">{{ p }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-    <label for="current_workload">Jobs currently ahead in queue</label>
-    <input type="number" name="current_workload" id="current_workload" min="0" max="30" value="2" required>
+      <div class="field">
+        <label for="current_workload">Jobs currently ahead in queue</label>
+        <div class="stepper">
+          <button type="button" data-action="dec" aria-label="Decrease jobs ahead">&minus;</button>
+          <input type="number" inputmode="numeric" name="current_workload" id="current_workload"
+                 min="0" max="30" value="2" required>
+          <button type="button" data-action="inc" aria-label="Increase jobs ahead">&plus;</button>
+        </div>
+      </div>
 
-    <label for="technician_availability">Technicians currently available</label>
-    <input type="number" name="technician_availability" id="technician_availability" min="0" max="10" value="1" required>
+      <div class="field">
+        <label for="technician_availability">Technicians currently available</label>
+        <div class="stepper">
+          <button type="button" data-action="dec" aria-label="Decrease technicians available">&minus;</button>
+          <input type="number" inputmode="numeric" name="technician_availability" id="technician_availability"
+                 min="0" max="10" value="1" required>
+          <button type="button" data-action="inc" aria-label="Increase technicians available">&plus;</button>
+        </div>
+      </div>
 
-    <div class="checkbox-row">
-      <input type="checkbox" name="is_warranty_case" id="is_warranty_case">
-      <label for="is_warranty_case">This is a warranty case</label>
-    </div>
+      <div class="toggle-row">
+        <span>This is a warranty case</span>
+        <label class="switch">
+          <input type="checkbox" name="is_warranty_case" id="is_warranty_case">
+          <span class="track" aria-hidden="true"></span>
+          <span class="thumb" aria-hidden="true"></span>
+        </label>
+      </div>
 
-    <button type="submit">Get Estimated Time</button>
-  </form>
+      <button type="submit" class="btn-primary">Get my estimate</button>
+    </form>
+  </div>
+</div>
 
-  <p class="note">Prototype for demonstration and testing purposes. Trained on synthetic
-  data — estimates do not reflect real shop performance yet. See the project README for details.</p>
-</body>
-</html>
+<p class="finePrint">Prototype for demonstration and testing purposes. Trained on
+synthetic data — estimates do not reflect real shop performance yet. See the
+project README for details.</p>
+{% endblock %}
