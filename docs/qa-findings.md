@@ -34,6 +34,7 @@ reviewed terminology, messaging, and data collected by the intake form.
   prototype demo, not production-ready.
 
 ## Result
-Prototype is functional and internally consistent enough to proceed to real
-user testing (Phase 6). See `docs/testing.md` (added at that milestone) for
-the tester protocol.
+Prototype is functional and internally consistent. Real user testing (as
+originally planned) was not conducted; a simulated validation study was
+produced instead — see `docs/validation-approach.md` and
+`docs/simulated-validation-study.md`.
