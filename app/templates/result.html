@@ -20,6 +20,9 @@
 
   <dl>
     <div class="board-row"><dt>Service</dt><dd>{{ inputs.service_type }}</dd></div>
+    {% if inputs.reported_issue %}
+    <div class="board-row"><dt>Issue</dt><dd>{{ inputs.reported_issue }}</dd></div>
+    {% endif %}
     <div class="board-row"><dt>Brand</dt><dd>{{ inputs.phone_brand }}</dd></div>
     <div class="board-row"><dt>Parts</dt><dd>{{ inputs.parts_availability }}</dd></div>
     <div class="board-row"><dt>Queue</dt><dd>{{ inputs.current_workload }} ahead</dd></div>
@@ -28,6 +31,21 @@
   </dl>
 
   <p class="board-explain">{{ status_note }}</p>
+
+  {% if explanation and explanation.factors %}
+  <hr class="board-divider">
+  <div class="board-factors">
+    <div class="board-eyebrow">WHAT AFFECTS THIS ESTIMATE</div>
+    {% for factor in explanation.factors %}
+    <div class="factor-row">
+      <span class="factor-indicator factor-{{ factor.direction|replace(' ', '-') }}"></span>
+      <span class="factor-name">{{ factor.name }}</span>
+      <span class="factor-detail">{{ factor.explanation }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <p class="job-ref">Ticket ref. {{ job_id }}</p>
 </div>
 

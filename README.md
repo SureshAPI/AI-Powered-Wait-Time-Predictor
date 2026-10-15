@@ -85,66 +85,32 @@ See [`docs/responsible-ai.md`](docs/responsible-ai.md).
 
 ## Current Status
 
-**Completed**
-- Repository structure initialized.
-- Problem context and continuation-track justification documented.
-- Synthetic dataset schema and generator (`src/generate_synthetic_data.py`,
-  `data/schema.md`) — 600 rows, clearly labelled synthetic.
-- Baseline estimator (`src/baseline.py`) and Gradient Boosting Regression
-  model (`src/model.py`), trained via `src/train.py`, with automated tests
-  (`tests/test_pipeline.py`, 5/5 passing). Results in `docs/methodology.md`,
-  labelled synthetic-data-only.
-- Flask prototype app (`app/app.py`): customer intake form → prediction
-  results page with an estimated range and an explicit "this is an estimate,
-  not a guarantee" disclaimer. Verified working end-to-end (GET `/` and POST
-  `/predict` both return 200 and render correctly).
-- Employee dashboard (`app/templates/dashboard.html`) and feedback-loop job
-  log (`app/job_store.py`): every prediction is logged, and an employee can
-  record the real completion time for a job. Uncertainty/explanation text is
-  shown to both the customer and the dashboard. Full predict → dashboard →
-  record-actual flow tested end-to-end (`tests/test_pipeline.py`, 6/6
-  passing).
-- Internal QA pass completed (`docs/qa-findings.md`): found and fixed a
-  negative-prediction bug and a duration-readability issue; confirmed the
-  intake form doesn't collect unnecessary personal data.
-- Simulated validation study completed (`docs/validation-approach.md`,
-  `docs/simulated-validation-study.md`, `src/simulate_validation.py`): 5
-  hypothetical tester personas, synthetic interaction data, clearly labelled
-  as simulated and not real-world validation. Original real-testing protocol
-  retained unfilled in `docs/testing-protocol.md`.
-- Final Prototype & Validation Report produced
-  (`docs/Project_Better_Tomorrow_Review1_Report.docx`), covering problem,
-  architecture, ML methodology and results, QA findings, the simulated
-  validation study, responsible AI, and limitations.
-- UI/UX redesign (`docs/design-notes.md`): original visual identity — a
-  "service departure board" concept — replacing the generic first-pass
-  styling. Found and fixed a routing bug (result page broke on refresh) as
-  part of this pass. 7/7 tests passing.
+**Phase 1 (Completed & Evaluated — 35% completion, 32.2/35 marks)**
+- Problem context, continuation-track rationale, and architecture documented.
+- Synthetic dataset schema and generator (600 rows).
+- Baseline estimator and Gradient Boosting Regression (GBR) model with fixed ±20 min range.
+- Prototype Flask web app: customer intake, departure-board result screen, CSV-based job log, and employee dashboard.
+- Internal QA pass: clamped negative predictions, formatted readable hour/minute durations.
+- Simulated validation study (5 hypothetical personas).
+- Original visual identity: "service departure board" design theme.
 
-**Planned / Future Work**
-- Final pre-submission polish and QBEE-readiness check.
+**Phase 2 (Completed — Cumulative 70% completion)**
+- **Enhanced Intake & Data Pipeline:** Separated `reported_issue` from `service_type` across 8 service categories with 38 specific symptoms and complexity multipliers. Added client-side dynamic selection cascade and comprehensive server-side input validation. Dataset expanded to 800 rows (`data/synthetic_service_data.csv`).
+- **Data-Driven Prediction Intervals:** Replaced fixed ±20 min band with Quantile Gradient Boosting Regressors ($\alpha=0.10$ and $\alpha=0.90$) producing an 80% empirical prediction interval conditioned on job features.
+- **SQLite Persistence & Safe Migration:** Replaced fragile CSV logging with SQLite (`data/jobs.db`). Implemented automatic, idempotent legacy CSV migration that marks historical records as `source='demo'` to preserve clean separation from real operational data.
+- **Job Lifecycle & Status Management:** Introduced validated status state machine (`open` → `in_progress` → `completed` / `cancelled`, `cancelled` → `open`) with mandatory, positive actual-duration recording on completion.
+- **Employee Dashboard & Live Analytics:** Added real-time text search and filters (status, service type). Implemented operational analytics (AI MAE, baseline MAE, mean error) that strictly query completed live records (`source='live'`) and require $N \ge 3$ to avoid misleading small-sample claims.
+- **Prediction Explanations:** Created an interpretive feature contribution analyzer (`src/explanations.py`) comparing inputs to neutral training medians, generating concise customer status notes and detailed employee factor breakdowns without falsely claiming formal SHAP attribution.
+- **Deployment & Testability:** Implemented Flask application factory (`create_app`), health monitoring endpoint (`/health`), Gunicorn WSGI compatibility (`gunicorn app.app:app`), and expanded automated test suite (17/17 tests passing in `tests/test_pipeline.py`).
 
 ## Limitations
 
-- **No real-world validation.** All model training data and all validation-
-  study data are synthetic/simulated. Neither the prediction accuracy in
-  `docs/methodology.md` nor the usability findings in
-  `docs/simulated-validation-study.md` should be read as evidence about real
-  shop performance or real customers.
-- **Flat uncertainty range.** The displayed ± range is a fixed 20-minute
-  band, not a statistically calibrated prediction interval (see
-  `docs/qa-findings.md`).
-- **Simplified inputs.** "Reported issue" was folded into `service_type`
-  rather than kept as a separate field, for scope reasons.
-- **No persistence beyond a local CSV log** — acceptable for a single-shop
-  prototype, not production-ready (no database, auth, or multi-shop
-  support).
+- **Synthetic Training Data.** All model training remains on synthetic demonstration data (`data/synthetic_service_data.csv`). Real-world predictive accuracy cannot be claimed without genuine historical shop logs.
+- **Simulated Validation.** The user validation study remains simulated (`docs/simulated-validation-study.md`) to reflect ethical academic honesty until field testing with real shop customers is conducted.
+- **Single-Node SQLite Storage.** SQLite provides robust local persistence for a single workshop, but does not support multi-tenant distributed deployments or user authentication.
 
-## Future Improvements
+## Future Improvements (Phase 3 Roadmap)
 
-- Replace the flat uncertainty margin with a proper prediction interval
-  (e.g. quantile regression).
-- Add a distinct "reported issue" field alongside service type.
-- If real historical service data or real testers become available, retrain
-  the model and run `docs/testing-protocol.md` for genuine validation,
-  reported separately from the simulated study.
+- Authentication and role-based access control (RBAC) separating customer self-service from employee actions.
+- Automatic online retraining trigger when live completed records exceed a statistical significance threshold ($N \ge 100$).
+- Field deployment and empirical validation study with real repair technicians at the Gandhipuram shop.

@@ -1,601 +1,801 @@
-service_type,phone_brand,is_warranty_case,parts_availability,current_workload,technician_availability,actual_duration_minutes
-Battery Replacement,Samsung,False,Available,2,0,29.5
-Screen Replacement,Apple,True,Available,0,4,40.4
-Software Issue,Other,False,Order Required,0,1,107.3
-Battery Replacement,Oppo,True,Order Required,9,2,208.0
-Water Damage Diagnostic,Apple,False,Order Required,9,2,125.7
-Battery Replacement,Realme,False,Available,7,2,29.4
-Camera Repair,Apple,False,Available,11,1,55.6
-Software Issue,Vivo,False,Order Required,3,0,92.9
-Speaker/Mic Repair,Realme,False,Available,14,3,34.3
-Water Damage Diagnostic,Oppo,False,Unknown,2,4,43.2
-Charging Port Repair,Xiaomi,False,Available,1,3,8
-Screen Replacement,Apple,False,Available,4,2,29.8
-Warranty Diagnostic,Samsung,False,Order Required,4,4,82.3
-Software Issue,Xiaomi,False,Available,12,4,20.1
-Warranty Diagnostic,Samsung,True,Available,13,2,62.5
-Battery Replacement,Xiaomi,True,Available,8,1,44.6
-Software Issue,Realme,False,Available,10,2,30.8
-Speaker/Mic Repair,Samsung,False,Available,3,0,29.3
-Software Issue,Apple,False,Order Required,1,4,114.3
-Warranty Diagnostic,Realme,False,Order Required,3,0,177.5
-Warranty Diagnostic,Samsung,False,Unknown,1,0,49.0
-Warranty Diagnostic,Xiaomi,False,Available,3,0,31.8
-Battery Replacement,Samsung,False,Available,0,0,23.5
-Software Issue,Oppo,False,Available,0,3,12.3
-Warranty Diagnostic,OnePlus,False,Unknown,12,4,47.3
-Screen Replacement,Vivo,True,Available,8,4,40.2
-Charging Port Repair,Apple,False,Order Required,3,3,112.8
-Water Damage Diagnostic,Vivo,False,Available,11,2,44.4
-Camera Repair,Other,False,Order Required,1,0,276.7
-Camera Repair,Xiaomi,False,Order Required,14,1,264.1
-Camera Repair,Samsung,False,Available,14,0,67.1
-Charging Port Repair,OnePlus,True,Available,5,1,46.9
-Camera Repair,Samsung,True,Available,4,0,48.3
-Water Damage Diagnostic,Samsung,True,Unknown,11,1,115.8
-Charging Port Repair,Samsung,False,Order Required,12,0,169.5
-Water Damage Diagnostic,Xiaomi,False,Available,2,1,63.4
-Speaker/Mic Repair,Oppo,False,Order Required,12,1,126.1
-Software Issue,Realme,False,Available,4,1,8
-Water Damage Diagnostic,Vivo,True,Available,12,2,81.5
-Screen Replacement,Apple,False,Available,9,2,32.4
-Speaker/Mic Repair,Vivo,False,Unknown,1,3,20.3
-Software Issue,Vivo,False,Unknown,14,2,52.8
-Camera Repair,OnePlus,False,Available,11,2,41.9
-Charging Port Repair,OnePlus,False,Order Required,4,2,186.2
-Speaker/Mic Repair,Other,False,Order Required,8,3,217.5
-Speaker/Mic Repair,Apple,False,Order Required,10,2,91.7
-Software Issue,Other,False,Order Required,7,3,205.3
-Charging Port Repair,Samsung,False,Order Required,14,0,266.1
-Warranty Diagnostic,Samsung,False,Unknown,1,3,25.1
-Warranty Diagnostic,Oppo,False,Available,14,1,44.2
-Camera Repair,Realme,False,Available,12,4,28.8
-Software Issue,OnePlus,False,Order Required,1,1,105.8
-Software Issue,Apple,False,Available,7,3,8
-Screen Replacement,Oppo,False,Unknown,4,3,61.9
-Software Issue,Other,True,Available,0,3,20.6
-Charging Port Repair,Samsung,False,Available,10,0,45.8
-Warranty Diagnostic,Xiaomi,True,Available,3,3,25.2
-Camera Repair,Apple,False,Order Required,0,2,241.0
-Screen Replacement,Samsung,False,Available,0,4,19.7
-Software Issue,Other,False,Order Required,2,4,76.6
-Charging Port Repair,OnePlus,True,Available,4,4,27.9
-Software Issue,Apple,False,Available,10,4,20.0
-Screen Replacement,Vivo,False,Order Required,1,4,153.9
-Speaker/Mic Repair,Other,False,Available,11,4,39.3
-Warranty Diagnostic,Other,False,Order Required,4,2,103.0
-Warranty Diagnostic,Oppo,False,Available,5,1,21.4
-Camera Repair,Vivo,True,Available,14,2,59.2
-Software Issue,Other,False,Available,12,0,39.0
-Software Issue,OnePlus,False,Available,8,4,8
-Warranty Diagnostic,OnePlus,False,Available,11,1,31.3
-Charging Port Repair,Realme,True,Available,11,4,53.5
-Software Issue,Vivo,True,Available,8,1,39.9
-Charging Port Repair,Other,True,Available,4,3,43.5
-Battery Replacement,Apple,False,Available,10,0,45.9
-Camera Repair,Apple,False,Available,12,3,44.8
-Warranty Diagnostic,Other,True,Available,6,2,58.8
-Battery Replacement,Realme,False,Available,1,1,21.8
-Warranty Diagnostic,OnePlus,True,Available,4,3,35.3
-Software Issue,Oppo,True,Available,2,2,18.0
-Camera Repair,Other,True,Order Required,11,3,216.8
-Screen Replacement,Oppo,False,Available,0,0,43.5
-Screen Replacement,OnePlus,False,Order Required,2,3,129.9
-Water Damage Diagnostic,Other,False,Available,6,2,58.5
-Warranty Diagnostic,OnePlus,False,Available,12,4,35.0
-Camera Repair,Vivo,True,Order Required,13,4,290.2
-Warranty Diagnostic,Other,False,Available,8,1,40.4
-Warranty Diagnostic,Apple,True,Available,12,1,42.1
-Battery Replacement,Other,False,Available,2,3,19.4
-Camera Repair,Oppo,False,Unknown,3,3,37.4
-Battery Replacement,OnePlus,False,Order Required,5,4,209.8
-Warranty Diagnostic,Xiaomi,False,Available,5,4,38.4
-Software Issue,Oppo,True,Order Required,0,2,218.4
-Charging Port Repair,Other,False,Available,9,2,29.4
-Warranty Diagnostic,Samsung,False,Available,10,1,33.9
-Camera Repair,Vivo,False,Available,1,2,19.1
-Warranty Diagnostic,Samsung,False,Available,10,2,44.0
-Water Damage Diagnostic,Apple,False,Order Required,1,3,101.5
-Speaker/Mic Repair,Vivo,False,Available,6,4,27.2
-Charging Port Repair,Apple,False,Available,10,1,41.6
-Warranty Diagnostic,OnePlus,False,Order Required,7,2,183.6
-Speaker/Mic Repair,OnePlus,False,Available,4,3,18.0
-Software Issue,Oppo,False,Available,11,2,27.3
-Water Damage Diagnostic,OnePlus,True,Order Required,12,0,303.8
-Speaker/Mic Repair,Realme,False,Available,10,1,33.4
-Screen Replacement,OnePlus,False,Available,5,1,38.9
-Charging Port Repair,Vivo,False,Unknown,13,1,56.0
-Camera Repair,Vivo,False,Available,1,1,23.7
-Water Damage Diagnostic,Vivo,True,Available,4,4,35.6
-Camera Repair,Oppo,False,Unknown,1,1,51.6
-Battery Replacement,Other,False,Available,6,0,35.6
-Camera Repair,Other,True,Available,8,1,56.4
-Charging Port Repair,Oppo,False,Order Required,9,3,213.9
-Software Issue,Other,False,Available,5,0,36.8
-Screen Replacement,Oppo,True,Unknown,13,3,78.9
-Screen Replacement,Vivo,True,Available,9,1,55.5
-Speaker/Mic Repair,Xiaomi,False,Available,4,1,42.7
-Charging Port Repair,Apple,False,Available,0,2,17.8
-Screen Replacement,Xiaomi,False,Available,11,0,60.5
-Battery Replacement,Other,False,Unknown,0,4,29.1
-Water Damage Diagnostic,Apple,False,Unknown,1,0,58.9
-Speaker/Mic Repair,Oppo,False,Available,7,4,23.0
-Software Issue,Oppo,False,Available,5,3,8
-Speaker/Mic Repair,Oppo,False,Available,2,3,16.2
-Speaker/Mic Repair,Xiaomi,False,Available,8,4,27.8
-Speaker/Mic Repair,Oppo,False,Order Required,4,4,175.5
-Battery Replacement,Vivo,False,Available,12,2,41.8
-Screen Replacement,OnePlus,True,Available,12,2,75.2
-Battery Replacement,Xiaomi,False,Unknown,1,4,33.8
-Speaker/Mic Repair,OnePlus,False,Order Required,9,4,106.0
-Camera Repair,Other,False,Available,7,3,21.3
-Battery Replacement,Vivo,False,Available,10,4,30.8
-Screen Replacement,Samsung,True,Unknown,12,1,86.4
-Water Damage Diagnostic,Xiaomi,True,Available,3,4,28.0
-Water Damage Diagnostic,Samsung,False,Available,5,4,57.4
-Water Damage Diagnostic,OnePlus,True,Available,5,1,76.1
-Battery Replacement,Realme,False,Available,1,3,10.6
-Software Issue,Vivo,False,Available,10,0,35.1
-Charging Port Repair,Realme,True,Available,2,4,12.5
-Warranty Diagnostic,Other,False,Order Required,7,4,145.1
-Warranty Diagnostic,Apple,False,Available,12,2,36.6
-Battery Replacement,OnePlus,False,Available,5,2,24.1
-Water Damage Diagnostic,Other,False,Unknown,11,0,71.3
-Speaker/Mic Repair,Other,False,Unknown,7,0,76.1
-Screen Replacement,Realme,False,Unknown,8,4,75.7
-Water Damage Diagnostic,Oppo,False,Order Required,0,2,217.6
-Charging Port Repair,Vivo,True,Order Required,14,2,239.5
-Battery Replacement,OnePlus,False,Available,5,1,26.1
-Battery Replacement,Oppo,False,Available,4,1,18.0
-Warranty Diagnostic,Realme,True,Available,1,2,45.0
-Screen Replacement,Vivo,False,Available,9,3,22.7
-Charging Port Repair,Other,True,Available,11,1,66.4
-Software Issue,OnePlus,False,Order Required,14,1,266.1
-Warranty Diagnostic,OnePlus,False,Available,6,1,34.9
-Warranty Diagnostic,Vivo,False,Available,13,4,45.5
-Charging Port Repair,OnePlus,False,Available,13,3,37.5
-Screen Replacement,Oppo,True,Available,3,3,20.7
-Battery Replacement,Vivo,False,Available,4,3,19.8
-Screen Replacement,Apple,True,Available,2,4,27.8
-Camera Repair,Realme,False,Available,6,4,41.9
-Screen Replacement,Realme,False,Available,0,4,14.9
-Charging Port Repair,Apple,False,Available,8,4,16.5
-Warranty Diagnostic,Samsung,False,Unknown,4,0,38.2
-Battery Replacement,Vivo,True,Available,5,1,44.0
-Charging Port Repair,Apple,False,Unknown,0,2,46.2
-Speaker/Mic Repair,OnePlus,False,Unknown,8,3,29.9
-Speaker/Mic Repair,OnePlus,True,Available,14,3,61.3
-Charging Port Repair,Other,False,Available,12,4,27.3
-Charging Port Repair,OnePlus,False,Available,10,2,38.5
-Water Damage Diagnostic,Xiaomi,False,Available,0,2,22.3
-Screen Replacement,Apple,False,Available,8,1,38.6
-Warranty Diagnostic,Samsung,True,Available,10,2,40.6
-Speaker/Mic Repair,Vivo,False,Available,2,4,21.1
-Camera Repair,Realme,False,Available,2,3,33.7
-Warranty Diagnostic,Realme,False,Available,14,3,45.3
-Battery Replacement,Other,True,Order Required,1,2,182.5
-Charging Port Repair,Vivo,False,Available,3,1,31.0
-Speaker/Mic Repair,Vivo,False,Unknown,2,4,34.5
-Water Damage Diagnostic,Oppo,False,Available,5,0,37.2
-Speaker/Mic Repair,Xiaomi,False,Order Required,10,4,160.5
-Battery Replacement,Xiaomi,False,Available,14,1,38.1
-Camera Repair,Apple,True,Available,8,2,43.2
-Charging Port Repair,Xiaomi,False,Order Required,9,2,247.9
-Screen Replacement,Apple,True,Available,9,2,50.1
-Camera Repair,OnePlus,False,Order Required,10,3,102.1
-Warranty Diagnostic,Oppo,False,Available,9,1,29.1
-Water Damage Diagnostic,Xiaomi,False,Available,1,2,12.4
-Warranty Diagnostic,Realme,True,Available,6,4,42.3
-Speaker/Mic Repair,Realme,False,Available,8,3,13.9
-Screen Replacement,Apple,False,Available,3,1,36.1
-Warranty Diagnostic,OnePlus,False,Order Required,6,1,241.4
-Speaker/Mic Repair,Samsung,False,Available,3,2,11.6
-Camera Repair,Apple,True,Available,5,2,40.9
-Water Damage Diagnostic,Samsung,True,Available,5,3,88.0
-Speaker/Mic Repair,Xiaomi,False,Available,13,2,54.1
-Warranty Diagnostic,OnePlus,False,Available,5,0,37.0
-Screen Replacement,Other,True,Order Required,12,4,201.8
-Water Damage Diagnostic,Xiaomi,False,Available,9,0,44.5
-Software Issue,Oppo,False,Available,7,0,33.9
-Speaker/Mic Repair,Other,False,Available,2,3,11.4
-Camera Repair,Other,True,Available,8,2,55.8
-Camera Repair,Realme,False,Available,7,2,34.4
-Water Damage Diagnostic,Oppo,False,Unknown,12,1,73.5
-Speaker/Mic Repair,Other,False,Order Required,3,1,187.0
-Software Issue,Realme,True,Unknown,3,1,50.6
-Charging Port Repair,Samsung,False,Unknown,2,3,29.5
-Camera Repair,Vivo,True,Available,12,0,58.4
-Screen Replacement,Xiaomi,False,Order Required,14,0,242.7
-Camera Repair,Samsung,True,Available,1,2,27.8
-Warranty Diagnostic,Xiaomi,False,Available,3,0,15.4
-Screen Replacement,Vivo,False,Available,12,1,35.6
-Water Damage Diagnostic,Oppo,False,Available,10,0,54.3
-Camera Repair,Oppo,True,Order Required,5,2,157.0
-Software Issue,Samsung,False,Available,2,3,18.1
-Battery Replacement,OnePlus,False,Available,2,3,8
-Speaker/Mic Repair,Oppo,False,Unknown,12,4,55.6
-Battery Replacement,Other,False,Available,14,4,16.9
-Software Issue,Xiaomi,True,Order Required,7,0,193.5
-Charging Port Repair,Oppo,False,Available,7,2,35.3
-Screen Replacement,Realme,False,Available,5,0,67.5
-Warranty Diagnostic,Samsung,True,Available,2,3,8
-Water Damage Diagnostic,Oppo,True,Unknown,13,4,74.1
-Software Issue,Samsung,False,Unknown,7,4,33.4
-Warranty Diagnostic,Vivo,True,Available,14,0,70.9
-Software Issue,Realme,True,Available,7,4,16.7
-Screen Replacement,Oppo,False,Available,12,0,53.8
-Speaker/Mic Repair,Vivo,True,Order Required,10,4,132.2
-Charging Port Repair,Oppo,False,Available,5,3,24.3
-Water Damage Diagnostic,Xiaomi,False,Available,13,1,66.5
-Warranty Diagnostic,Samsung,False,Unknown,8,4,21.5
-Speaker/Mic Repair,Apple,False,Order Required,0,2,70.1
-Battery Replacement,Realme,False,Available,10,4,29.4
-Screen Replacement,Realme,False,Unknown,1,3,46.6
-Water Damage Diagnostic,Realme,False,Order Required,6,3,137.8
-Battery Replacement,Other,False,Available,3,2,20.1
-Software Issue,Xiaomi,True,Available,9,4,33.1
-Software Issue,Other,False,Unknown,5,2,54.8
-Warranty Diagnostic,Other,True,Order Required,2,1,257.3
-Screen Replacement,Apple,False,Order Required,12,0,154.8
-Charging Port Repair,Samsung,True,Available,0,4,27.5
-Water Damage Diagnostic,Samsung,True,Order Required,8,2,243.7
-Charging Port Repair,Apple,False,Available,3,1,19.8
-Battery Replacement,Vivo,False,Available,3,1,29.6
-Battery Replacement,Samsung,True,Available,8,3,25.3
-Speaker/Mic Repair,Apple,False,Unknown,3,1,47.1
-Camera Repair,Samsung,False,Order Required,4,4,247.6
-Charging Port Repair,Oppo,False,Available,9,1,57.5
-Speaker/Mic Repair,Oppo,False,Available,11,0,49.4
-Battery Replacement,Vivo,False,Available,9,3,36.3
-Camera Repair,Other,False,Available,6,3,17.8
-Camera Repair,Realme,False,Available,2,3,35.0
-Water Damage Diagnostic,Vivo,False,Available,4,3,50.6
-Warranty Diagnostic,Oppo,True,Available,8,0,58.5
-Screen Replacement,OnePlus,False,Order Required,11,4,213.0
-Charging Port Repair,OnePlus,False,Available,1,1,30.8
-Warranty Diagnostic,Apple,False,Unknown,11,3,38.4
-Speaker/Mic Repair,Oppo,False,Available,5,3,38.2
-Charging Port Repair,OnePlus,False,Unknown,3,3,44.2
-Warranty Diagnostic,Realme,False,Available,12,3,43.4
-Software Issue,Xiaomi,False,Available,11,3,38.9
-Battery Replacement,Oppo,False,Available,4,1,13.0
-Water Damage Diagnostic,Oppo,True,Unknown,7,4,63.2
-Speaker/Mic Repair,Apple,True,Available,10,2,39.8
-Water Damage Diagnostic,Vivo,False,Available,0,0,25.4
-Software Issue,Other,False,Available,10,4,25.5
-Screen Replacement,Other,True,Available,1,0,37.8
-Warranty Diagnostic,Vivo,False,Available,11,3,44.6
-Battery Replacement,Samsung,False,Available,10,1,33.0
-Speaker/Mic Repair,Oppo,False,Available,6,1,26.4
-Water Damage Diagnostic,Samsung,False,Order Required,7,4,143.8
-Battery Replacement,Apple,False,Available,5,2,32.0
-Warranty Diagnostic,Vivo,False,Available,9,0,21.3
-Camera Repair,Apple,False,Available,3,2,17.5
-Charging Port Repair,Oppo,False,Available,6,3,19.8
-Charging Port Repair,Xiaomi,False,Available,5,3,13.0
-Screen Replacement,Other,True,Order Required,8,4,198.6
-Screen Replacement,Realme,True,Available,8,2,58.7
-Warranty Diagnostic,Apple,False,Available,8,2,28.9
-Software Issue,Oppo,True,Order Required,12,1,172.6
-Battery Replacement,Other,False,Available,12,1,29.8
-Water Damage Diagnostic,Xiaomi,False,Order Required,13,1,199.2
-Charging Port Repair,Vivo,False,Available,9,2,52.8
-Charging Port Repair,Oppo,False,Unknown,13,1,54.5
-Speaker/Mic Repair,Realme,False,Order Required,7,1,158.2
-Battery Replacement,Oppo,False,Available,14,2,41.6
-Screen Replacement,Apple,False,Available,10,2,29.9
-Software Issue,Other,True,Order Required,5,4,182.3
-Screen Replacement,Samsung,True,Order Required,7,0,195.5
-Charging Port Repair,OnePlus,True,Unknown,4,0,67.8
-Charging Port Repair,Samsung,False,Available,11,1,46.7
-Battery Replacement,Xiaomi,False,Available,7,0,30.8
-Battery Replacement,Oppo,False,Available,3,3,17.7
-Camera Repair,Xiaomi,False,Order Required,13,1,130.6
-Screen Replacement,Xiaomi,False,Order Required,10,1,199.7
-Charging Port Repair,Apple,False,Available,6,2,50.1
-Battery Replacement,Realme,False,Available,9,2,38.2
-Camera Repair,Realme,False,Available,11,3,30.3
-Software Issue,Other,False,Available,10,4,20.4
-Speaker/Mic Repair,Xiaomi,False,Order Required,6,2,174.1
-Battery Replacement,Samsung,False,Available,3,0,23.2
-Water Damage Diagnostic,Oppo,False,Available,8,4,58.2
-Camera Repair,Apple,False,Available,12,1,38.6
-Battery Replacement,OnePlus,False,Order Required,13,1,164.1
-Warranty Diagnostic,Samsung,False,Order Required,11,1,230.5
-Camera Repair,Xiaomi,False,Order Required,13,2,294.6
-Speaker/Mic Repair,Oppo,True,Available,11,4,57.9
-Charging Port Repair,Vivo,True,Order Required,14,4,248.9
-Screen Replacement,Realme,True,Available,14,1,61.9
-Water Damage Diagnostic,Realme,False,Available,11,2,35.3
-Speaker/Mic Repair,Apple,False,Unknown,2,1,58.7
-Camera Repair,OnePlus,False,Available,0,2,28.0
-Camera Repair,Realme,False,Available,7,1,43.4
-Water Damage Diagnostic,Samsung,True,Available,13,0,83.3
-Camera Repair,Apple,True,Unknown,6,3,61.2
-Water Damage Diagnostic,Vivo,False,Order Required,9,0,195.7
-Screen Replacement,Oppo,False,Available,4,2,21.7
-Speaker/Mic Repair,Vivo,False,Available,3,1,33.7
-Charging Port Repair,Apple,True,Available,6,0,42.2
-Battery Replacement,Apple,True,Order Required,13,4,151.4
-Software Issue,Vivo,False,Available,4,2,34.4
-Software Issue,Apple,False,Order Required,2,0,249.6
-Charging Port Repair,Realme,False,Available,10,0,45.2
-Battery Replacement,Realme,False,Available,2,0,23.6
-Speaker/Mic Repair,Apple,True,Available,2,4,18.7
-Speaker/Mic Repair,Realme,False,Available,7,1,32.4
-Software Issue,OnePlus,False,Order Required,7,0,150.7
-Software Issue,Samsung,False,Order Required,5,3,228.8
-Speaker/Mic Repair,Oppo,True,Available,9,1,41.6
-Speaker/Mic Repair,Realme,False,Available,10,1,26.5
-Screen Replacement,Realme,False,Unknown,6,2,55.7
-Speaker/Mic Repair,Samsung,False,Available,9,4,25.0
-Warranty Diagnostic,OnePlus,True,Available,0,1,23.4
-Charging Port Repair,Vivo,False,Unknown,13,2,70.7
-Charging Port Repair,Apple,False,Order Required,1,2,182.3
-Charging Port Repair,Oppo,False,Unknown,10,2,61.3
-Speaker/Mic Repair,Realme,False,Order Required,6,2,132.6
-Water Damage Diagnostic,Samsung,True,Available,12,4,69.6
-Charging Port Repair,Vivo,False,Available,5,1,36.4
-Speaker/Mic Repair,Other,True,Available,11,0,46.6
-Screen Replacement,Oppo,False,Available,2,3,26.0
-Warranty Diagnostic,Realme,True,Available,13,0,58.5
-Battery Replacement,Vivo,True,Available,11,0,40.5
-Warranty Diagnostic,Samsung,False,Order Required,9,3,115.3
-Software Issue,Oppo,False,Order Required,11,4,134.4
-Warranty Diagnostic,Xiaomi,True,Available,1,2,32.0
-Battery Replacement,Samsung,True,Available,1,3,16.6
-Battery Replacement,Oppo,True,Order Required,5,1,179.1
-Camera Repair,Samsung,True,Order Required,1,0,183.4
-Water Damage Diagnostic,Oppo,False,Order Required,14,3,183.9
-Water Damage Diagnostic,Samsung,False,Unknown,12,4,69.8
-Charging Port Repair,Realme,False,Available,6,0,35.0
-Charging Port Repair,OnePlus,False,Order Required,12,0,206.1
-Screen Replacement,Oppo,True,Available,9,4,33.9
-Battery Replacement,Apple,False,Order Required,14,2,219.5
-Charging Port Repair,OnePlus,False,Available,10,3,22.2
-Speaker/Mic Repair,Realme,True,Available,4,2,27.6
-Battery Replacement,Realme,True,Unknown,7,2,62.8
-Software Issue,Oppo,False,Order Required,13,2,123.5
-Charging Port Repair,Samsung,True,Order Required,3,0,279.2
-Camera Repair,Vivo,False,Available,10,0,41.1
-Warranty Diagnostic,Vivo,False,Order Required,4,0,116.4
-Software Issue,Realme,False,Order Required,4,3,241.6
-Charging Port Repair,Xiaomi,False,Available,4,4,15.3
-Camera Repair,Oppo,False,Order Required,7,2,180.4
-Screen Replacement,Vivo,False,Available,4,2,28.1
-Speaker/Mic Repair,OnePlus,False,Order Required,4,2,137.9
-Water Damage Diagnostic,Vivo,False,Order Required,10,3,208.1
-Water Damage Diagnostic,Samsung,False,Unknown,13,1,75.7
-Speaker/Mic Repair,OnePlus,False,Order Required,14,4,110.3
-Camera Repair,Xiaomi,False,Order Required,10,0,245.3
-Speaker/Mic Repair,OnePlus,False,Available,1,3,20.5
-Battery Replacement,Other,False,Available,13,3,38.4
-Software Issue,Vivo,False,Available,14,3,19.9
-Charging Port Repair,Apple,False,Available,2,2,23.0
-Charging Port Repair,Xiaomi,False,Order Required,1,1,169.7
-Warranty Diagnostic,Oppo,True,Available,11,2,53.7
-Screen Replacement,Realme,True,Order Required,4,1,158.0
-Screen Replacement,OnePlus,False,Available,8,4,36.5
-Warranty Diagnostic,Vivo,False,Available,14,3,24.9
-Charging Port Repair,Realme,False,Available,2,0,44.3
-Camera Repair,Samsung,False,Available,1,0,35.5
-Warranty Diagnostic,Oppo,True,Available,11,1,33.9
-Camera Repair,Xiaomi,False,Order Required,8,4,113.0
-Software Issue,Realme,False,Order Required,3,2,77.8
-Warranty Diagnostic,Vivo,True,Available,1,0,29.7
-Battery Replacement,Apple,False,Available,4,1,23.1
-Charging Port Repair,Samsung,False,Available,10,2,40.6
-Screen Replacement,Samsung,False,Order Required,2,2,207.7
-Speaker/Mic Repair,Xiaomi,True,Available,7,2,41.3
-Water Damage Diagnostic,Xiaomi,True,Order Required,0,1,182.5
-Speaker/Mic Repair,Samsung,False,Order Required,11,1,262.5
-Warranty Diagnostic,Samsung,True,Order Required,0,4,184.4
-Battery Replacement,Oppo,False,Available,5,3,11.2
-Screen Replacement,Samsung,False,Available,13,3,64.1
-Software Issue,Vivo,False,Available,3,4,14.1
-Software Issue,Apple,False,Order Required,7,0,100.9
-Battery Replacement,Oppo,False,Available,0,0,20.1
-Camera Repair,Realme,False,Available,5,2,38.6
-Warranty Diagnostic,Vivo,False,Available,12,1,24.3
-Camera Repair,Vivo,False,Available,2,3,21.7
-Software Issue,Realme,True,Order Required,3,3,148.1
-Screen Replacement,Apple,False,Available,10,4,38.1
-Screen Replacement,Oppo,False,Available,8,1,49.5
-Charging Port Repair,Apple,False,Available,14,2,63.1
-Software Issue,OnePlus,False,Available,4,3,14.9
-Camera Repair,Vivo,False,Unknown,10,1,49.6
-Charging Port Repair,Vivo,False,Order Required,8,3,226.7
-Camera Repair,Oppo,False,Available,0,3,24.6
-Charging Port Repair,OnePlus,False,Available,0,2,31.5
-Speaker/Mic Repair,Other,True,Order Required,11,4,205.9
-Camera Repair,Samsung,False,Available,12,2,39.5
-Camera Repair,Realme,False,Order Required,13,3,225.9
-Software Issue,Realme,True,Available,10,0,31.4
-Water Damage Diagnostic,Samsung,False,Available,2,1,35.0
-Charging Port Repair,Samsung,True,Available,0,4,42.4
-Speaker/Mic Repair,Apple,False,Available,3,1,28.8
-Water Damage Diagnostic,Apple,False,Order Required,10,2,303.0
-Warranty Diagnostic,Samsung,True,Available,3,4,30.2
-Battery Replacement,Oppo,True,Order Required,0,4,221.3
-Screen Replacement,OnePlus,False,Available,8,0,66.4
-Screen Replacement,Apple,True,Available,3,3,48.7
-Water Damage Diagnostic,Apple,False,Available,7,2,54.4
-Battery Replacement,Realme,False,Available,7,3,30.4
-Battery Replacement,Samsung,False,Available,12,4,15.9
-Camera Repair,OnePlus,False,Available,14,3,51.1
-Screen Replacement,Other,True,Available,11,3,52.3
-Speaker/Mic Repair,Samsung,False,Available,1,0,18.8
-Battery Replacement,OnePlus,True,Order Required,11,2,252.4
-Camera Repair,Realme,True,Order Required,9,0,313.1
-Battery Replacement,OnePlus,False,Available,3,4,20.9
-Battery Replacement,OnePlus,False,Unknown,5,3,41.7
-Charging Port Repair,Vivo,False,Unknown,2,0,48.4
-Speaker/Mic Repair,Xiaomi,False,Available,7,3,19.4
-Warranty Diagnostic,Apple,True,Available,13,2,56.9
-Battery Replacement,Apple,False,Order Required,10,0,253.5
-Software Issue,Samsung,False,Available,8,3,11.4
-Camera Repair,Xiaomi,False,Available,6,2,46.3
-Charging Port Repair,Xiaomi,False,Available,9,1,37.9
-Warranty Diagnostic,Realme,True,Available,0,1,32.7
-Warranty Diagnostic,Samsung,True,Available,1,4,16.5
-Water Damage Diagnostic,Oppo,False,Order Required,13,0,283.4
-Water Damage Diagnostic,Vivo,False,Available,12,3,79.1
-Software Issue,Apple,False,Available,2,1,8.8
-Battery Replacement,Realme,False,Available,1,3,8
-Water Damage Diagnostic,Samsung,True,Available,9,1,61.0
-Charging Port Repair,Samsung,True,Unknown,8,3,54.2
-Battery Replacement,Realme,False,Unknown,13,3,45.4
-Charging Port Repair,OnePlus,True,Order Required,14,3,191.0
-Water Damage Diagnostic,Xiaomi,False,Available,14,4,59.6
-Battery Replacement,Apple,False,Available,9,4,26.7
-Water Damage Diagnostic,Vivo,False,Order Required,6,1,233.5
-Speaker/Mic Repair,Apple,False,Available,12,1,41.3
-Camera Repair,Realme,True,Order Required,0,4,146.9
-Speaker/Mic Repair,Oppo,False,Available,10,4,16.5
-Camera Repair,Oppo,False,Available,12,4,44.9
-Warranty Diagnostic,OnePlus,False,Available,12,3,25.8
-Warranty Diagnostic,Xiaomi,True,Available,12,2,41.7
-Screen Replacement,Xiaomi,False,Available,12,0,58.8
-Camera Repair,Realme,False,Available,11,3,45.8
-Camera Repair,Samsung,False,Order Required,10,3,221.2
-Screen Replacement,Realme,False,Order Required,5,1,109.2
-Camera Repair,Oppo,False,Available,9,1,46.9
-Camera Repair,Vivo,False,Order Required,3,4,160.1
-Screen Replacement,OnePlus,True,Available,8,0,48.9
-Camera Repair,Other,False,Available,12,1,51.7
-Warranty Diagnostic,Other,False,Order Required,7,0,235.6
-Speaker/Mic Repair,Oppo,False,Available,0,2,28.3
-Speaker/Mic Repair,Apple,False,Available,5,2,27.9
-Software Issue,Other,False,Available,3,2,26.7
-Software Issue,Vivo,True,Available,14,0,59.2
-Screen Replacement,Other,False,Available,14,4,43.2
-Camera Repair,Oppo,True,Available,0,4,22.3
-Charging Port Repair,Other,False,Order Required,7,2,133.4
-Battery Replacement,Vivo,False,Order Required,2,4,243.4
-Water Damage Diagnostic,Realme,False,Order Required,5,3,137.3
-Software Issue,Apple,False,Order Required,8,3,229.7
-Screen Replacement,Xiaomi,False,Available,14,4,39.7
-Warranty Diagnostic,OnePlus,True,Order Required,0,3,123.0
-Speaker/Mic Repair,OnePlus,False,Available,14,2,36.7
-Speaker/Mic Repair,Realme,False,Available,8,1,35.4
-Warranty Diagnostic,Apple,False,Available,10,1,50.7
-Speaker/Mic Repair,Oppo,False,Available,13,0,35.0
-Camera Repair,Oppo,True,Available,13,2,76.0
-Charging Port Repair,Xiaomi,False,Available,3,2,29.7
-Battery Replacement,Apple,True,Order Required,8,0,235.6
-Camera Repair,Xiaomi,True,Unknown,6,2,52.4
-Screen Replacement,Vivo,False,Available,7,3,42.0
-Camera Repair,Other,True,Unknown,8,1,74.2
-Camera Repair,Vivo,False,Available,1,3,28.2
-Charging Port Repair,OnePlus,True,Available,12,1,64.1
-Warranty Diagnostic,OnePlus,True,Available,4,4,17.2
-Water Damage Diagnostic,Oppo,False,Available,11,3,81.2
-Camera Repair,OnePlus,False,Available,4,3,35.4
-Charging Port Repair,OnePlus,True,Available,7,2,55.8
-Screen Replacement,Xiaomi,False,Available,2,3,53.5
-Charging Port Repair,Samsung,False,Available,4,3,28.1
-Charging Port Repair,Samsung,True,Available,8,3,26.9
-Water Damage Diagnostic,Samsung,True,Order Required,3,3,216.2
-Software Issue,Other,False,Unknown,14,2,56.0
-Battery Replacement,OnePlus,False,Available,5,0,38.1
-Speaker/Mic Repair,Samsung,True,Available,1,3,30.3
-Warranty Diagnostic,Xiaomi,False,Available,2,3,43.8
-Screen Replacement,Samsung,False,Available,8,0,31.6
-Speaker/Mic Repair,Other,False,Available,6,2,40.5
-Camera Repair,Other,True,Available,5,2,56.6
-Charging Port Repair,Apple,False,Available,13,2,45.5
-Charging Port Repair,Samsung,False,Available,9,1,28.1
-Water Damage Diagnostic,Realme,False,Available,8,1,53.7
-Battery Replacement,Samsung,False,Available,13,0,36.8
-Battery Replacement,Samsung,False,Order Required,10,3,129.2
-Battery Replacement,Samsung,False,Available,7,0,38.8
-Speaker/Mic Repair,Oppo,False,Order Required,0,4,80.7
-Battery Replacement,Apple,False,Available,3,1,36.8
-Charging Port Repair,Oppo,False,Order Required,9,2,185.0
-Water Damage Diagnostic,Vivo,False,Available,9,3,71.5
-Speaker/Mic Repair,Vivo,False,Available,13,2,44.3
-Camera Repair,Vivo,False,Available,6,0,57.8
-Screen Replacement,Xiaomi,False,Available,4,1,41.5
-Camera Repair,Xiaomi,True,Available,2,1,16.7
-Camera Repair,OnePlus,True,Available,14,1,81.4
-Battery Replacement,OnePlus,True,Order Required,6,0,181.6
-Water Damage Diagnostic,Oppo,False,Available,12,1,86.5
-Water Damage Diagnostic,Samsung,False,Available,8,4,34.9
-Software Issue,Xiaomi,True,Order Required,6,3,107.3
-Speaker/Mic Repair,Apple,False,Order Required,8,3,160.3
-Charging Port Repair,Xiaomi,False,Available,6,4,20.3
-Battery Replacement,OnePlus,False,Available,14,4,20.6
-Water Damage Diagnostic,Vivo,False,Available,9,0,48.5
-Warranty Diagnostic,Xiaomi,False,Unknown,3,1,63.6
-Battery Replacement,Apple,False,Available,9,1,46.5
-Battery Replacement,OnePlus,False,Available,3,4,12.9
-Camera Repair,Other,False,Unknown,11,0,69.0
-Software Issue,OnePlus,True,Order Required,0,0,246.1
-Battery Replacement,Samsung,True,Order Required,6,1,230.1
-Battery Replacement,Xiaomi,True,Unknown,8,0,59.2
-Charging Port Repair,Samsung,False,Available,10,2,17.5
-Camera Repair,Oppo,False,Order Required,0,4,141.6
-Water Damage Diagnostic,Xiaomi,True,Available,10,4,51.9
-Camera Repair,Vivo,False,Available,10,1,42.0
-Software Issue,Xiaomi,False,Order Required,8,1,218.1
-Charging Port Repair,Vivo,True,Available,11,0,39.4
-Screen Replacement,Vivo,False,Available,6,2,56.2
-Camera Repair,Xiaomi,False,Available,2,0,21.5
-Camera Repair,Realme,False,Available,0,2,34.5
-Warranty Diagnostic,Vivo,True,Available,7,1,53.0
-Screen Replacement,OnePlus,False,Available,10,1,80.8
-Warranty Diagnostic,Vivo,False,Order Required,6,3,219.1
-Speaker/Mic Repair,Oppo,False,Order Required,9,4,218.0
-Screen Replacement,Realme,False,Available,11,0,54.8
-Screen Replacement,Realme,True,Available,4,2,62.1
-Charging Port Repair,Other,False,Available,11,4,28.8
-Charging Port Repair,Oppo,False,Available,2,3,21.3
-Camera Repair,Vivo,False,Unknown,12,1,75.1
-Warranty Diagnostic,Vivo,True,Order Required,11,4,201.7
-Charging Port Repair,Xiaomi,False,Available,11,0,50.6
-Warranty Diagnostic,OnePlus,False,Available,2,1,30.6
-Warranty Diagnostic,Samsung,False,Available,3,4,15.4
-Warranty Diagnostic,Apple,False,Available,14,4,31.7
-Charging Port Repair,Xiaomi,True,Available,2,0,33.7
-Battery Replacement,Samsung,True,Unknown,2,2,58.8
-Speaker/Mic Repair,Samsung,True,Available,5,3,47.4
-Battery Replacement,OnePlus,False,Available,13,2,36.5
-Screen Replacement,Apple,False,Unknown,8,0,84.9
-Camera Repair,Oppo,False,Available,8,4,47.1
-Warranty Diagnostic,Other,False,Order Required,3,2,97.1
-Battery Replacement,Realme,False,Unknown,6,0,56.6
-Camera Repair,OnePlus,False,Available,8,4,35.3
-Speaker/Mic Repair,Vivo,False,Available,0,1,25.4
-Warranty Diagnostic,Samsung,False,Available,10,3,29.0
-Speaker/Mic Repair,Other,False,Available,11,0,46.2
-Screen Replacement,Realme,False,Available,14,2,39.8
-Screen Replacement,Vivo,False,Available,13,1,40.9
-Camera Repair,Vivo,False,Available,1,3,14.0
-Camera Repair,Realme,False,Available,5,0,39.2
-Warranty Diagnostic,Xiaomi,True,Unknown,11,4,59.7
-Charging Port Repair,Realme,False,Available,11,4,44.3
-Battery Replacement,Vivo,False,Available,8,2,26.0
-Software Issue,Vivo,True,Available,8,2,37.2
-Battery Replacement,Realme,False,Available,4,1,28.6
-Software Issue,Xiaomi,True,Available,5,4,25.2
-Screen Replacement,Apple,False,Available,9,4,35.4
-Warranty Diagnostic,Vivo,False,Order Required,11,4,212.5
-Warranty Diagnostic,Apple,False,Order Required,11,3,112.3
-Camera Repair,Vivo,False,Order Required,10,2,196.4
-Speaker/Mic Repair,Other,False,Available,12,2,42.8
-Battery Replacement,Oppo,False,Order Required,5,4,166.7
-Software Issue,Xiaomi,False,Available,5,1,27.9
-Water Damage Diagnostic,Vivo,False,Available,10,0,70.4
-Warranty Diagnostic,Vivo,False,Order Required,2,2,96.0
-Water Damage Diagnostic,Vivo,False,Order Required,1,1,265.9
-Charging Port Repair,Xiaomi,False,Available,9,4,31.3
-Speaker/Mic Repair,OnePlus,False,Unknown,4,3,40.5
-Water Damage Diagnostic,Xiaomi,False,Available,14,4,61.2
-Speaker/Mic Repair,Apple,False,Order Required,3,3,132.2
-Software Issue,Xiaomi,False,Available,6,2,29.4
-Charging Port Repair,Xiaomi,True,Available,2,3,33.7
-Warranty Diagnostic,Oppo,False,Available,6,4,36.3
-Software Issue,Xiaomi,False,Available,7,1,36.7
-Screen Replacement,Samsung,False,Order Required,1,4,103.0
-Camera Repair,Other,False,Available,9,0,36.8
-Camera Repair,Samsung,False,Available,0,3,8
+service_type,reported_issue,phone_brand,is_warranty_case,parts_availability,current_workload,technician_availability,actual_duration_minutes
+Battery Replacement,Battery drains fast,OnePlus,True,Available,1,4,16.8
+Screen Replacement,Screen discoloration,Realme,False,Order Required,6,1,274.8
+Charging Port Repair,Port physically damaged,Vivo,True,Available,12,2,46.1
+Screen Replacement,Dead pixels,Apple,False,Available,8,2,55.0
+Speaker/Mic Repair,Earpiece crackling,Realme,False,Available,3,2,27.7
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,False,Available,4,0,24.7
+Software Issue,Apps crashing,Other,False,Unknown,10,4,57.1
+Speaker/Mic Repair,Low call volume,OnePlus,True,Unknown,9,2,73.9
+Charging Port Repair,Slow charging,Xiaomi,True,Available,4,4,32.9
+Warranty Diagnostic,Manufacturing defect suspected,Samsung,False,Available,2,3,15.6
+Warranty Diagnostic,Recurring issue after previous repair,Samsung,False,Available,14,4,35.8
+Charging Port Repair,Port physically damaged,Samsung,False,Order Required,4,4,110.2
+Camera Repair,Autofocus not working,Realme,True,Order Required,8,4,176.9
+Camera Repair,Camera not opening,Samsung,True,Available,1,0,74.7
+Charging Port Repair,Port not recognizing cable,Other,False,Available,8,4,18.0
+Software Issue,Virus/malware issue,OnePlus,False,Order Required,5,3,121.8
+Battery Replacement,Battery swollen,Samsung,False,Available,3,0,28.6
+Speaker/Mic Repair,No sound from speaker,Realme,True,Available,8,1,64.1
+Software Issue,System update failed,Oppo,True,Available,6,2,26.4
+Battery Replacement,Battery drains fast,Oppo,False,Order Required,1,1,88.3
+Charging Port Repair,Slow charging,Other,True,Unknown,7,4,57.0
+Software Issue,Apps crashing,Oppo,False,Available,6,0,29.4
+Water Damage Diagnostic,Screen fogging,Other,True,Order Required,11,4,178.8
+Screen Replacement,Display flickering,Samsung,True,Available,14,4,56.3
+Charging Port Repair,Loose charging port,Apple,False,Available,1,4,8
+Speaker/Mic Repair,Microphone not working,Realme,False,Available,4,3,14.8
+Warranty Diagnostic,Recurring issue after previous repair,Apple,True,Available,9,0,63.5
+Software Issue,Stuck on boot screen,OnePlus,True,Order Required,11,2,208.1
+Camera Repair,Blurry photos,Xiaomi,True,Order Required,11,4,135.0
+Warranty Diagnostic,Recurring issue after previous repair,Samsung,True,Available,4,0,25.3
+Camera Repair,Camera not opening,Other,False,Available,0,0,42.3
+Speaker/Mic Repair,Earpiece crackling,Xiaomi,False,Available,5,0,30.0
+Software Issue,Virus/malware issue,Apple,False,Available,13,3,44.1
+Charging Port Repair,Port not recognizing cable,Oppo,True,Order Required,5,3,238.6
+Battery Replacement,Overheating,Samsung,False,Available,13,3,35.5
+Software Issue,System update failed,Vivo,True,Available,12,2,41.4
+Speaker/Mic Repair,No sound from speaker,Apple,False,Available,9,2,19.9
+Water Damage Diagnostic,Phone fell in water,Oppo,False,Available,0,3,55.2
+Software Issue,Stuck on boot screen,Oppo,True,Order Required,5,4,207.3
+Water Damage Diagnostic,Screen fogging,Xiaomi,True,Order Required,6,1,230.1
+Camera Repair,Camera not opening,Oppo,False,Available,5,3,15.9
+Charging Port Repair,Loose charging port,OnePlus,False,Available,5,0,35.3
+Camera Repair,Camera not opening,Realme,True,Available,7,4,47.7
+Water Damage Diagnostic,Phone not turning on after water contact,Oppo,True,Order Required,0,0,267.0
+Warranty Diagnostic,Manufacturing defect suspected,Realme,False,Available,2,3,8
+Warranty Diagnostic,Dead on arrival (DOA),Other,False,Order Required,7,3,182.2
+Warranty Diagnostic,Hardware failure within warranty,OnePlus,False,Order Required,3,2,99.6
+Charging Port Repair,Port not recognizing cable,Apple,False,Available,7,3,30.6
+Water Damage Diagnostic,Phone fell in water,Oppo,False,Unknown,4,3,60.6
+Software Issue,System update failed,Realme,True,Available,6,2,27.5
+Warranty Diagnostic,Hardware failure within warranty,Samsung,False,Available,10,0,39.3
+Camera Repair,Camera lens cracked,Vivo,True,Available,12,3,44.1
+Battery Replacement,Overheating,Samsung,False,Available,5,1,22.8
+Software Issue,Apps crashing,Samsung,False,Available,7,0,16.1
+Camera Repair,Front camera broken,Xiaomi,False,Unknown,11,0,53.8
+Water Damage Diagnostic,Phone not turning on after water contact,Realme,True,Order Required,10,1,274.5
+Battery Replacement,Shuts down randomly,Samsung,False,Available,5,0,39.8
+Battery Replacement,Overheating,Vivo,False,Order Required,11,1,262.7
+Camera Repair,Autofocus not working,Other,False,Order Required,9,2,269.0
+Warranty Diagnostic,Dead on arrival (DOA),Vivo,True,Order Required,2,3,160.4
+Camera Repair,Autofocus not working,Samsung,False,Available,3,3,23.2
+Warranty Diagnostic,Dead on arrival (DOA),Samsung,True,Available,11,1,31.1
+Speaker/Mic Repair,Low call volume,Vivo,False,Available,4,2,14.3
+Charging Port Repair,Port not recognizing cable,Realme,False,Available,9,4,40.3
+Software Issue,Stuck on boot screen,Realme,False,Available,11,4,30.9
+Charging Port Repair,Port physically damaged,Apple,False,Available,7,3,36.3
+Screen Replacement,Display flickering,Other,True,Available,7,0,70.3
+Battery Replacement,Phone not charging,Apple,False,Available,9,4,8.7
+Warranty Diagnostic,Dead on arrival (DOA),OnePlus,False,Unknown,4,4,44.4
+Software Issue,Stuck on boot screen,Apple,True,Available,1,1,28.4
+Camera Repair,Blurry photos,Realme,True,Available,13,3,49.9
+Software Issue,System update failed,Apple,False,Available,14,2,33.7
+Charging Port Repair,Slow charging,OnePlus,False,Available,4,3,21.2
+Screen Replacement,Dead pixels,Vivo,False,Available,3,4,34.6
+Camera Repair,Autofocus not working,Samsung,False,Available,8,3,34.1
+Warranty Diagnostic,Manufacturing defect suspected,Other,False,Available,10,0,35.9
+Warranty Diagnostic,Recurring issue after previous repair,Oppo,False,Available,7,0,45.3
+Screen Replacement,Screen discoloration,Other,False,Available,5,4,34.5
+Screen Replacement,Unresponsive touch,OnePlus,False,Unknown,7,3,58.7
+Screen Replacement,Screen discoloration,Oppo,True,Unknown,14,0,108.7
+Camera Repair,Autofocus not working,OnePlus,False,Available,7,1,47.7
+Charging Port Repair,Loose charging port,OnePlus,False,Order Required,5,4,225.5
+Warranty Diagnostic,Hardware failure within warranty,Other,False,Available,8,4,39.3
+Software Issue,Phone running slow,Oppo,True,Order Required,0,2,206.3
+Charging Port Repair,Port physically damaged,Samsung,True,Unknown,5,0,71.4
+Charging Port Repair,Loose charging port,Other,False,Available,9,3,24.2
+Water Damage Diagnostic,Screen fogging,Other,False,Available,1,1,65.8
+Water Damage Diagnostic,Phone fell in water,Apple,False,Order Required,14,0,175.0
+Speaker/Mic Repair,Low call volume,Xiaomi,True,Available,10,1,46.1
+Charging Port Repair,Port not recognizing cable,Other,False,Available,10,0,45.9
+Camera Repair,Autofocus not working,Xiaomi,True,Unknown,9,2,81.0
+Warranty Diagnostic,Manufacturing defect suspected,Realme,False,Available,4,2,27.0
+Water Damage Diagnostic,Screen fogging,Samsung,False,Order Required,11,0,300.1
+Software Issue,Phone running slow,Vivo,True,Available,4,1,23.8
+Camera Repair,Camera lens cracked,Samsung,False,Order Required,1,2,126.3
+Speaker/Mic Repair,Earpiece crackling,OnePlus,False,Available,13,3,33.3
+Speaker/Mic Repair,No sound from speaker,Other,False,Available,3,3,10.3
+Screen Replacement,Display flickering,Apple,False,Order Required,10,2,295.0
+Battery Replacement,Phone not charging,Other,True,Order Required,8,2,128.3
+Water Damage Diagnostic,Phone fell in water,Xiaomi,True,Available,7,0,54.5
+Warranty Diagnostic,Recurring issue after previous repair,Oppo,False,Order Required,14,3,220.0
+Speaker/Mic Repair,Distorted sound,Other,False,Available,5,0,31.2
+Speaker/Mic Repair,No sound from speaker,Oppo,True,Unknown,13,3,80.2
+Charging Port Repair,Port not recognizing cable,Apple,False,Available,9,1,46.3
+Charging Port Repair,Loose charging port,OnePlus,False,Available,2,4,17.7
+Screen Replacement,Display flickering,Realme,False,Available,4,0,43.8
+Battery Replacement,Battery drains fast,Other,False,Available,9,0,28.8
+Camera Repair,Camera lens cracked,Samsung,True,Available,6,3,42.7
+Battery Replacement,Battery drains fast,Vivo,False,Available,4,4,8
+Camera Repair,Camera lens cracked,Oppo,True,Order Required,13,4,223.7
+Speaker/Mic Repair,Low call volume,Oppo,False,Available,6,2,35.8
+Battery Replacement,Battery drains fast,Apple,True,Available,11,2,63.5
+Speaker/Mic Repair,No sound from speaker,Oppo,False,Order Required,12,3,268.7
+Software Issue,Apps crashing,Other,True,Available,13,4,30.4
+Water Damage Diagnostic,Phone fell in water,OnePlus,True,Available,12,2,89.7
+Battery Replacement,Phone not charging,Samsung,True,Available,6,3,41.3
+Speaker/Mic Repair,Earpiece crackling,Apple,False,Available,12,4,22.7
+Warranty Diagnostic,Dead on arrival (DOA),OnePlus,True,Available,5,3,32.2
+Camera Repair,Blurry photos,Realme,False,Available,0,1,30.6
+Speaker/Mic Repair,No sound from speaker,Samsung,False,Available,2,3,22.5
+Speaker/Mic Repair,No sound from speaker,Oppo,False,Available,0,3,8
+Water Damage Diagnostic,Screen fogging,Apple,False,Unknown,2,4,41.1
+Water Damage Diagnostic,Phone fell in water,Realme,False,Available,1,3,41.5
+Battery Replacement,Shuts down randomly,Apple,False,Available,12,2,46.3
+Charging Port Repair,Port not recognizing cable,Apple,True,Available,9,1,51.6
+Warranty Diagnostic,Recurring issue after previous repair,Vivo,True,Available,7,2,32.0
+Battery Replacement,Battery swollen,Other,False,Available,13,2,37.5
+Water Damage Diagnostic,Phone not turning on after water contact,Samsung,False,Order Required,10,1,138.0
+Screen Replacement,Dead pixels,Apple,False,Order Required,11,0,151.8
+Charging Port Repair,Slow charging,Vivo,False,Available,12,2,47.8
+Speaker/Mic Repair,No sound from speaker,Vivo,True,Order Required,4,2,260.5
+Charging Port Repair,Slow charging,OnePlus,False,Order Required,6,1,156.6
+Water Damage Diagnostic,Screen fogging,Xiaomi,False,Order Required,11,4,208.3
+Software Issue,Stuck on boot screen,Other,True,Unknown,2,0,55.2
+Screen Replacement,Display flickering,Xiaomi,False,Available,2,4,25.9
+Software Issue,System update failed,OnePlus,False,Order Required,3,4,209.6
+Software Issue,Stuck on boot screen,Other,False,Available,6,4,19.5
+Charging Port Repair,Slow charging,Samsung,False,Order Required,8,0,110.1
+Battery Replacement,Phone not charging,OnePlus,False,Available,13,3,31.8
+Screen Replacement,Dead pixels,Samsung,False,Available,6,0,27.9
+Battery Replacement,Battery swollen,Xiaomi,True,Available,13,3,58.5
+Battery Replacement,Battery drains fast,OnePlus,True,Available,11,4,41.4
+Camera Repair,Blurry photos,Samsung,True,Available,9,3,29.1
+Software Issue,Virus/malware issue,Xiaomi,True,Available,5,1,37.1
+Speaker/Mic Repair,No sound from speaker,Samsung,False,Available,10,3,51.5
+Speaker/Mic Repair,Distorted sound,Apple,False,Order Required,5,1,231.8
+Charging Port Repair,Port physically damaged,Other,False,Order Required,1,3,230.4
+Camera Repair,Autofocus not working,Oppo,False,Available,4,0,36.6
+Speaker/Mic Repair,No sound from speaker,Vivo,True,Order Required,6,3,164.6
+Camera Repair,Blurry photos,Oppo,True,Available,13,1,57.1
+Camera Repair,Front camera broken,Other,False,Available,11,3,49.2
+Water Damage Diagnostic,Screen fogging,Samsung,True,Available,5,4,49.6
+Charging Port Repair,Port physically damaged,Samsung,True,Available,10,2,48.1
+Speaker/Mic Repair,Microphone not working,Other,False,Available,8,2,37.6
+Software Issue,Phone keeps restarting,Samsung,False,Available,6,4,8.8
+Camera Repair,Camera lens cracked,Realme,True,Order Required,7,1,128.7
+Speaker/Mic Repair,Microphone not working,Apple,False,Available,4,1,20.8
+Software Issue,Phone keeps restarting,Realme,False,Available,7,0,17.4
+Warranty Diagnostic,Hardware failure within warranty,Apple,True,Available,11,3,73.4
+Battery Replacement,Overheating,Other,False,Available,14,4,48.2
+Charging Port Repair,Port physically damaged,Samsung,False,Available,4,1,33.5
+Camera Repair,Blurry photos,OnePlus,True,Unknown,4,1,81.4
+Charging Port Repair,Port not recognizing cable,Vivo,False,Available,13,0,44.0
+Software Issue,Phone running slow,Oppo,False,Available,14,4,13.0
+Warranty Diagnostic,Hardware failure within warranty,Oppo,True,Available,0,1,20.3
+Speaker/Mic Repair,Microphone not working,Oppo,True,Available,8,0,42.4
+Software Issue,Apps crashing,Apple,True,Unknown,13,4,77.4
+Software Issue,Apps crashing,Other,False,Available,14,2,29.8
+Water Damage Diagnostic,Phone not turning on after water contact,Realme,True,Available,0,2,43.0
+Battery Replacement,Overheating,Xiaomi,False,Order Required,12,3,197.7
+Software Issue,Stuck on boot screen,OnePlus,True,Available,12,4,52.0
+Water Damage Diagnostic,Screen fogging,Vivo,False,Available,2,1,71.6
+Screen Replacement,Cracked screen,Samsung,True,Available,7,4,41.0
+Charging Port Repair,Port physically damaged,OnePlus,False,Available,8,4,40.7
+Warranty Diagnostic,Manufacturing defect suspected,Vivo,False,Available,6,4,24.2
+Warranty Diagnostic,Recurring issue after previous repair,Realme,False,Available,2,4,8
+Water Damage Diagnostic,Speaker sounds muffled after spill,Realme,True,Unknown,1,1,45.6
+Warranty Diagnostic,Manufacturing defect suspected,Xiaomi,False,Available,10,3,40.2
+Charging Port Repair,Port physically damaged,Vivo,False,Order Required,13,2,148.9
+Camera Repair,Front camera broken,Realme,False,Available,7,2,35.0
+Camera Repair,Front camera broken,Apple,False,Available,14,3,54.0
+Camera Repair,Blurry photos,Vivo,False,Order Required,11,3,135.6
+Camera Repair,Camera not opening,Apple,False,Available,3,0,37.3
+Water Damage Diagnostic,Screen fogging,Other,True,Order Required,0,4,225.5
+Warranty Diagnostic,Dead on arrival (DOA),Realme,False,Available,4,0,16.5
+Screen Replacement,Unresponsive touch,Oppo,False,Available,14,0,67.9
+Warranty Diagnostic,Hardware failure within warranty,OnePlus,False,Available,9,4,11.7
+Warranty Diagnostic,Hardware failure within warranty,Other,True,Order Required,5,1,253.4
+Speaker/Mic Repair,Microphone not working,Realme,True,Order Required,14,3,139.1
+Speaker/Mic Repair,Distorted sound,Samsung,True,Available,12,2,64.4
+Screen Replacement,Display flickering,Vivo,False,Available,1,3,12.2
+Camera Repair,Blurry photos,OnePlus,False,Available,2,3,20.5
+Speaker/Mic Repair,Low call volume,Other,False,Order Required,13,1,214.1
+Speaker/Mic Repair,No sound from speaker,Apple,True,Available,8,1,36.9
+Warranty Diagnostic,Manufacturing defect suspected,Realme,False,Available,14,4,43.5
+Screen Replacement,Screen discoloration,Other,False,Available,0,3,40.1
+Software Issue,Phone running slow,Apple,True,Available,1,4,8
+Water Damage Diagnostic,Speaker sounds muffled after spill,Xiaomi,False,Unknown,10,3,63.5
+Water Damage Diagnostic,Phone not turning on after water contact,Apple,False,Order Required,8,1,141.9
+Software Issue,Phone keeps restarting,Samsung,False,Available,11,4,22.5
+Software Issue,Apps crashing,Other,False,Available,14,0,16.8
+Screen Replacement,Unresponsive touch,Realme,True,Available,7,4,31.2
+Screen Replacement,Dead pixels,Other,True,Available,13,0,74.6
+Speaker/Mic Repair,Distorted sound,OnePlus,False,Unknown,8,1,48.8
+Charging Port Repair,Port physically damaged,Other,True,Available,10,3,58.9
+Warranty Diagnostic,Hardware failure within warranty,Realme,False,Order Required,12,3,283.3
+Charging Port Repair,Port physically damaged,Realme,True,Available,1,3,42.7
+Screen Replacement,Cracked screen,Realme,False,Available,10,4,47.5
+Speaker/Mic Repair,Microphone not working,Samsung,True,Available,11,0,63.1
+Water Damage Diagnostic,Speaker sounds muffled after spill,Vivo,False,Available,8,2,25.8
+Warranty Diagnostic,Dead on arrival (DOA),Apple,False,Order Required,12,2,169.2
+Charging Port Repair,Loose charging port,OnePlus,False,Available,11,3,33.1
+Software Issue,System update failed,Realme,False,Order Required,10,2,252.7
+Charging Port Repair,Slow charging,Xiaomi,True,Available,2,4,18.7
+Battery Replacement,Battery drains fast,Samsung,False,Order Required,3,0,171.6
+Warranty Diagnostic,Dead on arrival (DOA),Samsung,True,Available,0,0,47.6
+Screen Replacement,Screen discoloration,Oppo,False,Unknown,1,0,62.6
+Water Damage Diagnostic,Phone fell in water,Vivo,False,Available,3,1,60.1
+Battery Replacement,Battery drains fast,Apple,False,Available,7,0,44.3
+Speaker/Mic Repair,Earpiece crackling,Apple,False,Unknown,3,1,54.9
+Camera Repair,Blurry photos,Apple,False,Available,8,4,36.5
+Software Issue,Phone running slow,Xiaomi,False,Order Required,6,0,183.1
+Water Damage Diagnostic,Screen fogging,Oppo,False,Available,11,0,78.3
+Battery Replacement,Battery swollen,Oppo,False,Available,10,2,41.5
+Software Issue,Stuck on boot screen,Oppo,False,Order Required,10,3,224.3
+Charging Port Repair,Port physically damaged,Xiaomi,False,Available,1,0,26.7
+Speaker/Mic Repair,Microphone not working,Apple,True,Available,7,4,29.9
+Speaker/Mic Repair,Low call volume,Samsung,True,Available,1,4,22.4
+Charging Port Repair,Port physically damaged,Xiaomi,True,Available,7,1,43.0
+Camera Repair,Camera not opening,Other,False,Available,1,1,31.1
+Speaker/Mic Repair,Earpiece crackling,Oppo,False,Available,5,3,27.0
+Speaker/Mic Repair,Earpiece crackling,Realme,False,Available,6,2,25.2
+Warranty Diagnostic,Hardware failure within warranty,Vivo,False,Order Required,6,2,175.9
+Screen Replacement,Dead pixels,Realme,False,Available,11,0,57.4
+Water Damage Diagnostic,Phone not turning on after water contact,Xiaomi,False,Available,10,1,112.7
+Warranty Diagnostic,Dead on arrival (DOA),Oppo,False,Order Required,5,4,105.9
+Software Issue,Virus/malware issue,Vivo,True,Available,9,3,51.2
+Software Issue,Phone running slow,Realme,False,Available,12,4,31.0
+Screen Replacement,Dead pixels,Apple,True,Unknown,1,0,68.7
+Speaker/Mic Repair,Low call volume,Apple,False,Order Required,5,0,100.2
+Speaker/Mic Repair,No sound from speaker,Xiaomi,False,Order Required,8,1,159.3
+Charging Port Repair,Port not recognizing cable,Oppo,False,Order Required,14,1,112.6
+Software Issue,Apps crashing,OnePlus,False,Order Required,1,4,89.4
+Camera Repair,Camera lens cracked,Vivo,False,Available,9,0,53.7
+Charging Port Repair,Slow charging,Apple,False,Available,3,2,27.3
+Charging Port Repair,Port physically damaged,Oppo,True,Available,11,1,60.2
+Speaker/Mic Repair,Low call volume,Samsung,False,Unknown,7,1,44.3
+Warranty Diagnostic,Dead on arrival (DOA),Other,False,Available,0,1,8
+Camera Repair,Camera not opening,Other,False,Order Required,7,4,115.1
+Screen Replacement,Dead pixels,Realme,False,Available,13,1,45.2
+Warranty Diagnostic,Recurring issue after previous repair,Vivo,False,Available,13,0,57.7
+Speaker/Mic Repair,Earpiece crackling,Oppo,True,Available,3,1,31.0
+Charging Port Repair,Slow charging,OnePlus,True,Available,13,4,62.7
+Screen Replacement,Display flickering,Xiaomi,False,Available,2,2,33.7
+Water Damage Diagnostic,Phone not turning on after water contact,Xiaomi,False,Available,6,3,59.8
+Camera Repair,Front camera broken,Other,False,Available,0,0,28.8
+Speaker/Mic Repair,No sound from speaker,Oppo,True,Available,3,3,17.8
+Warranty Diagnostic,Recurring issue after previous repair,Samsung,True,Available,13,3,29.6
+Warranty Diagnostic,Manufacturing defect suspected,Oppo,True,Order Required,2,2,139.2
+Charging Port Repair,Loose charging port,Oppo,False,Order Required,12,1,128.8
+Software Issue,System update failed,Apple,True,Available,10,3,44.1
+Charging Port Repair,Port physically damaged,Apple,True,Available,12,0,53.6
+Water Damage Diagnostic,Speaker sounds muffled after spill,Xiaomi,True,Available,9,1,76.4
+Warranty Diagnostic,Hardware failure within warranty,Apple,False,Available,1,4,21.7
+Water Damage Diagnostic,Screen fogging,Xiaomi,True,Available,3,4,47.5
+Camera Repair,Camera not opening,Realme,False,Available,0,1,30.0
+Warranty Diagnostic,Manufacturing defect suspected,Samsung,False,Unknown,2,3,25.6
+Battery Replacement,Battery drains fast,Apple,True,Available,14,0,54.1
+Water Damage Diagnostic,Phone not turning on after water contact,Oppo,True,Available,9,1,86.0
+Speaker/Mic Repair,Low call volume,Apple,False,Available,13,1,46.4
+Water Damage Diagnostic,Phone fell in water,Other,False,Available,10,1,52.4
+Speaker/Mic Repair,Earpiece crackling,OnePlus,True,Available,12,2,59.0
+Speaker/Mic Repair,Low call volume,OnePlus,False,Available,9,0,49.4
+Charging Port Repair,Slow charging,Xiaomi,True,Available,9,0,48.3
+Screen Replacement,Unresponsive touch,Samsung,False,Available,2,1,18.7
+Water Damage Diagnostic,Speaker sounds muffled after spill,Vivo,True,Unknown,5,2,62.2
+Screen Replacement,Unresponsive touch,Realme,False,Unknown,6,0,76.4
+Warranty Diagnostic,Manufacturing defect suspected,Vivo,True,Available,4,4,38.6
+Software Issue,Virus/malware issue,Realme,True,Unknown,0,1,36.1
+Water Damage Diagnostic,Screen fogging,Apple,True,Unknown,6,3,89.4
+Screen Replacement,Unresponsive touch,Oppo,False,Available,11,0,53.5
+Screen Replacement,Dead pixels,Xiaomi,True,Available,5,3,39.1
+Camera Repair,Camera not opening,Apple,False,Available,12,4,32.8
+Battery Replacement,Shuts down randomly,Vivo,False,Available,4,3,25.1
+Charging Port Repair,Slow charging,Samsung,True,Order Required,2,0,160.6
+Charging Port Repair,Loose charging port,Oppo,False,Available,8,1,47.5
+Charging Port Repair,Loose charging port,Samsung,True,Order Required,3,1,238.3
+Battery Replacement,Battery drains fast,Apple,True,Available,12,1,53.3
+Battery Replacement,Battery drains fast,Other,True,Unknown,6,3,55.7
+Warranty Diagnostic,Hardware failure within warranty,Samsung,False,Available,10,2,28.6
+Warranty Diagnostic,Manufacturing defect suspected,Apple,True,Available,3,4,31.5
+Speaker/Mic Repair,Low call volume,Other,False,Available,5,3,22.2
+Software Issue,Phone keeps restarting,OnePlus,True,Unknown,8,2,58.6
+Screen Replacement,Unresponsive touch,Oppo,False,Order Required,13,1,252.4
+Speaker/Mic Repair,Earpiece crackling,Samsung,False,Available,9,4,26.6
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,False,Available,3,4,8
+Screen Replacement,Display flickering,Realme,False,Available,2,2,36.7
+Battery Replacement,Shuts down randomly,Vivo,False,Available,10,3,32.4
+Speaker/Mic Repair,Distorted sound,Xiaomi,False,Available,10,3,44.9
+Speaker/Mic Repair,Distorted sound,Xiaomi,False,Order Required,4,1,208.9
+Water Damage Diagnostic,Phone fell in water,Xiaomi,False,Unknown,9,1,78.1
+Speaker/Mic Repair,Microphone not working,Xiaomi,False,Unknown,13,2,59.7
+Battery Replacement,Battery swollen,OnePlus,False,Order Required,0,3,93.8
+Speaker/Mic Repair,Earpiece crackling,Oppo,True,Available,13,4,51.1
+Battery Replacement,Battery drains fast,OnePlus,True,Available,1,0,41.8
+Battery Replacement,Battery swollen,Other,False,Available,10,1,46.5
+Screen Replacement,Cracked screen,Vivo,True,Available,11,4,52.2
+Screen Replacement,Dead pixels,Other,True,Available,6,0,67.5
+Software Issue,Phone keeps restarting,Samsung,True,Available,1,3,10.2
+Battery Replacement,Shuts down randomly,Oppo,True,Order Required,5,1,183.1
+Camera Repair,Autofocus not working,Samsung,True,Order Required,1,0,186.4
+Water Damage Diagnostic,Phone not turning on after water contact,Other,False,Available,4,0,66.1
+Screen Replacement,Screen discoloration,Xiaomi,True,Order Required,2,1,144.5
+Charging Port Repair,Slow charging,Vivo,False,Unknown,1,0,41.3
+Camera Repair,Autofocus not working,Other,False,Available,11,4,44.2
+Battery Replacement,Battery drains fast,Apple,False,Order Required,14,2,227.8
+Warranty Diagnostic,Manufacturing defect suspected,Xiaomi,True,Available,9,3,31.2
+Camera Repair,Front camera broken,Samsung,False,Order Required,4,2,231.4
+Software Issue,Apps crashing,OnePlus,False,Available,13,2,24.8
+Software Issue,System update failed,Other,False,Order Required,13,0,152.7
+Water Damage Diagnostic,Speaker sounds muffled after spill,Samsung,True,Order Required,3,0,281.7
+Water Damage Diagnostic,Phone fell in water,Samsung,True,Available,7,1,100.1
+Speaker/Mic Repair,Distorted sound,OnePlus,False,Order Required,4,0,204.2
+Software Issue,Virus/malware issue,Realme,True,Available,0,0,21.4
+Screen Replacement,Unresponsive touch,OnePlus,False,Unknown,11,2,69.1
+Water Damage Diagnostic,Phone fell in water,Samsung,False,Order Required,13,2,191.4
+Battery Replacement,Overheating,Apple,False,Available,5,2,26.8
+Charging Port Repair,Port not recognizing cable,Samsung,False,Order Required,9,3,220.3
+Warranty Diagnostic,Recurring issue after previous repair,OnePlus,False,Available,11,0,49.2
+Software Issue,Virus/malware issue,Other,False,Order Required,8,2,239.3
+Charging Port Repair,Slow charging,Apple,False,Order Required,11,4,219.0
+Speaker/Mic Repair,Distorted sound,OnePlus,False,Order Required,5,2,108.7
+Screen Replacement,Screen discoloration,Apple,False,Available,1,3,35.8
+Software Issue,Stuck on boot screen,Oppo,False,Order Required,7,1,222.7
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,False,Available,7,2,22.0
+Battery Replacement,Phone not charging,Oppo,False,Available,7,3,18.6
+Speaker/Mic Repair,No sound from speaker,Vivo,False,Available,0,0,19.8
+Charging Port Repair,Loose charging port,Oppo,False,Available,1,0,19.7
+Speaker/Mic Repair,Low call volume,Xiaomi,False,Unknown,5,1,54.3
+Charging Port Repair,Port not recognizing cable,Samsung,False,Available,5,0,35.4
+Screen Replacement,Screen discoloration,Samsung,False,Order Required,0,0,156.1
+Charging Port Repair,Port not recognizing cable,Samsung,False,Order Required,10,4,110.9
+Battery Replacement,Shuts down randomly,Apple,True,Order Required,7,1,259.8
+Charging Port Repair,Loose charging port,Other,False,Order Required,7,2,113.9
+Battery Replacement,Shuts down randomly,Other,True,Available,8,0,52.1
+Camera Repair,Front camera broken,Other,True,Order Required,13,0,281.5
+Battery Replacement,Battery drains fast,Samsung,True,Available,10,1,50.7
+Speaker/Mic Repair,Microphone not working,Xiaomi,True,Available,7,2,56.9
+Water Damage Diagnostic,Speaker sounds muffled after spill,Apple,True,Order Required,13,1,195.4
+Speaker/Mic Repair,Earpiece crackling,Samsung,False,Order Required,11,1,263.6
+Warranty Diagnostic,Manufacturing defect suspected,Apple,True,Available,11,4,59.8
+Speaker/Mic Repair,Earpiece crackling,Apple,False,Order Required,7,2,116.3
+Screen Replacement,Cracked screen,Xiaomi,False,Available,7,1,42.6
+Screen Replacement,Screen discoloration,Realme,False,Available,13,1,79.0
+Warranty Diagnostic,Manufacturing defect suspected,Other,False,Available,7,0,29.2
+Battery Replacement,Shuts down randomly,OnePlus,False,Available,10,3,40.1
+Screen Replacement,Unresponsive touch,Other,False,Order Required,9,3,203.0
+Screen Replacement,Display flickering,Vivo,False,Unknown,4,4,53.5
+Charging Port Repair,Port physically damaged,Xiaomi,False,Order Required,6,0,123.0
+Software Issue,Virus/malware issue,Vivo,True,Available,14,4,28.6
+Charging Port Repair,Port physically damaged,Samsung,False,Available,14,3,33.9
+Charging Port Repair,Port not recognizing cable,Xiaomi,True,Order Required,9,2,291.5
+Software Issue,Stuck on boot screen,Oppo,False,Unknown,7,1,36.8
+Speaker/Mic Repair,Earpiece crackling,Realme,True,Available,4,2,42.8
+Charging Port Repair,Slow charging,Apple,False,Available,9,4,24.1
+Camera Repair,Camera lens cracked,Samsung,False,Available,2,0,17.2
+Charging Port Repair,Slow charging,OnePlus,True,Available,12,2,35.0
+Software Issue,Virus/malware issue,Oppo,True,Order Required,12,2,181.5
+Speaker/Mic Repair,Earpiece crackling,Samsung,True,Available,9,3,40.7
+Software Issue,Virus/malware issue,Realme,True,Available,10,0,33.7
+Water Damage Diagnostic,Phone fell in water,Oppo,True,Available,2,4,57.5
+Speaker/Mic Repair,Earpiece crackling,Samsung,False,Available,13,2,39.9
+Speaker/Mic Repair,No sound from speaker,Vivo,False,Unknown,8,0,55.3
+Software Issue,Virus/malware issue,Vivo,False,Available,12,4,28.2
+Screen Replacement,Cracked screen,Vivo,False,Unknown,9,4,54.9
+Battery Replacement,Overheating,OnePlus,False,Available,14,4,50.0
+Warranty Diagnostic,Dead on arrival (DOA),Samsung,True,Order Required,5,4,253.5
+Software Issue,Virus/malware issue,Realme,False,Available,1,1,13.4
+Water Damage Diagnostic,Phone fell in water,Xiaomi,True,Order Required,0,0,170.8
+Water Damage Diagnostic,Phone not turning on after water contact,Other,False,Available,0,3,15.1
+Battery Replacement,Shuts down randomly,Samsung,False,Available,14,4,27.6
+Warranty Diagnostic,Dead on arrival (DOA),Oppo,False,Available,2,4,11.0
+Camera Repair,Camera not opening,OnePlus,False,Unknown,12,2,87.4
+Water Damage Diagnostic,Phone fell in water,OnePlus,True,Order Required,11,2,277.4
+Charging Port Repair,Port not recognizing cable,OnePlus,True,Available,12,4,67.0
+Battery Replacement,Battery swollen,Apple,True,Available,9,3,51.6
+Software Issue,Phone keeps restarting,OnePlus,False,Unknown,5,3,22.9
+Speaker/Mic Repair,Microphone not working,Oppo,True,Available,12,1,51.0
+Speaker/Mic Repair,Distorted sound,Vivo,False,Available,5,2,23.9
+Camera Repair,Camera not opening,Realme,True,Order Required,1,0,223.3
+Water Damage Diagnostic,Speaker sounds muffled after spill,Samsung,False,Available,8,3,25.3
+Camera Repair,Camera not opening,Other,False,Available,5,4,41.0
+Charging Port Repair,Port not recognizing cable,Other,True,Available,9,1,54.9
+Battery Replacement,Battery swollen,Vivo,True,Order Required,8,2,260.0
+Speaker/Mic Repair,No sound from speaker,OnePlus,False,Available,8,4,13.4
+Battery Replacement,Shuts down randomly,OnePlus,False,Unknown,8,3,52.3
+Warranty Diagnostic,Manufacturing defect suspected,Xiaomi,False,Available,8,2,16.7
+Battery Replacement,Phone not charging,Oppo,False,Order Required,7,3,208.0
+Water Damage Diagnostic,Phone fell in water,Realme,True,Available,2,1,71.4
+Charging Port Repair,Port physically damaged,Samsung,False,Order Required,13,2,226.8
+Warranty Diagnostic,Dead on arrival (DOA),Xiaomi,True,Available,2,4,26.5
+Speaker/Mic Repair,Low call volume,Apple,True,Available,1,0,45.0
+Water Damage Diagnostic,Speaker sounds muffled after spill,Apple,True,Unknown,9,0,75.6
+Screen Replacement,Dead pixels,Oppo,False,Available,8,3,19.8
+Water Damage Diagnostic,Screen fogging,Apple,False,Available,12,1,53.9
+Camera Repair,Camera not opening,Samsung,False,Order Required,9,4,208.4
+Speaker/Mic Repair,Low call volume,Vivo,True,Available,9,2,24.4
+Water Damage Diagnostic,Speaker sounds muffled after spill,Oppo,False,Available,2,2,8.4
+Camera Repair,Autofocus not working,Vivo,False,Available,2,0,35.7
+Software Issue,Phone running slow,Oppo,False,Order Required,9,0,81.9
+Battery Replacement,Phone not charging,Other,False,Available,1,2,23.9
+Water Damage Diagnostic,Screen fogging,Samsung,False,Order Required,10,3,235.0
+Camera Repair,Camera not opening,Samsung,False,Available,11,1,43.3
+Charging Port Repair,Loose charging port,OnePlus,False,Available,6,3,36.7
+Battery Replacement,Battery drains fast,OnePlus,False,Available,9,2,29.9
+Warranty Diagnostic,Dead on arrival (DOA),Samsung,True,Available,1,4,53.5
+Camera Repair,Autofocus not working,OnePlus,False,Unknown,9,3,61.8
+Screen Replacement,Dead pixels,Apple,True,Available,12,1,71.8
+Speaker/Mic Repair,Earpiece crackling,Samsung,False,Available,4,0,25.1
+Charging Port Repair,Port physically damaged,Vivo,False,Order Required,4,1,267.4
+Warranty Diagnostic,Hardware failure within warranty,Realme,False,Order Required,3,1,197.9
+Battery Replacement,Overheating,Samsung,False,Available,0,3,16.5
+Camera Repair,Camera lens cracked,Xiaomi,False,Unknown,4,3,40.7
+Screen Replacement,Screen discoloration,Vivo,False,Order Required,2,3,165.2
+Screen Replacement,Cracked screen,Realme,False,Available,5,4,36.5
+Speaker/Mic Repair,Microphone not working,Xiaomi,False,Available,11,2,42.5
+Warranty Diagnostic,Hardware failure within warranty,Xiaomi,False,Order Required,13,0,213.8
+Charging Port Repair,Port physically damaged,Samsung,True,Available,14,4,52.9
+Camera Repair,Autofocus not working,Samsung,False,Order Required,0,1,195.7
+Speaker/Mic Repair,Microphone not working,OnePlus,False,Available,5,4,20.8
+Charging Port Repair,Slow charging,Vivo,False,Available,12,3,41.2
+Charging Port Repair,Port not recognizing cable,Vivo,False,Available,6,0,45.1
+Speaker/Mic Repair,Microphone not working,OnePlus,False,Available,6,2,42.0
+Warranty Diagnostic,Dead on arrival (DOA),Xiaomi,True,Available,11,1,46.1
+Battery Replacement,Phone not charging,Xiaomi,False,Available,14,3,33.5
+Battery Replacement,Battery drains fast,OnePlus,False,Available,14,3,41.1
+Camera Repair,Camera lens cracked,Xiaomi,True,Order Required,0,0,171.8
+Camera Repair,Autofocus not working,Other,True,Unknown,8,1,87.2
+Water Damage Diagnostic,Screen fogging,Vivo,False,Available,1,3,37.1
+Charging Port Repair,Slow charging,OnePlus,False,Available,14,3,49.9
+Screen Replacement,Dead pixels,OnePlus,False,Order Required,8,2,179.5
+Water Damage Diagnostic,Phone not turning on after water contact,Realme,True,Available,3,4,86.2
+Camera Repair,Front camera broken,OnePlus,False,Order Required,2,1,200.8
+Software Issue,Stuck on boot screen,Samsung,True,Unknown,0,1,50.6
+Screen Replacement,Unresponsive touch,Apple,True,Available,5,3,38.5
+Speaker/Mic Repair,No sound from speaker,Xiaomi,True,Order Required,1,4,245.8
+Screen Replacement,Cracked screen,Realme,False,Unknown,3,0,47.8
+Water Damage Diagnostic,Screen fogging,Vivo,True,Order Required,11,4,227.4
+Screen Replacement,Unresponsive touch,Apple,True,Available,0,1,47.4
+Warranty Diagnostic,Hardware failure within warranty,Vivo,False,Available,7,0,63.0
+Screen Replacement,Cracked screen,Vivo,False,Order Required,12,0,292.1
+Warranty Diagnostic,Hardware failure within warranty,Samsung,False,Available,2,2,8
+Warranty Diagnostic,Recurring issue after previous repair,Other,True,Available,5,2,58.1
+Battery Replacement,Shuts down randomly,Xiaomi,False,Order Required,8,2,178.4
+Charging Port Repair,Loose charging port,Vivo,False,Available,11,0,40.2
+Warranty Diagnostic,Hardware failure within warranty,OnePlus,False,Available,1,0,31.8
+Charging Port Repair,Port not recognizing cable,Samsung,True,Available,1,0,30.8
+Camera Repair,Blurry photos,Vivo,True,Order Required,0,1,244.2
+Screen Replacement,Display flickering,Oppo,False,Order Required,0,4,96.6
+Battery Replacement,Battery drains fast,Realme,False,Available,8,1,45.2
+Water Damage Diagnostic,Phone fell in water,Vivo,False,Order Required,6,0,181.2
+Warranty Diagnostic,Recurring issue after previous repair,Vivo,False,Unknown,13,2,71.6
+Speaker/Mic Repair,Earpiece crackling,Realme,False,Available,12,4,49.3
+Water Damage Diagnostic,Phone fell in water,Samsung,False,Available,8,1,58.4
+Camera Repair,Camera not opening,Realme,False,Available,13,2,47.5
+Battery Replacement,Battery drains fast,Other,False,Available,5,4,14.2
+Camera Repair,Blurry photos,Oppo,False,Available,1,2,32.3
+Battery Replacement,Shuts down randomly,OnePlus,True,Order Required,6,0,167.5
+Water Damage Diagnostic,Phone not turning on after water contact,Apple,False,Available,10,4,61.6
+Screen Replacement,Display flickering,Xiaomi,False,Order Required,2,0,276.7
+Battery Replacement,Phone not charging,Oppo,True,Available,2,2,21.0
+Water Damage Diagnostic,Speaker sounds muffled after spill,Xiaomi,False,Available,6,4,40.0
+Software Issue,Apps crashing,Apple,True,Available,10,4,20.6
+Screen Replacement,Display flickering,Xiaomi,False,Available,12,3,62.9
+Software Issue,Apps crashing,Vivo,True,Order Required,1,0,197.9
+Speaker/Mic Repair,No sound from speaker,OnePlus,False,Available,3,4,9.0
+Camera Repair,Autofocus not working,Other,False,Unknown,11,0,72.0
+Software Issue,Virus/malware issue,OnePlus,True,Order Required,0,0,248.3
+Battery Replacement,Battery drains fast,OnePlus,False,Available,3,3,21.0
+Battery Replacement,Phone not charging,Realme,False,Available,14,0,34.6
+Camera Repair,Front camera broken,Other,False,Available,5,2,59.5
+Camera Repair,Blurry photos,OnePlus,False,Order Required,13,0,160.0
+Speaker/Mic Repair,Low call volume,Xiaomi,True,Available,10,4,34.3
+Camera Repair,Autofocus not working,Vivo,False,Available,10,1,45.0
+Software Issue,Apps crashing,OnePlus,False,Order Required,14,1,227.2
+Charging Port Repair,Slow charging,Apple,False,Unknown,1,1,37.6
+Speaker/Mic Repair,Low call volume,Oppo,False,Order Required,13,2,137.1
+Camera Repair,Autofocus not working,Realme,False,Available,0,2,30.2
+Charging Port Repair,Port physically damaged,Vivo,True,Available,7,1,65.2
+Water Damage Diagnostic,Speaker sounds muffled after spill,Realme,False,Available,14,3,57.5
+Speaker/Mic Repair,Low call volume,Realme,False,Order Required,9,3,251.9
+Screen Replacement,Screen discoloration,Apple,False,Order Required,0,1,222.6
+Water Damage Diagnostic,Phone fell in water,Realme,True,Available,4,2,77.7
+Charging Port Repair,Port physically damaged,Other,True,Available,2,4,30.3
+Water Damage Diagnostic,Screen fogging,Other,True,Available,14,1,69.2
+Charging Port Repair,Loose charging port,Apple,True,Available,5,0,41.1
+Charging Port Repair,Port physically damaged,Oppo,True,Available,5,4,41.4
+Screen Replacement,Dead pixels,OnePlus,False,Order Required,7,2,143.6
+Software Issue,Phone keeps restarting,OnePlus,True,Available,7,4,34.2
+Warranty Diagnostic,Dead on arrival (DOA),Other,True,Available,3,4,41.3
+Software Issue,Phone keeps restarting,Xiaomi,True,Order Required,0,1,235.7
+Water Damage Diagnostic,Speaker sounds muffled after spill,Xiaomi,False,Available,11,4,47.1
+Warranty Diagnostic,Recurring issue after previous repair,Samsung,True,Available,5,3,52.8
+Battery Replacement,Battery swollen,Vivo,False,Available,11,1,45.4
+Battery Replacement,Overheating,OnePlus,False,Order Required,4,4,238.4
+Warranty Diagnostic,Dead on arrival (DOA),Xiaomi,False,Available,4,1,13.1
+Battery Replacement,Phone not charging,Oppo,False,Available,8,1,26.2
+Camera Repair,Front camera broken,Vivo,False,Available,5,2,49.4
+Screen Replacement,Unresponsive touch,Realme,False,Available,10,3,44.6
+Warranty Diagnostic,Recurring issue after previous repair,Other,False,Available,11,0,40.1
+Speaker/Mic Repair,Earpiece crackling,Samsung,True,Order Required,12,2,249.2
+Charging Port Repair,Port physically damaged,Xiaomi,False,Order Required,12,2,121.6
+Water Damage Diagnostic,Phone fell in water,Other,False,Available,13,2,79.1
+Software Issue,Phone keeps restarting,Other,False,Order Required,14,4,181.5
+Camera Repair,Front camera broken,Xiaomi,False,Available,8,1,27.5
+Battery Replacement,Battery drains fast,OnePlus,False,Order Required,9,0,121.0
+Camera Repair,Blurry photos,OnePlus,False,Available,3,1,32.1
+Camera Repair,Camera not opening,Xiaomi,True,Available,9,4,37.1
+Speaker/Mic Repair,Microphone not working,Xiaomi,False,Order Required,9,1,252.8
+Screen Replacement,Dead pixels,Samsung,True,Available,6,3,48.8
+Warranty Diagnostic,Recurring issue after previous repair,OnePlus,False,Available,12,4,25.4
+Battery Replacement,Overheating,Apple,False,Order Required,11,3,108.4
+Camera Repair,Front camera broken,Oppo,True,Unknown,5,2,60.8
+Speaker/Mic Repair,Earpiece crackling,Xiaomi,False,Available,11,0,42.0
+Camera Repair,Autofocus not working,Other,False,Available,9,1,40.1
+Water Damage Diagnostic,Phone not turning on after water contact,Vivo,False,Available,10,0,84.7
+Warranty Diagnostic,Manufacturing defect suspected,Other,False,Available,7,1,16.0
+Water Damage Diagnostic,Screen fogging,Other,False,Available,3,1,32.8
+Screen Replacement,Unresponsive touch,Xiaomi,False,Available,9,4,50.9
+Camera Repair,Camera lens cracked,Vivo,False,Available,9,4,31.2
+Camera Repair,Blurry photos,Vivo,False,Unknown,0,4,49.2
+Water Damage Diagnostic,Screen fogging,Oppo,False,Available,3,1,37.6
+Water Damage Diagnostic,Screen fogging,Oppo,True,Unknown,10,1,64.5
+Charging Port Repair,Loose charging port,Xiaomi,False,Available,7,4,29.6
+Warranty Diagnostic,Dead on arrival (DOA),Other,False,Available,6,4,11.4
+Camera Repair,Camera lens cracked,Vivo,True,Available,7,2,34.8
+Charging Port Repair,Slow charging,Other,False,Available,9,0,31.3
+Camera Repair,Autofocus not working,Samsung,False,Available,0,3,10.1
+Speaker/Mic Repair,Low call volume,Vivo,False,Order Required,4,1,214.5
+Screen Replacement,Dead pixels,Xiaomi,False,Order Required,4,4,99.9
+Battery Replacement,Battery swollen,OnePlus,True,Available,13,2,39.1
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,True,Order Required,7,1,160.8
+Charging Port Repair,Port not recognizing cable,Other,False,Available,6,1,40.4
+Speaker/Mic Repair,No sound from speaker,OnePlus,False,Available,2,3,25.6
+Software Issue,System update failed,Oppo,False,Available,13,3,9.3
+Screen Replacement,Cracked screen,Vivo,False,Available,14,2,57.6
+Battery Replacement,Battery swollen,Oppo,False,Order Required,3,4,204.6
+Screen Replacement,Cracked screen,Apple,True,Available,1,3,34.7
+Screen Replacement,Cracked screen,Apple,True,Available,14,1,95.8
+Charging Port Repair,Port physically damaged,Xiaomi,False,Order Required,4,2,214.0
+Camera Repair,Camera lens cracked,Vivo,True,Order Required,4,0,126.0
+Warranty Diagnostic,Hardware failure within warranty,Oppo,True,Available,2,4,42.0
+Warranty Diagnostic,Recurring issue after previous repair,Apple,True,Available,11,2,56.5
+Screen Replacement,Dead pixels,OnePlus,True,Available,6,4,46.5
+Warranty Diagnostic,Dead on arrival (DOA),Oppo,False,Order Required,12,0,277.3
+Speaker/Mic Repair,Microphone not working,OnePlus,False,Available,10,0,33.6
+Speaker/Mic Repair,No sound from speaker,Other,False,Available,3,1,20.7
+Water Damage Diagnostic,Phone fell in water,Vivo,False,Order Required,7,1,231.1
+Software Issue,System update failed,Oppo,True,Available,4,3,27.0
+Screen Replacement,Display flickering,Samsung,False,Available,10,4,44.7
+Charging Port Repair,Port not recognizing cable,Apple,True,Available,10,0,48.8
+Charging Port Repair,Loose charging port,OnePlus,False,Available,9,1,39.4
+Battery Replacement,Battery drains fast,Other,False,Available,1,1,27.1
+Speaker/Mic Repair,No sound from speaker,Xiaomi,False,Unknown,3,0,39.2
+Charging Port Repair,Port physically damaged,Xiaomi,False,Available,7,1,56.0
+Water Damage Diagnostic,Speaker sounds muffled after spill,Samsung,False,Available,0,1,54.2
+Camera Repair,Camera lens cracked,Other,False,Available,10,2,54.6
+Screen Replacement,Screen discoloration,Xiaomi,False,Available,1,2,30.9
+Software Issue,Apps crashing,Apple,False,Unknown,9,2,35.7
+Software Issue,Stuck on boot screen,Samsung,True,Order Required,10,3,263.9
+Speaker/Mic Repair,Microphone not working,Realme,False,Available,12,3,32.7
+Screen Replacement,Dead pixels,Apple,True,Available,7,4,52.5
+Speaker/Mic Repair,Distorted sound,Apple,False,Available,11,3,39.7
+Warranty Diagnostic,Manufacturing defect suspected,Oppo,True,Unknown,7,1,79.6
+Camera Repair,Camera not opening,Vivo,True,Order Required,0,2,165.3
+Charging Port Repair,Port not recognizing cable,Realme,True,Order Required,7,1,176.4
+Software Issue,Apps crashing,Vivo,False,Available,14,4,38.9
+Screen Replacement,Cracked screen,Other,False,Available,6,4,24.6
+Battery Replacement,Overheating,Other,True,Available,0,3,23.1
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,False,Order Required,11,4,221.4
+Water Damage Diagnostic,Speaker sounds muffled after spill,Vivo,False,Order Required,0,0,188.8
+Software Issue,Virus/malware issue,Apple,False,Available,14,0,56.2
+Speaker/Mic Repair,No sound from speaker,Apple,False,Available,0,2,12.9
+Software Issue,Apps crashing,Vivo,True,Available,7,4,22.7
+Software Issue,Stuck on boot screen,Vivo,False,Available,6,2,11.1
+Battery Replacement,Overheating,OnePlus,False,Available,10,0,38.5
+Battery Replacement,Battery drains fast,Oppo,False,Available,1,0,23.5
+Software Issue,Phone running slow,Samsung,True,Unknown,8,1,58.2
+Software Issue,Phone keeps restarting,Samsung,False,Available,8,2,20.7
+Warranty Diagnostic,Dead on arrival (DOA),OnePlus,False,Order Required,4,1,144.3
+Camera Repair,Blurry photos,Xiaomi,False,Available,2,4,14.3
+Charging Port Repair,Port not recognizing cable,Realme,True,Unknown,9,1,90.2
+Speaker/Mic Repair,Microphone not working,Xiaomi,False,Available,2,4,8
+Charging Port Repair,Port physically damaged,Vivo,True,Unknown,8,4,62.3
+Charging Port Repair,Port physically damaged,Vivo,False,Order Required,14,0,151.0
+Warranty Diagnostic,Recurring issue after previous repair,Apple,False,Available,3,4,26.5
+Camera Repair,Camera not opening,Samsung,True,Order Required,10,0,217.0
+Speaker/Mic Repair,Low call volume,Xiaomi,False,Available,6,2,21.5
+Camera Repair,Camera lens cracked,Apple,True,Order Required,11,3,254.5
+Charging Port Repair,Loose charging port,Xiaomi,True,Available,13,4,76.0
+Water Damage Diagnostic,Phone fell in water,Samsung,False,Unknown,6,1,84.5
+Water Damage Diagnostic,Screen fogging,Other,True,Order Required,13,4,207.1
+Screen Replacement,Unresponsive touch,OnePlus,False,Available,10,3,40.6
+Software Issue,Phone keeps restarting,Apple,False,Available,1,4,10.9
+Water Damage Diagnostic,Screen fogging,Other,False,Order Required,5,4,144.7
+Warranty Diagnostic,Hardware failure within warranty,Vivo,True,Available,6,2,36.2
+Battery Replacement,Shuts down randomly,Realme,False,Available,1,4,21.6
+Camera Repair,Front camera broken,Vivo,True,Available,13,1,42.8
+Warranty Diagnostic,Dead on arrival (DOA),Vivo,False,Available,3,1,23.5
+Battery Replacement,Overheating,Other,False,Available,2,0,18.3
+Speaker/Mic Repair,Distorted sound,Other,False,Available,12,2,32.6
+Charging Port Repair,Port not recognizing cable,Realme,False,Available,1,3,13.6
+Battery Replacement,Battery drains fast,Other,False,Available,1,0,25.0
+Camera Repair,Blurry photos,Apple,False,Available,1,0,32.5
+Software Issue,Apps crashing,Vivo,True,Available,11,2,29.4
+Software Issue,Phone running slow,Apple,True,Available,0,4,12.4
+Screen Replacement,Cracked screen,Realme,False,Order Required,7,2,241.1
+Water Damage Diagnostic,Phone not turning on after water contact,Realme,False,Available,12,2,83.7
+Charging Port Repair,Port physically damaged,Vivo,False,Available,0,0,26.5
+Camera Repair,Camera lens cracked,Realme,False,Available,13,3,54.3
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,True,Order Required,10,0,217.5
+Battery Replacement,Phone not charging,Apple,False,Available,3,4,22.3
+Software Issue,System update failed,Other,True,Order Required,9,4,192.3
+Water Damage Diagnostic,Phone not turning on after water contact,OnePlus,True,Available,1,2,73.1
+Screen Replacement,Cracked screen,Samsung,False,Available,0,1,39.6
+Battery Replacement,Battery drains fast,Other,False,Available,10,3,37.7
+Speaker/Mic Repair,Earpiece crackling,Samsung,False,Available,6,0,27.8
+Screen Replacement,Unresponsive touch,OnePlus,False,Available,6,1,53.1
+Battery Replacement,Shuts down randomly,Other,False,Order Required,9,3,175.0
+Water Damage Diagnostic,Screen fogging,OnePlus,False,Available,0,1,51.1
+Screen Replacement,Display flickering,Oppo,True,Available,5,3,39.3
+Battery Replacement,Battery swollen,Apple,False,Available,5,0,25.5
+Water Damage Diagnostic,Screen fogging,Samsung,False,Available,5,3,58.7
+Software Issue,Stuck on boot screen,Other,False,Order Required,5,1,169.1
+Warranty Diagnostic,Manufacturing defect suspected,Realme,True,Available,9,3,47.2
+Speaker/Mic Repair,Microphone not working,Apple,False,Available,6,1,22.9
+Camera Repair,Autofocus not working,OnePlus,False,Available,3,3,13.8
+Charging Port Repair,Loose charging port,Xiaomi,False,Available,13,3,39.2
+Water Damage Diagnostic,Phone fell in water,Realme,False,Available,2,2,65.0
+Software Issue,System update failed,OnePlus,False,Available,4,4,8
+Charging Port Repair,Port not recognizing cable,Samsung,True,Order Required,7,3,215.5
+Camera Repair,Front camera broken,Xiaomi,False,Available,11,3,53.7
+Battery Replacement,Battery swollen,OnePlus,False,Unknown,6,2,52.0
+Software Issue,Phone keeps restarting,Apple,False,Order Required,12,4,109.6
+Battery Replacement,Battery swollen,Vivo,False,Order Required,12,1,129.9
+Water Damage Diagnostic,Screen fogging,Samsung,False,Available,1,2,50.5
+Software Issue,Stuck on boot screen,Xiaomi,False,Order Required,13,2,201.5
+Screen Replacement,Unresponsive touch,OnePlus,False,Available,11,2,45.5
+Software Issue,System update failed,Oppo,True,Unknown,14,2,68.6
+Warranty Diagnostic,Recurring issue after previous repair,Oppo,False,Available,1,3,12.8
+Speaker/Mic Repair,Low call volume,Apple,False,Order Required,8,0,238.9
+Screen Replacement,Cracked screen,Xiaomi,False,Order Required,2,0,144.0
+Battery Replacement,Battery drains fast,Xiaomi,True,Order Required,12,1,247.0
+Camera Repair,Camera not opening,Vivo,False,Available,6,2,36.1
+Software Issue,Phone keeps restarting,Samsung,False,Available,10,1,40.3
+Charging Port Repair,Loose charging port,Oppo,False,Available,2,0,41.7
+Battery Replacement,Battery drains fast,Oppo,False,Unknown,13,3,47.9
+Camera Repair,Camera lens cracked,Oppo,True,Order Required,9,1,231.1
+Water Damage Diagnostic,Speaker sounds muffled after spill,Samsung,True,Available,9,3,66.9
+Charging Port Repair,Slow charging,Oppo,False,Order Required,11,3,117.4
+Screen Replacement,Cracked screen,Vivo,False,Available,5,4,17.8
+Screen Replacement,Cracked screen,OnePlus,False,Available,6,2,26.0
+Screen Replacement,Screen discoloration,Xiaomi,True,Available,14,2,71.1
+Battery Replacement,Battery swollen,Samsung,False,Available,13,2,42.9
+Camera Repair,Front camera broken,OnePlus,False,Available,2,2,40.8
+Warranty Diagnostic,Manufacturing defect suspected,Realme,True,Available,0,3,17.4
+Warranty Diagnostic,Manufacturing defect suspected,Other,False,Order Required,7,3,241.0
+Camera Repair,Camera not opening,Xiaomi,False,Order Required,9,4,93.8
+Charging Port Repair,Port physically damaged,Apple,True,Available,1,2,30.1
+Battery Replacement,Battery swollen,Xiaomi,True,Available,11,3,49.8
+Screen Replacement,Display flickering,Samsung,False,Unknown,5,4,54.5
+Battery Replacement,Shuts down randomly,Oppo,True,Available,3,3,34.8
+Water Damage Diagnostic,Screen fogging,Xiaomi,True,Available,6,2,72.8
+Software Issue,System update failed,Other,False,Available,9,4,22.5
+Speaker/Mic Repair,Earpiece crackling,Xiaomi,False,Available,0,4,13.1
+Charging Port Repair,Port physically damaged,Apple,True,Available,14,3,66.4
+Camera Repair,Camera not opening,Oppo,True,Available,1,0,32.0
+Camera Repair,Front camera broken,OnePlus,False,Order Required,0,0,236.2
+Water Damage Diagnostic,Phone fell in water,Apple,False,Order Required,5,4,187.5
+Charging Port Repair,Port not recognizing cable,Xiaomi,True,Unknown,4,0,49.6
+Warranty Diagnostic,Dead on arrival (DOA),Oppo,False,Unknown,9,3,34.4
+Water Damage Diagnostic,Screen fogging,Apple,True,Available,1,0,14.4
+Warranty Diagnostic,Hardware failure within warranty,Realme,False,Available,12,4,17.9
+Screen Replacement,Cracked screen,Xiaomi,False,Order Required,7,3,204.5
+Software Issue,Stuck on boot screen,Oppo,True,Available,10,3,39.3
+Camera Repair,Blurry photos,Other,False,Available,11,4,33.4
+Warranty Diagnostic,Hardware failure within warranty,Samsung,False,Available,5,4,8
+Warranty Diagnostic,Recurring issue after previous repair,Other,False,Available,4,1,34.0
+Software Issue,Phone running slow,Vivo,False,Order Required,11,3,222.8
+Speaker/Mic Repair,Low call volume,Xiaomi,False,Available,11,0,39.2
+Software Issue,Apps crashing,Other,True,Available,7,2,33.9
+Charging Port Repair,Port not recognizing cable,Samsung,False,Available,1,4,20.1
+Warranty Diagnostic,Recurring issue after previous repair,Vivo,False,Order Required,12,4,202.8
+Screen Replacement,Dead pixels,Other,False,Order Required,1,4,100.8
+Screen Replacement,Screen discoloration,Apple,True,Available,3,2,32.9
+Battery Replacement,Phone not charging,Vivo,False,Available,13,1,40.8
+Screen Replacement,Unresponsive touch,Other,False,Available,1,2,23.7
+Charging Port Repair,Port physically damaged,Realme,True,Available,14,3,72.0
+Speaker/Mic Repair,No sound from speaker,Other,True,Available,12,4,56.3
+Screen Replacement,Dead pixels,Samsung,False,Available,14,4,40.9
+Camera Repair,Camera lens cracked,Oppo,False,Order Required,13,2,183.5
+Charging Port Repair,Port physically damaged,Other,False,Order Required,9,4,238.2
+Water Damage Diagnostic,Speaker sounds muffled after spill,OnePlus,True,Available,6,1,43.9
+Speaker/Mic Repair,Distorted sound,Samsung,True,Order Required,9,2,237.6
+Battery Replacement,Battery drains fast,Vivo,True,Available,1,0,33.4
+Speaker/Mic Repair,Distorted sound,Realme,False,Available,12,4,31.8
+Software Issue,Phone keeps restarting,Vivo,False,Available,12,2,26.0
+Battery Replacement,Battery drains fast,Oppo,False,Available,7,0,34.5
+Water Damage Diagnostic,Screen fogging,Other,False,Unknown,11,3,53.9
+Warranty Diagnostic,Hardware failure within warranty,Apple,False,Available,0,1,18.8
+Battery Replacement,Shuts down randomly,Oppo,True,Available,4,0,37.6
+Screen Replacement,Unresponsive touch,Xiaomi,False,Available,14,2,72.5
+Warranty Diagnostic,Manufacturing defect suspected,Apple,False,Available,0,3,8
+Water Damage Diagnostic,Phone not turning on after water contact,Xiaomi,False,Available,7,3,65.6
+Speaker/Mic Repair,No sound from speaker,Oppo,False,Unknown,5,4,33.3
+Charging Port Repair,Loose charging port,OnePlus,False,Available,8,0,40.0
+Screen Replacement,Screen discoloration,Realme,False,Available,0,0,46.3
+Software Issue,Apps crashing,Other,True,Available,5,3,31.9
+Speaker/Mic Repair,Low call volume,Xiaomi,False,Order Required,5,3,100.6
+Camera Repair,Blurry photos,Xiaomi,False,Available,2,0,36.9
+Screen Replacement,Cracked screen,OnePlus,False,Available,6,2,39.1
+Software Issue,Phone running slow,Realme,False,Order Required,6,0,180.1
+Battery Replacement,Overheating,Samsung,False,Available,14,0,41.7
+Charging Port Repair,Slow charging,Oppo,False,Order Required,8,1,191.1
+Charging Port Repair,Port not recognizing cable,Oppo,False,Available,0,0,17.8
+Charging Port Repair,Loose charging port,Samsung,False,Available,9,2,32.1
+Speaker/Mic Repair,Distorted sound,OnePlus,True,Order Required,9,0,119.1
+Water Damage Diagnostic,Speaker sounds muffled after spill,Vivo,False,Unknown,10,2,69.6
+Speaker/Mic Repair,Microphone not working,Realme,False,Available,0,1,8
+Charging Port Repair,Port physically damaged,Other,False,Available,12,0,54.1
+Warranty Diagnostic,Manufacturing defect suspected,Vivo,False,Available,9,2,38.9
+Battery Replacement,Overheating,Vivo,False,Available,3,0,12.6
+Speaker/Mic Repair,Distorted sound,Apple,False,Available,12,1,32.3
+Software Issue,Phone keeps restarting,Realme,False,Available,1,2,17.4
+Software Issue,Virus/malware issue,Xiaomi,True,Available,1,1,10.2
+Software Issue,Virus/malware issue,Samsung,False,Order Required,8,4,156.7
+Water Damage Diagnostic,Phone fell in water,Vivo,False,Unknown,4,0,72.3
+Software Issue,Phone keeps restarting,OnePlus,False,Available,5,0,8.5
+Screen Replacement,Unresponsive touch,Oppo,False,Unknown,3,1,74.2
+Screen Replacement,Screen discoloration,Vivo,False,Available,7,1,53.8
+Speaker/Mic Repair,Earpiece crackling,Realme,False,Order Required,9,3,199.4
+Screen Replacement,Dead pixels,Vivo,False,Order Required,12,1,120.2
+Water Damage Diagnostic,Phone fell in water,Apple,False,Available,4,3,16.7
+Screen Replacement,Dead pixels,Oppo,False,Available,9,4,46.1
+Screen Replacement,Dead pixels,Vivo,False,Available,0,4,35.7
+Charging Port Repair,Slow charging,Vivo,False,Order Required,7,1,87.1
+Camera Repair,Autofocus not working,Oppo,False,Order Required,5,2,110.8
+Camera Repair,Front camera broken,Samsung,False,Order Required,2,0,197.5
+Screen Replacement,Dead pixels,Vivo,True,Available,14,1,70.5
+Speaker/Mic Repair,Earpiece crackling,Vivo,False,Available,2,0,8.0
+Screen Replacement,Dead pixels,Realme,False,Available,11,1,37.2
+Speaker/Mic Repair,Low call volume,Realme,False,Order Required,0,2,175.7
+Charging Port Repair,Slow charging,Other,True,Available,12,2,50.3
+Charging Port Repair,Slow charging,Realme,True,Available,13,2,80.6
+Water Damage Diagnostic,Phone fell in water,Vivo,False,Available,3,2,83.6
+Water Damage Diagnostic,Phone fell in water,Apple,True,Unknown,12,1,76.2
+Software Issue,Phone keeps restarting,Realme,False,Available,2,2,12.2
+Warranty Diagnostic,Hardware failure within warranty,Apple,False,Order Required,9,0,258.7
+Speaker/Mic Repair,Low call volume,Other,True,Order Required,8,3,155.3
+Screen Replacement,Unresponsive touch,Realme,False,Available,3,3,28.1
+Water Damage Diagnostic,Speaker sounds muffled after spill,Vivo,True,Available,12,0,85.3
+Speaker/Mic Repair,Low call volume,Other,False,Available,12,3,33.0
+Charging Port Repair,Port physically damaged,Realme,True,Available,14,0,69.8
+Software Issue,Phone keeps restarting,Apple,True,Available,3,2,28.1
+Camera Repair,Camera not opening,Xiaomi,False,Order Required,11,4,172.0
+Water Damage Diagnostic,Phone not turning on after water contact,Samsung,False,Available,12,1,55.9
+Software Issue,System update failed,Realme,False,Order Required,12,3,234.0
+Water Damage Diagnostic,Speaker sounds muffled after spill,Other,False,Available,5,1,56.9
+Screen Replacement,Dead pixels,Vivo,False,Available,10,3,44.4
+Screen Replacement,Unresponsive touch,Xiaomi,False,Unknown,9,4,77.9
+Water Damage Diagnostic,Speaker sounds muffled after spill,Oppo,True,Available,7,0,63.4
+Charging Port Repair,Loose charging port,Other,True,Available,14,3,59.1
+Battery Replacement,Overheating,Samsung,False,Available,5,3,22.9
+Battery Replacement,Overheating,Realme,True,Available,6,3,35.2
+Software Issue,Phone running slow,Other,True,Available,2,3,8
+Warranty Diagnostic,Dead on arrival (DOA),Other,False,Order Required,4,3,212.6
+Water Damage Diagnostic,Speaker sounds muffled after spill,Oppo,True,Order Required,11,3,126.9
+Software Issue,Apps crashing,OnePlus,False,Available,10,0,46.5
+Software Issue,System update failed,Oppo,False,Available,5,0,28.9
+Charging Port Repair,Slow charging,Realme,False,Available,1,3,8
+Software Issue,System update failed,Samsung,True,Available,14,1,57.2
+Software Issue,Virus/malware issue,Other,True,Order Required,13,1,125.4
+Water Damage Diagnostic,Speaker sounds muffled after spill,Apple,False,Available,4,1,38.2
+Software Issue,System update failed,Samsung,False,Order Required,10,0,86.5
+Screen Replacement,Cracked screen,Oppo,False,Unknown,5,1,69.3
+Battery Replacement,Phone not charging,Apple,False,Order Required,2,1,228.3
+Speaker/Mic Repair,Earpiece crackling,Realme,False,Unknown,6,3,44.4
+Speaker/Mic Repair,No sound from speaker,Oppo,True,Available,10,2,49.3
+Software Issue,System update failed,OnePlus,False,Available,1,4,8
+Battery Replacement,Shuts down randomly,Vivo,False,Order Required,10,1,254.2
+Speaker/Mic Repair,Low call volume,Apple,False,Available,9,3,26.3
+Screen Replacement,Unresponsive touch,Samsung,False,Order Required,4,1,228.4
+Screen Replacement,Unresponsive touch,Vivo,False,Available,6,1,43.6
+Warranty Diagnostic,Recurring issue after previous repair,Xiaomi,True,Available,12,0,31.7
+Camera Repair,Blurry photos,Realme,False,Available,3,1,26.9
+Software Issue,Phone running slow,Oppo,False,Available,10,0,20.4
+Software Issue,Phone keeps restarting,Xiaomi,False,Available,2,4,8.7
+Water Damage Diagnostic,Phone not turning on after water contact,OnePlus,True,Available,6,1,94.1
+Software Issue,Stuck on boot screen,Other,True,Unknown,6,3,54.9
+Warranty Diagnostic,Manufacturing defect suspected,Oppo,False,Available,14,2,24.6

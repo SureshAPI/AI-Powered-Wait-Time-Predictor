@@ -29,4 +29,37 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", sync);
     sync();
   });
+
+  // Dynamic reported_issue dropdown based on selected service_type
+  const serviceSelect = document.getElementById("service_type");
+  const issueSelect = document.getElementById("reported_issue");
+
+  if (serviceSelect && issueSelect) {
+    const issuesMap = window.REPORTED_ISSUES || {};
+
+    const updateIssues = (selectedIssue) => {
+      const service = serviceSelect.value;
+      const issues = issuesMap[service] || [];
+      const currentVal = selectedIssue || issueSelect.getAttribute("data-selected") || issueSelect.value || "";
+
+      issueSelect.innerHTML = '<option value="">— Select issue —</option>';
+      issues.forEach((issue) => {
+        const opt = document.createElement("option");
+        opt.value = issue;
+        opt.textContent = issue;
+        if (issue === currentVal) {
+          opt.selected = true;
+        }
+        issueSelect.appendChild(opt);
+      });
+      issueSelect.removeAttribute("data-selected");
+    };
+
+    serviceSelect.addEventListener("change", () => updateIssues());
+
+    // Populate on load if service_type already has a selection
+    if (serviceSelect.value) {
+      updateIssues();
+    }
+  }
 });

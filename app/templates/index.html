@@ -10,16 +10,43 @@
   </div>
   <div class="perforation" aria-hidden="true"></div>
   <div class="ticket-body">
+    {% if errors %}
+    <div class="error-box" role="alert">
+      <strong>Please fix the following:</strong>
+      <ul>
+        {% for err in errors %}
+        <li>{{ err }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
     <form action="/predict" method="post">
       <div class="field">
         <label for="service_type">Service type</label>
         <div class="select-wrap">
           <select name="service_type" id="service_type" required>
+            <option value="">— Select service —</option>
             {% for st in service_types %}
-            <option value="{{ st }}">{{ st }}</option>
+            <option value="{{ st }}" {% if form_data and form_data.get('service_type') == st %}selected{% endif %}>{{ st }}</option>
             {% endfor %}
           </select>
         </div>
+      </div>
+
+      <div class="field">
+        <label for="reported_issue">Reported issue</label>
+        <div class="select-wrap">
+          <select name="reported_issue" id="reported_issue" required data-selected="{{ form_data.get('reported_issue', '') if form_data else '' }}">
+            <option value="">— Select issue —</option>
+            {% if form_data and form_data.get('service_type') and form_data.get('service_type') in reported_issues %}
+              {% for iss in reported_issues[form_data.get('service_type')] %}
+              <option value="{{ iss }}" {% if form_data.get('reported_issue') == iss %}selected{% endif %}>{{ iss }}</option>
+              {% endfor %}
+            {% endif %}
+          </select>
+        </div>
+        <small class="field-hint">Choose the service type first to see relevant issues.</small>
       </div>
 
       <div class="field">
@@ -27,7 +54,7 @@
         <div class="select-wrap">
           <select name="phone_brand" id="phone_brand" required>
             {% for b in phone_brands %}
-            <option value="{{ b }}">{{ b }}</option>
+            <option value="{{ b }}" {% if form_data and form_data.get('phone_brand') == b %}selected{% endif %}>{{ b }}</option>
             {% endfor %}
           </select>
         </div>
@@ -38,7 +65,7 @@
         <div class="select-wrap">
           <select name="parts_availability" id="parts_availability" required>
             {% for p in parts_options %}
-            <option value="{{ p }}">{{ p }}</option>
+            <option value="{{ p }}" {% if form_data and form_data.get('parts_availability') == p %}selected{% endif %}>{{ p }}</option>
             {% endfor %}
           </select>
         </div>
@@ -49,7 +76,7 @@
         <div class="stepper">
           <button type="button" data-action="dec" aria-label="Decrease jobs ahead">&minus;</button>
           <input type="number" inputmode="numeric" name="current_workload" id="current_workload"
-                 min="0" max="30" value="2" required>
+                 min="0" max="30" value="{{ form_data.get('current_workload', '2') if form_data else '2' }}" required>
           <button type="button" data-action="inc" aria-label="Increase jobs ahead">&plus;</button>
         </div>
       </div>
@@ -59,7 +86,7 @@
         <div class="stepper">
           <button type="button" data-action="dec" aria-label="Decrease technicians available">&minus;</button>
           <input type="number" inputmode="numeric" name="technician_availability" id="technician_availability"
-                 min="0" max="10" value="1" required>
+                 min="0" max="10" value="{{ form_data.get('technician_availability', '1') if form_data else '1' }}" required>
           <button type="button" data-action="inc" aria-label="Increase technicians available">&plus;</button>
         </div>
       </div>
@@ -67,7 +94,8 @@
       <div class="toggle-row">
         <span>This is a warranty case</span>
         <label class="switch">
-          <input type="checkbox" name="is_warranty_case" id="is_warranty_case">
+          <input type="checkbox" name="is_warranty_case" id="is_warranty_case"
+                 {% if form_data and form_data.get('is_warranty_case') == 'on' %}checked{% endif %}>
           <span class="track" aria-hidden="true"></span>
           <span class="thumb" aria-hidden="true"></span>
         </label>
@@ -77,6 +105,11 @@
     </form>
   </div>
 </div>
+
+{# Pass reported_issues map to JS for dynamic dropdown population #}
+<script>
+  window.REPORTED_ISSUES = {{ reported_issues | tojson }};
+</script>
 
 <p class="finePrint">Prototype for demonstration and testing purposes. Trained on
 synthetic data — estimates do not reflect real shop performance yet. See the

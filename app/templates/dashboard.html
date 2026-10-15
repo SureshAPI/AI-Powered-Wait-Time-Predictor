@@ -14,38 +14,151 @@
     <span class="lbl">Open</span>
   </div>
   <div class="stat-pill">
+    <span class="num">{{ in_progress_count }}</span>
+    <span class="lbl">In Progress</span>
+  </div>
+  <div class="stat-pill">
     <span class="num">{{ completed_count }}</span>
     <span class="lbl">Completed</span>
   </div>
   <div class="stat-pill">
-    <span class="num">{{ jobs|length }}</span>
-    <span class="lbl">Total logged</span>
+    <span class="num">{{ cancelled_count }}</span>
+    <span class="lbl">Cancelled</span>
   </div>
 </div>
+
+{# Phase 2: Search and filter controls #}
+<form class="dash-filters" method="get" action="/dashboard">
+  <input type="text" name="search" placeholder="Search job ID, brand, service…"
+         value="{{ current_filters.search }}" class="filter-input">
+  <select name="status" class="filter-select">
+    <option value="">All statuses</option>
+    <option value="open" {% if current_filters.status == 'open' %}selected{% endif %}>Open</option>
+    <option value="in_progress" {% if current_filters.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+    <option value="completed" {% if current_filters.status == 'completed' %}selected{% endif %}>Completed</option>
+    <option value="cancelled" {% if current_filters.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+  </select>
+  <select name="service_type" class="filter-select">
+    <option value="">All services</option>
+    {% for st in service_types %}
+    <option value="{{ st }}" {% if current_filters.service_type == st %}selected{% endif %}>{{ st }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" class="btn-small">Filter</button>
+  {% if current_filters.search or current_filters.status or current_filters.service_type %}
+  <a href="/dashboard" class="filter-clear">Clear</a>
+  {% endif %}
+</form>
 
 {% if jobs %}
   {% for job in jobs %}
   <div class="job-card">
     <div class="job-card-top">
-      <span class="service">{{ job.service_type }} &middot; {{ job.phone_brand }}</span>
-      <span class="status-pill {{ job.status }}">{{ job.status|upper }}</span>
+      <span class="service">{{ job.service_type }}{% if job.reported_issue %} · {{ job.reported_issue }}{% endif %} · {{ job.phone_brand }}</span>
+      <span class="status-pill {{ job.status }}">{{ job.status | replace('_', ' ') | upper }}</span>
     </div>
     <div class="job-meta">
       <span>AI est. <b>{{ job.gbr_prediction_minutes|format_minutes }}</b></span>
+      {% if job.interval_lower_minutes and job.interval_upper_minutes %}
+      <span>Range <b>{{ job.interval_lower_minutes|format_minutes }}–{{ job.interval_upper_minutes|format_minutes }}</b></span>
+      {% endif %}
       <span>Baseline <b>{{ job.baseline_prediction_minutes|format_minutes }}</b></span>
       <span>Actual <b>{{ job.actual_completion_minutes|format_minutes if job.actual_completion_minutes else "—" }}</b></span>
       <span>Ref <b>{{ job.job_id }}</b></span>
+      {% if job.source == 'demo' %}<span class="source-tag">DEMO</span>{% endif %}
     </div>
+
+    {# Phase 2: Status transition controls #}
     {% if job.status == "open" %}
-    <form class="complete-form" action="/dashboard/complete/{{ job.job_id }}" method="post">
-      <input type="number" step="0.1" name="actual_completion_minutes" placeholder="Actual minutes" required>
-      <button type="submit" class="btn-small">Save</button>
-    </form>
+    <div class="status-actions">
+      <form class="inline-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="in_progress">
+        <button type="submit" class="btn-small btn-progress">Start Work</button>
+      </form>
+      <form class="complete-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="completed">
+        <input type="number" step="0.1" min="1" name="actual_completion_minutes" placeholder="Actual minutes" required>
+        <button type="submit" class="btn-small">Complete</button>
+      </form>
+      <form class="inline-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="cancelled">
+        <button type="submit" class="btn-small btn-cancel">Cancel</button>
+      </form>
+    </div>
+    {% elif job.status == "in_progress" %}
+    <div class="status-actions">
+      <form class="complete-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="completed">
+        <input type="number" step="0.1" min="1" name="actual_completion_minutes" placeholder="Actual minutes" required>
+        <button type="submit" class="btn-small">Complete</button>
+      </form>
+      <form class="inline-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="cancelled">
+        <button type="submit" class="btn-small btn-cancel">Cancel</button>
+      </form>
+    </div>
+    {% elif job.status == "cancelled" %}
+    <div class="status-actions">
+      <form class="inline-form" action="/dashboard/update/{{ job.job_id }}" method="post">
+        <input type="hidden" name="new_status" value="open">
+        <button type="submit" class="btn-small btn-reopen">Reopen</button>
+      </form>
+    </div>
     {% endif %}
   </div>
   {% endfor %}
 {% else %}
-  <div class="empty-state">No jobs logged yet. Create one from the intake form.</div>
+  <div class="empty-state">
+    {% if current_filters.search or current_filters.status or current_filters.service_type %}
+      No jobs match the current filters. <a href="/dashboard">Clear filters</a>
+    {% else %}
+      No jobs logged yet. Create one from the intake form.
+    {% endif %}
+  </div>
+{% endif %}
+
+{# Phase 2: Analytics section #}
+{% if accuracy_stats %}
+<div class="analytics-section">
+  <h2>Prediction Accuracy (Live Records)</h2>
+  <p class="analytics-note">Based on {{ accuracy_stats.n_records }} completed live job{{ 's' if accuracy_stats.n_records != 1 }} with recorded actual durations.
+  {{ accuracy_stats.note }}</p>
+  <div class="analytics-grid">
+    <div class="analytics-card">
+      <div class="analytics-value">{{ "%.1f"|format(accuracy_stats.gbr_mae) }} min</div>
+      <div class="analytics-label">AI Model MAE</div>
+    </div>
+    <div class="analytics-card">
+      <div class="analytics-value">{{ "%.1f"|format(accuracy_stats.baseline_mae) }} min</div>
+      <div class="analytics-label">Baseline MAE</div>
+    </div>
+    <div class="analytics-card">
+      <div class="analytics-value">{{ "%+.1f"|format(accuracy_stats.gbr_mean_error) }} min</div>
+      <div class="analytics-label">AI Mean Error</div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if service_stats %}
+<div class="analytics-section">
+  <h2>By Service Type (Live Records)</h2>
+  <table class="analytics-table">
+    <thead>
+      <tr><th>Service</th><th>Jobs</th><th>Avg Predicted</th><th>Avg Actual</th></tr>
+    </thead>
+    <tbody>
+      {% for row in service_stats %}
+      <tr>
+        <td>{{ row.service_type }}</td>
+        <td>{{ row.count }}</td>
+        <td>{{ "%.0f"|format(row.avg_predicted) }} min</td>
+        <td>{{ "%.0f"|format(row.avg_actual) }} min</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endif %}
 
 <p class="dash-note">Recording the actual completion time here is the feedback-loop

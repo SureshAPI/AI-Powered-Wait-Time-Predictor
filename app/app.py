@@ -4,14 +4,27 @@ app.py
 Prototype web application for Project Better Tomorrow: a customer/employee
 intake form that produces an estimated service/waiting time.
 
-The model is trained once at startup on the SYNTHETIC dataset (fast — ~600
+The model is trained once at startup on the SYNTHETIC dataset (fast — ~800
 rows). This is a prototype demonstrating the pipeline end-to-end; it is not
-connected to any real shop data. See docs/methodology.md and
-data/README.md.
+connected to any real shop data. See docs/methodology.md and data/README.md.
+
+Phase 2 changes:
+  - App factory pattern (create_app) for testability.
+  - Quantile GBR models for data-driven prediction intervals.
+  - Separated reported_issue from service_type.
+  - Input validation with error messages.
+  - Prediction explanations.
+  - SQLite-backed job store with status transitions.
+  - Dashboard search, filters, and analytics.
+  - Health endpoint (/health).
+  - Lazy model loading to avoid import-time side effects in tests.
 
 Run with:
     python app/app.py
 Then open http://127.0.0.1:5000/
+
+Production:
+    gunicorn app.app:app
 """
 
 import sys
@@ -20,41 +33,33 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd
-from flask import Flask, abort, redirect, render_template, request, url_for
+from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 from src.baseline import BaselineEstimator
-from src.model import build_gbr_pipeline
-from src.preprocessing import get_features_and_target, load_dataset
+from src.explanations import explain_prediction
+from src.generate_synthetic_data import REPORTED_ISSUES
+from src.model import build_gbr_pipeline, build_quantile_pipelines
+from src.preprocessing import (
+    get_features_and_target,
+    load_dataset,
+    validate_prediction_inputs,
+)
 
-from app.job_store import add_job, get_job, load_jobs, record_actual_completion
-
-app = Flask(__name__)
-app.jinja_env.filters["format_minutes"] = lambda m: format_minutes(float(m))
-
-# --- Train once at startup on the synthetic dataset ---
-_df = load_dataset()
-_X, _y = get_features_and_target(_df)
-
-_gbr = build_gbr_pipeline()
-_gbr.fit(_X, _y)
-
-_baseline = BaselineEstimator().fit(_X, _y)
-
-# Rough uncertainty margin for the displayed range. This is a simple
-# constant derived from the model's held-out RMSE reported in
-# docs/methodology.md — a future iteration could replace this with proper
-# quantile regression for a statistically grounded interval.
-UNCERTAINTY_MARGIN_MINUTES = 20
+from app.job_store import (
+    add_job,
+    get_job,
+    get_prediction_accuracy_stats,
+    get_service_type_summary,
+    get_status_counts,
+    load_jobs,
+    update_job_status,
+)
 
 # QA finding: the raw GBR prediction can occasionally go to zero or negative
 # for very fast/low-workload jobs, since nothing in training constrains it to
 # be positive. A real service can't take negative time, so clamp to a small
 # practical floor (matches the floor already used in the baseline estimator).
 MIN_PREDICTION_MINUTES = 5.0
-
-SERVICE_TYPES = sorted(_df["service_type"].unique())
-PHONE_BRANDS = sorted(_df["phone_brand"].unique())
-PARTS_OPTIONS = sorted(_df["parts_availability"].unique())
 
 
 def format_minutes(minutes: float) -> str:
@@ -67,100 +72,232 @@ def format_minutes(minutes: float) -> str:
     return f"{hours} hr {rem} min" if rem else f"{hours} hr"
 
 
-@app.route("/", methods=["GET"])
-def index():
-    return render_template(
-        "index.html",
-        service_types=SERVICE_TYPES,
-        phone_brands=PHONE_BRANDS,
-        parts_options=PARTS_OPTIONS,
-    )
+def create_app(test_db_path=None):
+    """Flask application factory.
 
+    Args:
+        test_db_path: If provided, use this path for the SQLite database
+            instead of the default. Used in tests to isolate data.
+    """
+    flask_app = Flask(__name__)
+    flask_app.jinja_env.filters["format_minutes"] = lambda m: format_minutes(float(m))
 
-def status_note_for(inputs: dict) -> str:
-    """Short, honest context line for the result board — based on the
-    actual inputs, not invented."""
-    if inputs["parts_availability"] == "Order Required":
-        return "Parts need to be ordered for this job — this can extend the wait."
-    if inputs["technician_availability"] == 0:
-        return "No technician is currently free — the wait may run longer than usual."
-    return "Estimate based on current shop workload and technician availability."
+    # --- Train once at startup on the synthetic dataset ---
+    _df = load_dataset()
+    _X, _y = get_features_and_target(_df)
 
+    _gbr = build_gbr_pipeline()
+    _gbr.fit(_X, _y)
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    form = request.form
-    inputs = {
-        "service_type": form["service_type"],
-        "phone_brand": form["phone_brand"],
-        "is_warranty_case": form.get("is_warranty_case") == "on",
-        "parts_availability": form["parts_availability"],
-        "current_workload": int(form["current_workload"]),
-        "technician_availability": int(form["technician_availability"]),
+    _baseline = BaselineEstimator().fit(_X, _y)
+
+    # Phase 2: Quantile models for prediction intervals
+    _quantile_models = build_quantile_pipelines()
+    for pipe in _quantile_models.values():
+        pipe.fit(_X, _y)
+
+    # Training medians for explanations
+    _training_medians = {
+        "current_workload": int(_df["current_workload"].median()),
+        "technician_availability": int(_df["technician_availability"].median()),
     }
-    row = pd.DataFrame([inputs])
 
-    gbr_pred = float(_gbr.predict(row)[0])
-    gbr_pred = max(gbr_pred, MIN_PREDICTION_MINUTES)  # QA fix: no negative/near-zero estimates
-    baseline_pred = float(_baseline.predict(row)[0])
+    SERVICE_TYPES = sorted(_df["service_type"].unique())
+    PHONE_BRANDS = sorted(_df["phone_brand"].unique())
+    PARTS_OPTIONS = sorted(_df["parts_availability"].unique())
 
-    job_id = add_job(inputs, gbr_pred, baseline_pred)
+    # Store on app for access in route handlers
+    flask_app.config["GBR_MODEL"] = _gbr
+    flask_app.config["BASELINE_MODEL"] = _baseline
+    flask_app.config["QUANTILE_MODELS"] = _quantile_models
+    flask_app.config["TRAINING_MEDIANS"] = _training_medians
+    flask_app.config["SERVICE_TYPES"] = SERVICE_TYPES
+    flask_app.config["PHONE_BRANDS"] = PHONE_BRANDS
+    flask_app.config["PARTS_OPTIONS"] = PARTS_OPTIONS
+    flask_app.config["TEST_DB_PATH"] = test_db_path
 
-    # Robustness fix: redirect to a real GET URL for the result (Post/Redirect/
-    # Get) instead of rendering directly on the POST response, so refreshing
-    # or bookmarking the result page works instead of showing "Method Not
-    # Allowed".
-    return redirect(url_for("result", job_id=job_id))
+    # ---------------------------------------------------------------------------
+    # Routes
+    # ---------------------------------------------------------------------------
+
+    @flask_app.route("/", methods=["GET"])
+    def index():
+        return render_template(
+            "index.html",
+            service_types=SERVICE_TYPES,
+            phone_brands=PHONE_BRANDS,
+            parts_options=PARTS_OPTIONS,
+            reported_issues=REPORTED_ISSUES,
+        )
+
+    @flask_app.route("/predict", methods=["POST"])
+    def predict():
+        form = request.form
+
+        # Phase 2: Input validation
+        inputs, errors = validate_prediction_inputs(form)
+        if errors:
+            return render_template(
+                "index.html",
+                service_types=SERVICE_TYPES,
+                phone_brands=PHONE_BRANDS,
+                parts_options=PARTS_OPTIONS,
+                reported_issues=REPORTED_ISSUES,
+                errors=errors,
+                form_data=form,
+            ), 400
+
+        row = pd.DataFrame([inputs])
+
+        gbr_pred = float(_gbr.predict(row)[0])
+        gbr_pred = max(gbr_pred, MIN_PREDICTION_MINUTES)
+        baseline_pred = float(_baseline.predict(row)[0])
+
+        # Phase 2: Data-driven prediction intervals from quantile models
+        interval_lower = float(_quantile_models["lower"].predict(row)[0])
+        interval_upper = float(_quantile_models["upper"].predict(row)[0])
+        # Ensure lower bound is at least MIN_PREDICTION_MINUTES
+        interval_lower = max(interval_lower, MIN_PREDICTION_MINUTES)
+        # Ensure upper bound is at least as large as point prediction
+        interval_upper = max(interval_upper, gbr_pred)
+
+        job_id = add_job(
+            inputs, gbr_pred, baseline_pred,
+            interval_lower=interval_lower,
+            interval_upper=interval_upper,
+            db_path=test_db_path,
+        )
+
+        return redirect(url_for("result", job_id=job_id))
+
+    @flask_app.route("/result/<job_id>", methods=["GET"])
+    def result(job_id):
+        job = get_job(job_id, db_path=test_db_path)
+        if job is None:
+            abort(404)
+
+        inputs = {
+            "service_type": job["service_type"],
+            "reported_issue": job.get("reported_issue", ""),
+            "phone_brand": job["phone_brand"],
+            "is_warranty_case": bool(job["is_warranty_case"]),
+            "parts_availability": job["parts_availability"],
+            "current_workload": int(job["current_workload"]),
+            "technician_availability": int(job["technician_availability"]),
+        }
+        gbr_pred = float(job["gbr_prediction_minutes"])
+
+        # Phase 2: Use stored interval bounds if available, else fall back
+        low = job.get("interval_lower_minutes")
+        high = job.get("interval_upper_minutes")
+        if low is not None and high is not None:
+            low = max(float(low), MIN_PREDICTION_MINUTES)
+            high = float(high)
+        else:
+            # Fallback for legacy jobs without interval data
+            low = max(gbr_pred - 20, MIN_PREDICTION_MINUTES)
+            high = gbr_pred + 20
+
+        # Phase 2: Prediction explanations
+        explanation = explain_prediction(inputs, gbr_pred, _training_medians)
+
+        return render_template(
+            "result.html",
+            job_id=job_id,
+            estimate=format_minutes(gbr_pred),
+            low=format_minutes(low),
+            high=format_minutes(high),
+            inputs=inputs,
+            status_note=explanation["customer_summary"],
+            explanation=explanation,
+        )
+
+    @flask_app.route("/dashboard", methods=["GET"])
+    def dashboard():
+        # Phase 2: Search and filter support
+        status_filter = request.args.get("status", "").strip() or None
+        search_query = request.args.get("search", "").strip() or None
+        service_type_filter = request.args.get("service_type", "").strip() or None
+
+        jobs = load_jobs(
+            status_filter=status_filter,
+            search_query=search_query,
+            service_type_filter=service_type_filter,
+            db_path=test_db_path,
+        )
+        counts = get_status_counts(db_path=test_db_path)
+
+        # Phase 2: Analytics (only from live operational records)
+        accuracy_stats = get_prediction_accuracy_stats(db_path=test_db_path)
+        service_stats = get_service_type_summary(db_path=test_db_path)
+
+        return render_template(
+            "dashboard.html",
+            jobs=jobs,
+            counts=counts,
+            open_count=counts.get("open", 0),
+            in_progress_count=counts.get("in_progress", 0),
+            completed_count=counts.get("completed", 0),
+            cancelled_count=counts.get("cancelled", 0),
+            accuracy_stats=accuracy_stats,
+            service_stats=service_stats,
+            service_types=SERVICE_TYPES,
+            current_filters={
+                "status": status_filter or "",
+                "search": search_query or "",
+                "service_type": service_type_filter or "",
+            },
+        )
+
+    @flask_app.route("/dashboard/update/<job_id>", methods=["POST"])
+    def update_job(job_id):
+        """Phase 2: General status update endpoint with validated transitions."""
+        new_status = request.form.get("new_status", "").strip()
+        actual_minutes_str = request.form.get("actual_completion_minutes", "").strip()
+
+        actual_minutes = None
+        if actual_minutes_str:
+            try:
+                actual_minutes = float(actual_minutes_str)
+            except ValueError:
+                return redirect(url_for("dashboard"))
+
+        success, message = update_job_status(
+            job_id, new_status, actual_minutes, db_path=test_db_path
+        )
+
+        # In a real app we'd flash the message; for this prototype, just redirect
+        return redirect(url_for("dashboard"))
+
+    # Backward-compatible route from Phase 1
+    @flask_app.route("/dashboard/complete/<job_id>", methods=["POST"])
+    def complete_job(job_id):
+        actual_minutes = float(request.form["actual_completion_minutes"])
+        update_job_status(job_id, "completed", actual_minutes, db_path=test_db_path)
+        return redirect(url_for("dashboard"))
+
+    # Phase 2: Health endpoint for deployment monitoring
+    @flask_app.route("/health", methods=["GET"])
+    def health():
+        return jsonify({
+            "status": "ok",
+            "model": "gradient_boosting_regression",
+            "dataset_rows": len(_df),
+            "service_types": len(SERVICE_TYPES),
+        })
+
+    # Phase 2: API endpoint for reported issues (used by JS dynamic dropdown)
+    @flask_app.route("/api/issues/<service_type>", methods=["GET"])
+    def get_issues(service_type):
+        issues = REPORTED_ISSUES.get(service_type, [])
+        return jsonify(issues)
+
+    return flask_app
 
 
-@app.route("/result/<job_id>", methods=["GET"])
-def result(job_id):
-    job = get_job(job_id)
-    if job is None:
-        abort(404)
-
-    inputs = {
-        "service_type": job["service_type"],
-        "phone_brand": job["phone_brand"],
-        "is_warranty_case": job["is_warranty_case"] == "True",
-        "parts_availability": job["parts_availability"],
-        "current_workload": int(job["current_workload"]),
-        "technician_availability": int(job["technician_availability"]),
-    }
-    gbr_pred = float(job["gbr_prediction_minutes"])
-
-    low = max(gbr_pred - UNCERTAINTY_MARGIN_MINUTES, MIN_PREDICTION_MINUTES)
-    high = gbr_pred + UNCERTAINTY_MARGIN_MINUTES
-
-    return render_template(
-        "result.html",
-        job_id=job_id,
-        estimate=format_minutes(gbr_pred),
-        low=format_minutes(low),
-        high=format_minutes(high),
-        inputs=inputs,
-        status_note=status_note_for(inputs),
-    )
-
-
-@app.route("/dashboard", methods=["GET"])
-def dashboard():
-    jobs = load_jobs()
-    open_count = sum(1 for j in jobs if j["status"] == "open")
-    completed_count = sum(1 for j in jobs if j["status"] == "completed")
-    return render_template(
-        "dashboard.html",
-        jobs=jobs,
-        open_count=open_count,
-        completed_count=completed_count,
-    )
-
-
-@app.route("/dashboard/complete/<job_id>", methods=["POST"])
-def complete_job(job_id):
-    actual_minutes = float(request.form["actual_completion_minutes"])
-    record_actual_completion(job_id, actual_minutes)
-    return redirect(url_for("dashboard"))
+# Module-level app instance for gunicorn compatibility:
+#   gunicorn app.app:app
+app = create_app()
 
 
 if __name__ == "__main__":

@@ -10,18 +10,21 @@ See `data/README.md` and `docs/methodology.md`.
 
 For each synthetic row, a service type is picked and given a base duration +
 variability (loosely informed by the field-visit problem context, not by
-measured data). Duration is then adjusted by: current workload (more queued
-jobs → longer wait), technician availability (more free technicians →
-shorter wait), parts availability (parts on order → large added delay),
-warranty case status (small added delay for documentation), and random noise.
-Full logic is in the generator script — nothing here is hidden or
-black-boxed.
+measured data). In Phase 2, a specific `reported_issue` is sampled for that
+service category, adjusting duration by an issue complexity multiplier.
+Duration is then adjusted by: current workload (more queued jobs → longer wait),
+technician availability (more free technicians → shorter wait), parts availability
+(parts on order → large added delay), warranty case status (small added delay
+for documentation), and random noise. The dataset contains 800 rows (expanded
+from 600 in Phase 1 for quantile regression calibration). Full logic is in
+`src/generate_synthetic_data.py` — nothing here is hidden or black-boxed.
 
 ## Columns
 
 | Column | Type | Description |
 |---|---|---|
 | `service_type` | categorical | One of: Screen Replacement, Battery Replacement, Charging Port Repair, Software Issue, Camera Repair, Speaker/Mic Repair, Water Damage Diagnostic, Warranty Diagnostic |
+| `reported_issue` | categorical | Specific customer-reported symptom/problem appropriate to the service type (e.g. Cracked screen, Battery swollen, Loose charging port) |
 | `phone_brand` | categorical | Samsung, Apple, Xiaomi, Realme, OnePlus, Vivo, Oppo, Other |
 | `is_warranty_case` | boolean | Whether the job is a warranty claim |
 | `parts_availability` | categorical | Available, Order Required, Unknown |
