@@ -14,12 +14,19 @@ Key changes from Phase 1:
   - Analytics queries (only on real operational records).
   - Source tagging: 'live' for app-created jobs, 'demo' for migrated/test.
 
+Phase 3 additions:
+  - job_events table for service timeline tracking.
+  - Event logging in add_job(), update_job_status().
+  - Customer ticket tracking (get_job_by_ticket_code).
+  - CSV export (export_jobs_csv).
+
 The database file lives at data/jobs.db (git-ignored). Legacy CSV records
 in data/job_log.csv are migrated once on first access and then the CSV
 is left in place (not deleted) for safety.
 """
 
 import csv
+import io
 import sqlite3
 import uuid
 from datetime import datetime, timezone
@@ -67,6 +74,22 @@ _CREATE_INDEX_SQL = [
     "CREATE INDEX IF NOT EXISTS idx_jobs_created_at ON jobs(created_at);",
 ]
 
+# Phase 3: Event timeline table
+_CREATE_EVENTS_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS job_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_id TEXT NOT NULL,
+    event_type TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    details TEXT,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+);
+"""
+
+_CREATE_EVENTS_INDEX_SQL = (
+    "CREATE INDEX IF NOT EXISTS idx_events_job_id ON job_events(job_id);"
+)
+
 
 def get_db(db_path: Path = None) -> sqlite3.Connection:
     """Get a SQLite connection with row factory set to dict-like access."""
@@ -90,7 +113,30 @@ def init_db(conn: sqlite3.Connection):
     conn.execute(_CREATE_TABLE_SQL)
     for idx_sql in _CREATE_INDEX_SQL:
         conn.execute(idx_sql)
+    conn.execute(_CREATE_EVENTS_TABLE_SQL)
+    conn.execute(_CREATE_EVENTS_INDEX_SQL)
     conn.commit()
+
+
+def add_event(job_id: str, event_type: str, details: str = None,
+              timestamp: str = None, conn: sqlite3.Connection = None,
+              db_path: Path = None) -> int:
+    """Record a timeline event for a job (Phase 3)."""
+    close_after = False
+    if conn is None:
+        conn = ensure_db(db_path)
+        close_after = True
+    if timestamp is None:
+        timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    cur = conn.execute(
+        "INSERT INTO job_events (job_id, event_type, timestamp, details) VALUES (?, ?, ?, ?)",
+        (job_id, event_type, timestamp, details),
+    )
+    conn.commit()
+    event_id = cur.lastrowid
+    if close_after:
+        conn.close()
+    return event_id
 
 
 def _migrate_csv_if_needed(conn: sqlite3.Connection, csv_path: Path = None):
@@ -216,6 +262,17 @@ def add_job(inputs: dict, gbr_prediction: float, baseline_prediction: float,
             round(interval_upper, 1) if interval_upper is not None else None,
         ),
     )
+    # Phase 3: Log creation event in timeline
+    service_desc = inputs["service_type"]
+    if inputs.get("reported_issue"):
+        service_desc += f" ({inputs['reported_issue']})"
+    add_event(
+        job_id=job_id,
+        event_type="created",
+        details=f"Intake registered: {service_desc}. Estimated wait: {round(gbr_prediction, 1)} min.",
+        timestamp=now,
+        conn=conn,
+    )
     conn.commit()
     conn.close()
     return job_id
@@ -306,10 +363,29 @@ def update_job_status(job_id: str, new_status: str,
             "UPDATE jobs SET status = ?, actual_completion_minutes = ?, updated_at = ? WHERE job_id = ?",
             (new_status, round(actual_minutes, 1), now, job_id),
         )
+        add_event(
+            job_id=job_id,
+            event_type="completed",
+            details=f"Service completed. Actual duration recorded: {round(actual_minutes, 1)} min.",
+            timestamp=now,
+            conn=conn,
+        )
     else:
         conn.execute(
             "UPDATE jobs SET status = ?, updated_at = ? WHERE job_id = ?",
             (new_status, now, job_id),
+        )
+        event_descriptions = {
+            "in_progress": "Technician started diagnostic and repair work.",
+            "cancelled": "Service request cancelled.",
+            "open": "Service request reopened.",
+        }
+        add_event(
+            job_id=job_id,
+            event_type=new_status,
+            details=event_descriptions.get(new_status, f"Status updated to {new_status}."),
+            timestamp=now,
+            conn=conn,
         )
 
     conn.commit()
@@ -400,3 +476,177 @@ def get_service_type_summary(db_path: Path = None) -> list[dict]:
     ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+
+# ---------------------------------------------------------------------------
+# Phase 3: Timeline, Customer Tracking, CSV Export & Workload Intelligence
+# ---------------------------------------------------------------------------
+
+def get_job_events(job_id: str, db_path: Path = None) -> list[dict]:
+    """Retrieve all chronological events for a job.
+    
+    If no events are logged yet (e.g. for legacy or demo jobs), constructs
+    sensible fallback events from the job row so the timeline always renders.
+    """
+    conn = ensure_db(db_path)
+    rows = conn.execute(
+        "SELECT * FROM job_events WHERE job_id = ? ORDER BY timestamp ASC, id ASC",
+        (job_id,),
+    ).fetchall()
+    events = [dict(r) for r in rows]
+    
+    if not events:
+        job = conn.execute("SELECT * FROM jobs WHERE job_id = ?", (job_id,)).fetchone()
+        if job:
+            events.append({
+                "id": 0,
+                "job_id": job_id,
+                "event_type": "created",
+                "timestamp": job["created_at"],
+                "details": f"Job registered in system ({job['service_type']}). Initial AI estimate: {job['gbr_prediction_minutes']} min.",
+            })
+            if job["status"] in ("in_progress", "completed"):
+                events.append({
+                    "id": 1,
+                    "job_id": job_id,
+                    "event_type": "in_progress",
+                    "timestamp": job["updated_at"] or job["created_at"],
+                    "details": "Technician started service.",
+                })
+            if job["status"] == "completed":
+                actual_min = job["actual_completion_minutes"]
+                details = f"Service completed. Actual duration: {actual_min} min." if actual_min else "Service completed."
+                events.append({
+                    "id": 2,
+                    "job_id": job_id,
+                    "event_type": "completed",
+                    "timestamp": job["updated_at"] or job["created_at"],
+                    "details": details,
+                })
+            elif job["status"] == "cancelled":
+                events.append({
+                    "id": 3,
+                    "job_id": job_id,
+                    "event_type": "cancelled",
+                    "timestamp": job["updated_at"] or job["created_at"],
+                    "details": "Service request cancelled.",
+                })
+
+    conn.close()
+    return events
+
+
+def get_job_by_ticket_code(ticket_code: str, db_path: Path = None) -> dict | None:
+    """Case-insensitive lookup of a job by ticket reference code."""
+    if not ticket_code:
+        return None
+    code = str(ticket_code).strip()
+    conn = ensure_db(db_path)
+    row = conn.execute(
+        "SELECT * FROM jobs WHERE LOWER(job_id) = LOWER(?)",
+        (code,),
+    ).fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+
+def export_jobs_csv(status_filter: str = None, search_query: str = None,
+                    service_type_filter: str = None, source_filter: str = None,
+                    db_path: Path = None) -> str:
+    """Generate a RFC-4180 compliant CSV string of jobs matching filters."""
+    jobs = load_jobs(
+        status_filter=status_filter,
+        search_query=search_query,
+        service_type_filter=service_type_filter,
+        source_filter=source_filter,
+        db_path=db_path,
+    )
+    output = io.StringIO()
+    fieldnames = [
+        "job_id",
+        "created_at",
+        "status",
+        "service_type",
+        "reported_issue",
+        "phone_brand",
+        "is_warranty_case",
+        "parts_availability",
+        "current_workload",
+        "technician_availability",
+        "gbr_prediction_minutes",
+        "interval_lower_minutes",
+        "interval_upper_minutes",
+        "baseline_prediction_minutes",
+        "actual_completion_minutes",
+        "source",
+        "updated_at",
+    ]
+    writer = csv.DictWriter(output, fieldnames=fieldnames, extrasaction="ignore")
+    writer.writeheader()
+    for j in jobs:
+        writer.writerow(j)
+    return output.getvalue()
+
+
+def check_job_delay(job: dict) -> dict:
+    """Evaluate whether an active job has exceeded its predicted waiting time.
+    
+    Returns a dict with 'is_delayed', 'elapsed_minutes', and 'delay_minutes'.
+    """
+    created_at_str = job.get("created_at")
+    if not created_at_str or job.get("status") in ("completed", "cancelled"):
+        return {"is_delayed": False, "elapsed_minutes": 0.0, "delay_minutes": 0.0}
+
+    try:
+        created_dt = datetime.fromisoformat(created_at_str)
+        if created_dt.tzinfo is None:
+            created_dt = created_dt.replace(tzinfo=timezone.utc)
+        now = datetime.now(timezone.utc)
+        elapsed_minutes = max(0.0, (now - created_dt).total_seconds() / 60.0)
+    except Exception:
+        return {"is_delayed": False, "elapsed_minutes": 0.0, "delay_minutes": 0.0}
+
+    pred_minutes = float(job.get("gbr_prediction_minutes") or 0.0)
+    is_delayed = elapsed_minutes > pred_minutes and pred_minutes > 0
+    delay_minutes = max(0.0, elapsed_minutes - pred_minutes)
+    return {
+        "is_delayed": is_delayed,
+        "elapsed_minutes": round(elapsed_minutes, 1),
+        "delay_minutes": round(delay_minutes, 1),
+    }
+
+
+def get_workload_intelligence(db_path: Path = None) -> dict:
+    """Compute queue management insights and workload metrics for employees."""
+    conn = ensure_db(db_path)
+    rows = conn.execute(
+        "SELECT * FROM jobs WHERE status IN ('open', 'in_progress') ORDER BY created_at ASC"
+    ).fetchall()
+    conn.close()
+
+    active_jobs = [dict(r) for r in rows]
+    open_jobs = [j for j in active_jobs if j["status"] == "open"]
+    in_progress_jobs = [j for j in active_jobs if j["status"] == "in_progress"]
+
+    total_backlog_minutes = sum(float(j.get("gbr_prediction_minutes") or 0.0) for j in active_jobs)
+
+    overdue_count = 0
+    high_uncertainty_count = 0
+    for j in active_jobs:
+        delay_info = check_job_delay(j)
+        if delay_info["is_delayed"]:
+            overdue_count += 1
+        low = j.get("interval_lower_minutes")
+        high = j.get("interval_upper_minutes")
+        if (low is not None and high is not None and (float(high) - float(low)) >= 45.0) or j.get("parts_availability") == "Order Required":
+            high_uncertainty_count += 1
+
+    return {
+        "active_count": len(active_jobs),
+        "open_count": len(open_jobs),
+        "in_progress_count": len(in_progress_jobs),
+        "total_backlog_minutes": round(total_backlog_minutes, 1),
+        "overdue_count": overdue_count,
+        "high_uncertainty_count": high_uncertainty_count,
+    }
+

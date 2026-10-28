@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Staff Access — Project Better Tomorrow{% endblock %}
+{% block nav %}
+<a href="/">Customer view</a>
+<a href="/track">Track repair</a>
+{% endblock %}
+
+{% block content %}
+<div class="ticket login-ticket">
+  <div class="ticket-head">
+    <div class="badge-tag">SECURE ACCESS</div>
+    <h1>Staff Authentication</h1>
+    <p>Please enter your workshop staff PIN to access queue management and operational controls.</p>
+  </div>
+  <div class="perforation" aria-hidden="true"></div>
+  <div class="ticket-body">
+    {% if error %}
+    <div class="error-box" role="alert">
+      <strong>Authentication failed:</strong>
+      <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <form action="/dashboard/login" method="post" class="login-form">
+      <input type="hidden" name="next" value="{{ next_url }}">
+      <div class="field">
+        <label for="pin">4-Digit Staff PIN</label>
+        <div class="input-wrap pin-wrap">
+          <input type="password" name="pin" id="pin"
+                 placeholder="&bull;&bull;&bull;&bull;" maxlength="8"
+                 pattern="[0-9]*" inputmode="numeric"
+                 required autofocus class="pin-input" autocomplete="current-password">
+        </div>
+        <small class="field-hint">Default workshop demo PIN is <code>1234</code>.</small>
+      </div>
+
+      <button type="submit" class="btn-primary">Unlock Staff Dashboard &rarr;</button>
+    </form>
+  </div>
+</div>
+
+<div class="track-lookup-callout">
+  <span>Looking to estimate or track as a customer?</span>
+  <a href="/">&larr; Return to customer intake</a>
+</div>
+{% endblock %}

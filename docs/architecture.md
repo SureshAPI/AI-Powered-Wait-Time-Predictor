@@ -1,8 +1,7 @@
 # System Architecture
 
 ## Status
-Planned architecture, prior to implementation. Will be updated to reflect what
-is actually built as the prototype develops.
+Complete production-ready prototype (100% cumulative project completion across Phase 1, Phase 2, and Phase 3). Evaluated and verified on automated test suite (23/23 tests passing).
 
 ## Prototype Format Decision
 
@@ -71,18 +70,32 @@ Actual Completion Time -> Store actual result with prediction
                         -> Gradient Boosting Regression
 ```
 
-## Planned Components
+## Components Implemented in Final Product (Phase 3)
 
-- `data/` — synthetic dataset + schema documentation.
-- `src/` — data loading, preprocessing, baseline estimator, GBR model,
-  prediction service logic (kept as separate modules, not one large file).
-- `app/` — Flask app: customer/employee intake form, prediction results view,
-  employee dashboard.
-- `models/` — trained model artifacts (not committed if large/binary; documented
-  instead).
-- `tests/` — validation tests for preprocessing and prediction logic.
-- `docs/` — this architecture doc, methodology, testing methodology,
-  responsible-AI notes.
+- `data/` — 800-row synthetic demonstration dataset (`synthetic_service_data.csv`), schema definition (`schema.md`), and SQLite store (`jobs.db`).
+- `src/` —
+  * `preprocessing.py`: Feature encodings, validation routines.
+  * `model.py`: Gradient Boosting Regression and Quantile Regressors ($\alpha=0.10, 0.90$).
+  * `baseline.py`: Service-type mean + linear adjustment baseline estimator.
+  * `explanations.py`: Interpretive feature contribution analyzer against training medians.
+  * `train.py`: Evaluation pipeline reporting MAE, RMSE, $R^2$, and empirical prediction interval coverage/width.
+- `app/` —
+  * `app.py`: Flask application factory (`create_app`), staff PIN authentication, customer self-service ticket tracking, bookmarkable GET URLs, dynamic cascading issue APIs, RFC-4180 CSV export, and custom error handling.
+  * `job_store.py`: SQLite persistence layer managing `jobs` and `job_events` tables, safe legacy CSV migration, validated state machine, workload intelligence calculations, and active repair delay detection.
+  * `templates/`: Departure-board themed Jinja templates:
+    - `base.html`: Common layout, responsive topbar, and accessible footer.
+    - `index.html`: Customer intake ticket form with dynamic issue cascade and steppers.
+    - `result.html`: Animated departure board with prediction intervals, factor breakdown, and print styles.
+    - `track.html`: Ticket lookup by 8-character reference code.
+    - `track_status.html`: Live customer status tracking with 3-stage progress meter, delay alert banners, and chronological service timeline.
+    - `login.html`: Staff PIN entry protection for dashboard access.
+    - `dashboard.html`: Workload intelligence banner, real-time search/filters, delay pills, status transitions, and operational analytics.
+    - `errors/404.html` & `errors/500.html`: Custom themed error pages.
+  * `static/`:
+    - `css/style.css`: Comprehensive departure-board design system, responsive breakpoints (desktop up to 960px), and print media styles.
+    - `js/app.js`: Dynamic issue cascade, stepper synchronization, and client-side tracking redirection.
+- `tests/` — Automated test suite with 23 end-to-end tests covering data generation, ML models, prediction intervals, validations, database transactions, timeline events, delay logic, CSV export, and authentication.
+- `docs/` — Problem context, technical methodology, responsible AI, architecture, validation approaches, QA findings, and Review 1, 2, and 3 reports.
 
 ## Human-in-the-loop Responsibilities (retained from original proposal)
 

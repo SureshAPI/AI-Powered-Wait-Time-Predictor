@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ job.job_id }} Status — Project Better Tomorrow{% endblock %}
+{% block nav %}
+<a href="/">New estimate</a>
+<a href="/track">Track another</a>
+<a href="/dashboard">Staff view</a>
+{% endblock %}
+
+{% block content %}
+<div class="board" id="tracking-board">
+  <div class="board-header-row">
+    <div>
+      <div class="board-eyebrow">REPAIR STATUS TRACKER</div>
+      <div class="board-title-small">Ticket #<strong>{{ job.job_id }}</strong></div>
+    </div>
+    <div class="board-actions no-print">
+      <button type="button" class="btn-icon" onclick="window.print()" title="Print status summary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print Summary
+      </button>
+    </div>
+  </div>
+
+  <!-- Live Status Hero Badge -->
+  <div class="status-hero status-{{ job.status }}">
+    <div class="status-hero-indicator" aria-hidden="true"></div>
+    <div class="status-hero-body">
+      <div class="status-hero-label">CURRENT STATUS</div>
+      <div class="status-hero-val">
+        {% if job.status == 'open' %}
+          QUEUED &middot; AWAITING WORKBENCH
+        {% elif job.status == 'in_progress' %}
+          IN PROGRESS &middot; TECHNICIAN AT WORK
+        {% elif job.status == 'completed' %}
+          COMPLETED &middot; READY FOR PICKUP
+        {% elif job.status == 'cancelled' %}
+          CANCELLED
+        {% else %}
+          {{ job.status|upper }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-Stage Progress Step Meter -->
+  {% if job.status != 'cancelled' %}
+  <div class="step-meter" aria-label="Service progress stages">
+    <div class="step-item {% if job.status in ('open', 'in_progress', 'completed') %}active completed{% endif %}">
+      <div class="step-circle">1</div>
+      <div class="step-label">Intake Received</div>
+    </div>
+    <div class="step-connector {% if job.status in ('in_progress', 'completed') %}active{% endif %}"></div>
+    <div class="step-item {% if job.status in ('in_progress', 'completed') %}active{% endif %} {% if job.status == 'completed' %}completed{% endif %}">
+      <div class="step-circle">2</div>
+      <div class="step-label">Bench Service</div>
+    </div>
+    <div class="step-connector {% if job.status == 'completed' %}active{% endif %}"></div>
+    <div class="step-item {% if job.status == 'completed' %}active completed{% endif %}">
+      <div class="step-circle">3</div>
+      <div class="step-label">Ready / Finished</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Delay / Alert Notices -->
+  {% if delay_info.is_delayed %}
+  <div class="board-alert board-alert-danger" role="alert">
+    <span class="alert-icon" aria-hidden="true">⏱</span>
+    <div>
+      <strong>Service Taking Longer Than Predicted</strong>
+      <p>Elapsed time (approx. {{ delay_info.elapsed_minutes|format_minutes }}) has exceeded the initial AI estimate by ~{{ delay_info.delay_minutes|format_minutes }}. Our technician is working through diagnostic complications.</p>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if is_high_uncertainty %}
+  <div class="board-alert board-alert-warning">
+    <span class="alert-icon" aria-hidden="true">⚡</span>
+    <div>
+      <strong>Elevated Duration Uncertainty:</strong>
+      <span>Parts procurement or hardware diagnostic variability may adjust the final completion turnaround.</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <hr class="board-divider">
+
+  <!-- Service Details Grid -->
+  <dl class="board-dl">
+    <div class="board-row"><dt>Service Type</dt><dd>{{ job.service_type }}</dd></div>
+    {% if job.reported_issue %}
+    <div class="board-row"><dt>Reported Issue</dt><dd>{{ job.reported_issue }}</dd></div>
+    {% endif %}
+    <div class="board-row"><dt>Device</dt><dd>{{ job.phone_brand }}</dd></div>
+    <div class="board-row"><dt>Parts Status</dt><dd>{{ job.parts_availability }}</dd></div>
+    <div class="board-row"><dt>AI Predicted Wait</dt><dd>{{ estimate }} (range: {{ low }}–{{ high }})</dd></div>
+    {% if job.status == 'completed' and job.actual_completion_minutes %}
+    <div class="board-row highlight"><dt>Actual Duration</dt><dd><strong>{{ job.actual_completion_minutes|format_minutes }}</strong></dd></div>
+    {% endif %}
+    <div class="board-row"><dt>Registered At</dt><dd>{{ job.created_at[:16].replace('T', ' ') }} UTC</dd></div>
+  </dl>
+
+  <!-- Service Timeline Section -->
+  <div class="timeline-section">
+    <div class="board-eyebrow">CHRONOLOGICAL SERVICE TIMELINE</div>
+    <div class="timeline">
+      {% for ev in events %}
+      <div class="timeline-item">
+        <div class="timeline-node node-{{ ev.event_type }}"></div>
+        <div class="timeline-content">
+          <div class="timeline-top">
+            <span class="timeline-title">{{ ev.event_type|replace('_', ' ')|capitalize }}</span>
+            <span class="timeline-time">{{ ev.timestamp[11:19] }} UTC</span>
+          </div>
+          {% if ev.details %}
+          <p class="timeline-details">{{ ev.details }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <p class="job-ref">Ticket reference code: <strong>{{ job.job_id }}</strong></p>
+</div>
+
+<div class="result-links no-print">
+  <a href="/track">&larr; Track another ticket</a>
+  <a href="/">&plus; New estimate</a>
+  <a href="/dashboard">Staff view &rarr;</a>
+</div>
+{% endblock %}

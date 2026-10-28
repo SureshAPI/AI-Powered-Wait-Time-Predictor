@@ -8,14 +8,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head_extra %}{% endblock %}
 </head>
 <body>
   <div class="wrap{% block wrap_extra %}{% endblock %}">
-    <div class="topbar">
+    <header class="topbar">
       <a class="brand" href="/"><span class="dot" aria-hidden="true"></span>PROJECT BETTER TOMORROW</a>
-      <nav>{% block nav %}{% endblock %}</nav>
-    </div>
-    {% block content %}{% endblock %}
+      <nav aria-label="Main Navigation">
+        {% block nav %}
+        <a href="/">New Estimate</a>
+        <a href="/track">Track Repair</a>
+        <a href="/dashboard">Staff View</a>
+        {% endblock %}
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="app-footer">
+      <p>Project Better Tomorrow &middot; AI-Powered Wait Time Prediction &middot; Demonstration Prototype</p>
+    </footer>
   </div>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>

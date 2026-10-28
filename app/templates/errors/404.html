@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}404 Not Found — Project Better Tomorrow{% endblock %}
+{% block nav %}
+<a href="/">Home</a>
+<a href="/track">Track repair</a>
+<a href="/dashboard">Staff view</a>
+{% endblock %}
+
+{% block content %}
+<div class="board error-board">
+  <div class="board-eyebrow">ERROR 404 &middot; SERVICE NOTICE</div>
+  <div class="board-number-wrap">
+    <div class="board-number error-num">404</div>
+  </div>
+  <h2 class="error-title">Page or Record Not Found</h2>
+  <p class="board-range">The requested ticket or page does not exist in the service directory.</p>
+
+  <div class="board-note">
+    <span class="icon" aria-hidden="true">i</span>
+    <span>If you entered a ticket reference code, please verify the 8-character ID on your intake receipt.</span>
+  </div>
+
+  <div class="result-links" style="margin-top: 24px;">
+    <a href="/">&larr; Return to Home</a>
+    <a href="/track">Track Ticket Reference &rarr;</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Track Repair Status — Project Better Tomorrow{% endblock %}
+{% block nav %}
+<a href="/">New estimate</a>
+<a href="/dashboard">Staff view</a>
+{% endblock %}
+
+{% block content %}
+<div class="ticket">
+  <div class="ticket-head">
+    <h1>Track your repair</h1>
+    <p>Enter your 8-character ticket reference code to view real-time status and service timeline.</p>
+  </div>
+  <div class="perforation" aria-hidden="true"></div>
+  <div class="ticket-body">
+    {% if error %}
+    <div class="error-box" role="alert">
+      <strong>Unable to locate ticket:</strong>
+      <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <form action="/track" method="get" class="track-form" id="track-form">
+      <div class="field">
+        <label for="ticket-code">Ticket reference code</label>
+        <div class="input-wrap">
+          <input type="text" name="ticket_code" id="ticket-code"
+                 placeholder="e.g. 4c37167e" maxlength="12"
+                 value="{{ searched_code or '' }}" required autofocus
+                 class="mono-input" autocomplete="off" spellcheck="false">
+        </div>
+        <small class="field-hint">You received this code when your service request was created.</small>
+      </div>
+
+      <button type="submit" class="btn-primary">Find My Repair &rarr;</button>
+    </form>
+  </div>
+</div>
+
+<div class="track-lookup-callout">
+  <span>Need a new wait time prediction?</span>
+  <a href="/">&larr; Create a new estimate</a>
+</div>
+{% endblock %}

@@ -1,12 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Staff Dashboard — Project Better Tomorrow{% endblock %}
-{% block nav %}<a href="/">New estimate</a>{% endblock %}
+{% block nav %}
+<a href="/">New estimate</a>
+<a href="/track">Track repair</a>
+<a href="/dashboard/logout" class="nav-logout">Logout</a>
+{% endblock %}
 {% block wrap_extra %} wide{% endblock %}
 
 {% block content %}
 <div class="dash-header">
-  <h1>Staff dashboard</h1>
+  <div>
+    <h1>Staff dashboard</h1>
+    <p class="dash-subtitle">Workshop queue coordination &amp; operational feedback loop</p>
+  </div>
+  <div class="dash-header-actions">
+    <a href="/dashboard/export?status={{ current_filters.status }}&search={{ current_filters.search }}&service_type={{ current_filters.service_type }}"
+       class="btn-export" title="Export matching jobs as RFC-4180 CSV">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      Export CSV
+    </a>
+  </div>
 </div>
+
+{% if workload_intel %}
+<div class="intel-banner">
+  <div class="intel-col">
+    <span class="intel-val">{{ workload_intel.active_count }}</span>
+    <span class="intel-lbl">Active In-Shop</span>
+  </div>
+  <div class="intel-col">
+    <span class="intel-val">{{ workload_intel.total_backlog_minutes|format_minutes }}</span>
+    <span class="intel-lbl">Total Backlog Wait</span>
+  </div>
+  <div class="intel-col {% if workload_intel.overdue_count > 0 %}alert-state{% endif %}">
+    <span class="intel-val">{{ workload_intel.overdue_count }}</span>
+    <span class="intel-lbl">Delayed vs Est.</span>
+  </div>
+  <div class="intel-col">
+    <span class="intel-val">{{ workload_intel.high_uncertainty_count }}</span>
+    <span class="intel-lbl">Wide Variance</span>
+  </div>
+</div>
+{% endif %}
 
 <div class="dash-stats">
   <div class="stat-pill">
@@ -52,10 +87,15 @@
 
 {% if jobs %}
   {% for job in jobs %}
-  <div class="job-card">
+  <div class="job-card {% if job.delay_info and job.delay_info.is_delayed %}card-delayed{% endif %}">
     <div class="job-card-top">
       <span class="service">{{ job.service_type }}{% if job.reported_issue %} · {{ job.reported_issue }}{% endif %} · {{ job.phone_brand }}</span>
-      <span class="status-pill {{ job.status }}">{{ job.status | replace('_', ' ') | upper }}</span>
+      <div class="status-tags">
+        {% if job.delay_info and job.delay_info.is_delayed %}
+        <span class="status-pill overdue-pill">DELAYED +{{ job.delay_info.delay_minutes|format_minutes }}</span>
+        {% endif %}
+        <span class="status-pill {{ job.status }}">{{ job.status | replace('_', ' ') | upper }}</span>
+      </div>
     </div>
     <div class="job-meta">
       <span>AI est. <b>{{ job.gbr_prediction_minutes|format_minutes }}</b></span>
@@ -66,6 +106,7 @@
       <span>Actual <b>{{ job.actual_completion_minutes|format_minutes if job.actual_completion_minutes else "—" }}</b></span>
       <span>Ref <b>{{ job.job_id }}</b></span>
       {% if job.source == 'demo' %}<span class="source-tag">DEMO</span>{% endif %}
+      <a href="/track/{{ job.job_id }}" class="timeline-link" target="_blank" title="Open customer tracking view and timeline">Timeline &rarr;</a>
     </div>
 
     {# Phase 2: Status transition controls #}

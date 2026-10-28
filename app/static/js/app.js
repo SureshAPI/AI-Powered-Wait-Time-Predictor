@@ -62,4 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
       updateIssues();
     }
   }
+
+  // Phase 3: Track form redirection to bookmarkable GET URL
+  const trackForm = document.getElementById("track-form");
+  if (trackForm) {
+    trackForm.addEventListener("submit", (e) => {
+      const codeInput = document.getElementById("ticket-code");
+      if (codeInput && codeInput.value.trim()) {
+        e.preventDefault();
+        window.location.href = "/track/" + encodeURIComponent(codeInput.value.trim().toLowerCase());
+      }
+    });
+  }
 });

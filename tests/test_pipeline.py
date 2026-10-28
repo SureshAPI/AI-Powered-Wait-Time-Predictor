@@ -600,3 +600,251 @@ def test_full_acceptance_workflow(tmp_path, monkeypatch):
     completed_job = job_store.get_job(job_id, db_path=temp_db)
     assert completed_job["status"] == "completed"
     assert float(completed_job["actual_completion_minutes"]) == 26.5
+
+
+# ---------------------------------------------------------------------------
+# Phase 3: Timeline Events, Tracking, Workload Intelligence & Security Tests
+# ---------------------------------------------------------------------------
+
+def test_job_events_logging_and_timeline(tmp_path):
+    """Verify service timeline events are logged accurately upon each state change."""
+    import app.job_store as job_store
+
+    temp_db = tmp_path / "events_test.db"
+
+    # 1. Job created -> logs 'created' event
+    job_id = job_store.add_job(
+        {
+            "service_type": "Charging Port Repair",
+            "reported_issue": "Loose charging port",
+            "phone_brand": "OnePlus",
+            "is_warranty_case": False,
+            "parts_availability": "Available",
+            "current_workload": 2,
+            "technician_availability": 1,
+        },
+        gbr_prediction=28.0,
+        baseline_prediction=30.0,
+        interval_lower=20.0,
+        interval_upper=40.0,
+        db_path=temp_db,
+    )
+
+    events = job_store.get_job_events(job_id, db_path=temp_db)
+    assert len(events) == 1
+    assert events[0]["event_type"] == "created"
+    assert "Charging Port Repair" in events[0]["details"]
+    assert "28.0" in events[0]["details"]
+
+    # 2. Transition to in_progress -> logs 'in_progress' event
+    job_store.update_job_status(job_id, "in_progress", db_path=temp_db)
+    events = job_store.get_job_events(job_id, db_path=temp_db)
+    assert len(events) == 2
+    assert events[1]["event_type"] == "in_progress"
+
+    # 3. Transition to completed -> logs 'completed' event with actual minutes
+    job_store.update_job_status(job_id, "completed", actual_minutes=25.0, db_path=temp_db)
+    events = job_store.get_job_events(job_id, db_path=temp_db)
+    assert len(events) == 3
+    assert events[2]["event_type"] == "completed"
+    assert "25.0" in events[2]["details"]
+
+
+def test_workload_intelligence_and_delay_detection(tmp_path):
+    """Verify queue metrics, delay tracking, and backlog calculations."""
+    from datetime import datetime, timedelta, timezone
+    import app.job_store as job_store
+
+    temp_db = tmp_path / "intel_test.db"
+
+    # Add job that was created 120 minutes ago with 30 min predicted duration
+    old_time = (datetime.now(timezone.utc) - timedelta(minutes=120)).isoformat(timespec="seconds")
+
+    conn = job_store.ensure_db(temp_db)
+    conn.execute(
+        """INSERT INTO jobs (job_id, created_at, service_type, reported_issue,
+           phone_brand, is_warranty_case, parts_availability, current_workload,
+           technician_availability, gbr_prediction_minutes,
+           baseline_prediction_minutes, interval_lower_minutes,
+           interval_upper_minutes, status, source)
+           VALUES ('delayed1', ?, 'Screen Replacement', 'Cracked screen', 'Samsung', 0,
+                   'Available', 1, 1, 30.0, 35.0, 20.0, 45.0, 'in_progress', 'live')""",
+        (old_time,),
+    )
+    conn.commit()
+    conn.close()
+
+    delayed_job = job_store.get_job("delayed1", db_path=temp_db)
+    delay_check = job_store.check_job_delay(delayed_job)
+    assert delay_check["is_delayed"] is True
+    assert delay_check["delay_minutes"] >= 80.0
+
+    # Add a normal on-time job with high uncertainty (Order Required)
+    job_store.add_job(
+        {
+            "service_type": "Battery Replacement",
+            "reported_issue": "Swollen",
+            "phone_brand": "Apple",
+            "is_warranty_case": False,
+            "parts_availability": "Order Required",
+            "current_workload": 1,
+            "technician_availability": 1,
+        },
+        gbr_prediction=90.0,
+        baseline_prediction=100.0,
+        interval_lower=60.0,
+        interval_upper=150.0,
+        db_path=temp_db,
+    )
+
+    intel = job_store.get_workload_intelligence(db_path=temp_db)
+    assert intel["active_count"] == 2
+    assert intel["in_progress_count"] == 1
+    assert intel["open_count"] == 1
+    assert intel["overdue_count"] == 1
+    assert intel["high_uncertainty_count"] == 1
+    assert intel["total_backlog_minutes"] == 120.0  # 30.0 + 90.0
+
+
+def test_customer_ticket_tracking_workflow(tmp_path, monkeypatch):
+    """Verify customer ticket lookup and live status tracking page."""
+    import app.app as flask_app
+    import app.job_store as job_store
+
+    temp_db = tmp_path / "track_test.db"
+    monkeypatch.setattr(job_store, "DB_PATH", temp_db)
+
+    client = flask_app.app.test_client()
+
+    # 1. Tracking search page
+    track_home_res = client.get("/track")
+    assert track_home_res.status_code == 200
+    assert b"Track your repair" in track_home_res.data
+
+    # 2. Query param search redirect
+    redirect_res = client.get("/track?ticket_code=abc12345")
+    assert redirect_res.status_code == 302
+    assert redirect_res.headers["Location"].endswith("/track/abc12345")
+
+    # 3. Nonexistent ticket -> 404 with helpful guidance
+    not_found_res = client.get("/track/nonexistent99")
+    assert not_found_res.status_code == 404
+    assert b"No repair ticket found" in not_found_res.data
+
+    # 4. Create real job and track it
+    job_id = job_store.add_job(
+        {
+            "service_type": "Water Damage Diagnostic",
+            "reported_issue": "Phone fell in water",
+            "phone_brand": "Xiaomi",
+            "is_warranty_case": True,
+            "parts_availability": "Available",
+            "current_workload": 3,
+            "technician_availability": 1,
+        },
+        gbr_prediction=45.0,
+        baseline_prediction=50.0,
+        interval_lower=30.0,
+        interval_upper=65.0,
+        db_path=temp_db,
+    )
+
+    status_res = client.get(f"/track/{job_id}")
+    assert status_res.status_code == 200
+    assert b"REPAIR STATUS TRACKER" in status_res.data
+    assert b"QUEUED" in status_res.data
+    assert b"Water Damage Diagnostic" in status_res.data
+    assert b"CHRONOLOGICAL SERVICE TIMELINE" in status_res.data
+    assert job_id.encode() in status_res.data
+
+
+def test_csv_export_endpoint(tmp_path, monkeypatch):
+    """Verify RFC-4180 CSV export download."""
+    import app.app as flask_app
+    import app.job_store as job_store
+
+    temp_db = tmp_path / "export_test.db"
+    monkeypatch.setattr(job_store, "DB_PATH", temp_db)
+    monkeypatch.setattr(job_store, "JOB_LOG_PATH", tmp_path / "nonexistent.csv")
+    monkeypatch.setattr(job_store, "LEGACY_CSV_PATH", tmp_path / "nonexistent.csv")
+
+    # Add 2 sample jobs
+    job_store.add_job(
+        {"service_type": "Screen Replacement", "reported_issue": "Cracked screen", "phone_brand": "Samsung",
+         "is_warranty_case": False, "parts_availability": "Available", "current_workload": 1, "technician_availability": 2},
+        35.0, 40.0, db_path=temp_db
+    )
+    job_store.add_job(
+        {"service_type": "Battery Replacement", "reported_issue": "Fast drain", "phone_brand": "Apple",
+         "is_warranty_case": True, "parts_availability": "Available", "current_workload": 2, "technician_availability": 1},
+        20.0, 25.0, db_path=temp_db
+    )
+
+    client = flask_app.app.test_client()
+    export_res = client.get("/dashboard/export")
+    assert export_res.status_code == 200
+    assert export_res.mimetype == "text/csv"
+    assert "attachment; filename=repair_jobs_export.csv" in export_res.headers["Content-Disposition"]
+    
+    csv_text = export_res.data.decode("utf-8")
+    lines = [line.strip() for line in csv_text.strip().split("\n") if line.strip()]
+    assert len(lines) == 3  # header + 2 jobs
+    assert "job_id,created_at,status,service_type" in lines[0]
+    assert "Screen Replacement" in csv_text
+    assert "Battery Replacement" in csv_text
+
+
+def test_staff_authentication_and_access_control(tmp_path, monkeypatch):
+    """Verify staff PIN authentication, session persistence, and logout."""
+    import app.app as flask_app
+    import app.job_store as job_store
+
+    temp_db = tmp_path / "auth_test.db"
+    monkeypatch.setattr(job_store, "DB_PATH", temp_db)
+
+    client = flask_app.app.test_client()
+
+    # 1. Login page displays
+    login_get = client.get("/dashboard/login")
+    assert login_get.status_code == 200
+    assert b"Staff Authentication" in login_get.data
+
+    # 2. Invalid PIN rejected
+    bad_login = client.post("/dashboard/login", data={"pin": "wrong_pin"})
+    assert bad_login.status_code == 200
+    assert b"Invalid Staff PIN" in bad_login.data
+
+    # 3. Correct PIN authenticates and sets session
+    good_login = client.post("/dashboard/login", data={"pin": "1234"}, follow_redirects=False)
+    assert good_login.status_code == 302
+    assert good_login.headers["Location"].endswith("/dashboard")
+
+    # With session set, accessing dashboard succeeds
+    dash_res = client.get("/dashboard")
+    assert dash_res.status_code == 200
+    assert b"Staff dashboard" in dash_res.data
+
+    # 4. Logout clears session
+    logout_res = client.post("/dashboard/logout")
+    assert logout_res.status_code == 302
+
+    # 5. Access control enforcement when enabled
+    flask_app.app.config["TEST_STAFF_AUTH"] = True
+    try:
+        protected_res = client.get("/dashboard")
+        assert protected_res.status_code == 302
+        assert "/dashboard/login" in protected_res.headers["Location"]
+    finally:
+        flask_app.app.config["TEST_STAFF_AUTH"] = False
+
+
+def test_custom_404_error_page():
+    """Verify custom branded 404 departure board error page."""
+    import app.app as flask_app
+
+    client = flask_app.app.test_client()
+    res = client.get("/non-existent-route-xyz")
+    assert res.status_code == 404
+    assert b"404" in res.data
+    assert b"Page or Record Not Found" in res.data
+

@@ -1,14 +1,36 @@
 {% extends "base.html" %}
 {% block title %}Your Estimated Service Time — Project Better Tomorrow{% endblock %}
-{% block nav %}<a href="/dashboard">Staff view</a>{% endblock %}
+{% block nav %}
+<a href="/">New estimate</a>
+<a href="/track/{{ job_id }}">Track status</a>
+<a href="/dashboard">Staff view</a>
+{% endblock %}
 
 {% block content %}
-<div class="board">
-  <div class="board-eyebrow">ESTIMATED READY IN</div>
+<div class="board" id="printable-board">
+  <div class="board-header-row">
+    <div class="board-eyebrow">ESTIMATED READY IN</div>
+    <div class="board-actions no-print">
+      <button type="button" class="btn-icon" onclick="window.print()" title="Print or save estimate">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print
+      </button>
+    </div>
+  </div>
   <div class="board-number-wrap">
     <div class="board-number">{{ estimate }}</div>
   </div>
   <p class="board-range">Typically between {{ low }} and {{ high }}</p>
+
+  {% if is_high_uncertainty %}
+  <div class="board-alert board-alert-warning">
+    <span class="alert-icon" aria-hidden="true">⚡</span>
+    <div>
+      <strong>High Variability Notice:</strong>
+      <span>Specific requirements (such as component sourcing or component testing) create a broader timing window.</span>
+    </div>
+  </div>
+  {% endif %}
 
   <div class="board-note">
     <span class="icon" aria-hidden="true">!</span>
@@ -46,11 +68,15 @@
   </div>
   {% endif %}
 
-  <p class="job-ref">Ticket ref. {{ job_id }}</p>
+  <div class="board-footer-row">
+    <p class="job-ref">Ticket ref. <strong>{{ job_id }}</strong></p>
+    <a href="/track/{{ job_id }}" class="btn-track-live no-print">Track live timeline &rarr;</a>
+  </div>
 </div>
 
-<div class="result-links">
+<div class="result-links no-print">
   <a href="/">&larr; New estimate</a>
+  <a href="/track/{{ job_id }}">View status tracking</a>
   <a href="/dashboard">Staff view &rarr;</a>
 </div>
 {% endblock %}

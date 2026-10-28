@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Estimate My Service Time — Project Better Tomorrow{% endblock %}
-{% block nav %}<a href="/dashboard">Staff view</a>{% endblock %}
+{% block nav %}<a href="/track">Track repair</a><a href="/dashboard">Staff view</a>{% endblock %}
 
 {% block content %}
 <div class="ticket">
@@ -104,6 +104,11 @@
       <button type="submit" class="btn-primary">Get my estimate</button>
     </form>
   </div>
+</div>
+
+<div class="track-lookup-callout">
+  <span>Already have a repair in progress?</span>
+  <a href="/track">Track ticket status &rarr;</a>
 </div>
 
 {# Pass reported_issues map to JS for dynamic dropdown population #}

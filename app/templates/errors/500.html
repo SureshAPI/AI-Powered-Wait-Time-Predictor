@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}500 Server Error — Project Better Tomorrow{% endblock %}
+{% block nav %}
+<a href="/">Home</a>
+<a href="/track">Track repair</a>
+<a href="/dashboard">Staff view</a>
+{% endblock %}
+
+{% block content %}
+<div class="board error-board">
+  <div class="board-eyebrow">ERROR 500 &middot; SYSTEM NOTICE</div>
+  <div class="board-number-wrap">
+    <div class="board-number error-num">500</div>
+  </div>
+  <h2 class="error-title">Internal Server Encountered An Issue</h2>
+  <p class="board-range">An unexpected error occurred while processing this request.</p>
+
+  <div class="board-note">
+    <span class="icon" aria-hidden="true">!</span>
+    <span>Please return to the main intake form or contact the workshop system administrator.</span>
+  </div>
+
+  <div class="result-links" style="margin-top: 24px;">
+    <a href="/">&larr; Return to Home</a>
+    <a href="/dashboard">Staff Dashboard &rarr;</a>
+  </div>
+</div>
+{% endblock %}
